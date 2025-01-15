@@ -18,23 +18,22 @@ function LoginForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  // Mengubah nilai input
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
-  // Menangani login
   const handleLogin = (e) => {
     e.preventDefault();
-    const payload = { ...form }; // Data dikirimkan ke back-end
+    const payload = { ...form };
 
+    // Mengirim data login ke backend menggunakan axios
     axios
-      .post("https://example.com/api/login", payload) // Ganti dengan URL API Anda
+      .post("https://your-backend-api.com/api/login", payload) // Ganti dengan URL backend Anda
       .then((response) => {
         if (response.data.token) {
-          localStorage.setItem("authToken", response.data.token); // Simpan token
-          navigate("/dashboard"); // Arahkan ke dashboard
+          localStorage.setItem("authToken", response.data.token); // Simpan token di localStorage
+          navigate("/dashboard"); // Arahkan ke halaman dashboard setelah login berhasil
         } else {
           setErrorMessage("Username atau Password salah!");
         }
@@ -69,10 +68,12 @@ function LoginForm() {
           boxShadow: "0 10px 12px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <Typography variant="h4" sx={{ mb: 3 }}>
+        <Typography
+          variant="h4"
+          sx={{ mb: 3, textDecoration: "underline", fontWeight: "bold" }}
+        >
           Login
         </Typography>
-
         <form onSubmit={handleLogin} style={{ width: "100%" }}>
           <TextField
             label="Username"
@@ -109,7 +110,18 @@ function LoginForm() {
               {errorMessage}
             </Alert>
           )}
-          <Button type="submit" variant="contained" color="primary" fullWidth>
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            sx={{
+              backgroundColor: "#2196f3",
+              "&:hover": {
+                backgroundColor: "#1565c0", // Ganti dengan warna yang diinginkan
+                cursor: "pointer",
+              },
+            }}
+          >
             Login
           </Button>
         </form>
