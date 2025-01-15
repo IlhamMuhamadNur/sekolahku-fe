@@ -12,28 +12,29 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function LoginForm() {
+export default function LoginForm() {
   const [form, setForm] = useState({ username: "", password: "" });
   const [showPass, setShowPass] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  function handleChange(e) {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
-  };
+  }
 
-  const handleLogin = (e) => {
+  function handleLogin(e) {
     e.preventDefault();
     const payload = { ...form };
 
-    // Mengirim data login ke backend menggunakan axios
+    //mengirim data login ke backend dengan menggunakan Axios
+
     axios
-      .post("https://your-backend-api.com/api/login", payload) // Ganti dengan URL backend Anda
+      .post("backend login api url", payload) //ganti pakai url API loginnya, semangat back end!
       .then((response) => {
         if (response.data.token) {
-          localStorage.setItem("authToken", response.data.token); // Simpan token di localStorage
-          navigate("/dashboard"); // Arahkan ke halaman dashboard setelah login berhasil
+          localStorage.setItem("authtoken", response.data.token); //simpan token di local storage
+          navigate("/dashboard");
         } else {
           setErrorMessage("Username atau Password salah!");
         }
@@ -42,7 +43,7 @@ function LoginForm() {
         console.error("Login gagal:", error);
         setErrorMessage("Username atau Password salah!");
       });
-  };
+  }
 
   return (
     <Box
@@ -58,24 +59,29 @@ function LoginForm() {
         sx={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
           justifyContent: "center",
           width: "100%",
           maxWidth: 400,
-          backgroundColor: "#fff",
+          backgroundColor: "#ffff",
           padding: 3,
           borderRadius: "8px",
-          boxShadow: "0 10px 12px rgba(0, 0, 0, 0.1)",
+          boxShadow: "0 2px 20px rgba(0, 1, 1, 0.5)",
         }}
       >
         <Typography
           variant="h4"
-          sx={{ mb: 3, textDecoration: "underline", fontWeight: "bold" }}
+          sx={{
+            mb: 3,
+            textDecoration: "underline",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
         >
           Login
         </Typography>
         <form onSubmit={handleLogin} style={{ width: "100%" }}>
           <TextField
+            id="username"
             label="Username"
             name="username"
             variant="outlined"
@@ -83,6 +89,7 @@ function LoginForm() {
             value={form.username}
             onChange={handleChange}
             required
+            autoComplete="username"
             sx={{ mb: 2 }}
           />
           <TextField
@@ -117,8 +124,7 @@ function LoginForm() {
             sx={{
               backgroundColor: "#2196f3",
               "&:hover": {
-                backgroundColor: "#1565c0", // Ganti dengan warna yang diinginkan
-                cursor: "pointer",
+                backgroundColor: "#1565c0",
               },
             }}
           >
@@ -129,5 +135,3 @@ function LoginForm() {
     </Box>
   );
 }
-
-export default LoginForm;
