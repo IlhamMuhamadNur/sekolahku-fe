@@ -118,6 +118,4 @@ function LoginForm() {
   );
 }
 
-//test test halo halo
-
 export default LoginForm;
