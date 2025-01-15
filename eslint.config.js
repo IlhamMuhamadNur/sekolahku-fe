@@ -40,6 +40,7 @@ export default [
           varsIgnorePattern: "^React$|^props$", // Mengabaikan props atau variabel dengan nama 'React'
         },
       ],
+      "react/no-unescaped-entities": "off", // Menonaktifkan aturan ini
     },
   },
 ];

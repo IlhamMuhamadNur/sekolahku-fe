@@ -1,9 +1,18 @@
+/* Menghapus margin dan padding default dari semua elemen */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-:root {
-  min-height: 100vh;
+html,
+body {
+  height: 100%; /* Pastikan html dan body mengisi seluruh tinggi layar */
+  width: 100%; /* Pastikan body mengisi seluruh lebar layar */
+  background-color: transparent; /* Jika ingin transparan */
+}
+
+body {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -14,4 +23,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+#root {
+  height: 100%; /* Pastikan root juga mengisi seluruh layar */
+  width: 100%;
 }
