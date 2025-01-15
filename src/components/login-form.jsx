@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Box,
   TextField,
@@ -12,25 +12,38 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-axios
-  .get("https://jsonplaceholder.typicode.com/posts")
-  .then((response) => console.log(response.data))
-  .catch((error) => console.error("Error:", error));
-
 function LoginForm() {
-  const [username, setUser] = useState("");
-  const [pass, setPass] = useState("");
-  const [showPass, setSp] = useState(false);
+  const [form, setForm] = useState({ username: "", password: "" });
+  const [showPass, setShowPass] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  function handleLogin(e) {
-    if (username === "user" && pass === "user123") {
-      navigate("/dashboard");
-    } else {
-      setErrorMessage("Username atau Password salah!");
-    }
-  }
+  // Mengubah nilai input
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  // Menangani login
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const payload = { ...form }; // Data dikirimkan ke back-end
+
+    axios
+      .post("https://example.com/api/login", payload) // Ganti dengan URL API Anda
+      .then((response) => {
+        if (response.data.token) {
+          localStorage.setItem("authToken", response.data.token); // Simpan token
+          navigate("/dashboard"); // Arahkan ke dashboard
+        } else {
+          setErrorMessage("Username atau Password salah!");
+        }
+      })
+      .catch((error) => {
+        console.error("Login gagal:", error);
+        setErrorMessage("Username atau Password salah!");
+      });
+  };
 
   return (
     <Box
@@ -63,25 +76,27 @@ function LoginForm() {
         <form onSubmit={handleLogin} style={{ width: "100%" }}>
           <TextField
             label="Username"
+            name="username"
             variant="outlined"
             fullWidth
-            value={username}
-            onChange={(e) => setUser(e.target.value)}
+            value={form.username}
+            onChange={handleChange}
             required
             sx={{ mb: 2 }}
           />
           <TextField
             label="Password"
+            name="password"
             variant="outlined"
             type={showPass ? "text" : "password"}
             fullWidth
-            value={pass}
-            onChange={(e) => setPass(e.target.value)}
+            value={form.password}
+            onChange={handleChange}
             required
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton onClick={() => setSp(!showPass)}>
+                  <IconButton onClick={() => setShowPass(!showPass)}>
                     {showPass ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
@@ -91,7 +106,7 @@ function LoginForm() {
           />
           {errorMessage && (
             <Alert severity="error" sx={{ mb: 2, width: "350px" }}>
-              Username atau Password salah!
+              {errorMessage}
             </Alert>
           )}
           <Button type="submit" variant="contained" color="primary" fullWidth>
