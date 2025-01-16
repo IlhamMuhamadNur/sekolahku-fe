@@ -148,7 +148,6 @@ export default function LoginForm() {
           )}
           <Typography
             variant="body2"
-            fullWidth
             sx={{
               color: "#2196f3",
               textDecoration: "underline",
