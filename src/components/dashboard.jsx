@@ -1,168 +1,191 @@
-import * as React from "react";
-import { extendTheme, styled } from "@mui/material/styles";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import DescriptionIcon from "@mui/icons-material/Description";
-import LayersIcon from "@mui/icons-material/Layers";
-import { AppProvider } from "@toolpad/core/AppProvider";
-import { DashboardLayout } from "@toolpad/core/DashboardLayout";
-import { PageContainer } from "@toolpad/core/PageContainer";
-import Grid from "@mui/material/Grid2";
-import { useNavigate } from "react-router-dom"; // Import hook useNavigate
-import { Button } from "@mui/material";
+import React from "react";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Box,
+  Button,
+  CssBaseline,
+  Grid,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-const NAVIGATION = [
-  {
-    kind: "header",
-    title: "Main items",
-  },
-  {
-    segment: "dashboard",
-    title: "Dashboard",
-    icon: <DashboardIcon />,
-  },
-  {
-    segment: "orders",
-    title: "Orders",
-    icon: <ShoppingCartIcon />,
-  },
-  {
-    kind: "divider",
-  },
-  {
-    kind: "header",
-    title: "Analytics",
-  },
-  {
-    segment: "reports",
-    title: "Reports",
-    icon: <BarChartIcon />,
-    children: [
-      {
-        segment: "sales",
-        title: "Sales",
-        icon: <DescriptionIcon />,
-      },
-      {
-        segment: "traffic",
-        title: "Traffic",
-        icon: <DescriptionIcon />,
-      },
-    ],
-  },
-  {
-    segment: "integrations",
-    title: "Integrations",
-    icon: <LayersIcon />,
-  },
-];
-
-const demoTheme = extendTheme({
-  colorSchemes: { light: true, dark: true },
-  colorSchemeSelector: "class",
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 600,
-      lg: 1200,
-      xl: 1536,
-    },
-  },
-});
-
-function useDemoRouter(initialPath) {
-  const [pathname, setPathname] = React.useState(initialPath);
-
-  const router = React.useMemo(() => {
-    return {
-      pathname,
-      searchParams: new URLSearchParams(),
-      navigate: (path) => setPathname(String(path)),
-    };
-  }, [pathname]);
-
-  return router;
-}
-
-const Skeleton = styled("div")(({ theme, height }) => ({
-  backgroundColor: theme.palette.action.hover,
-  borderRadius: theme.shape.borderRadius,
-  height,
-  content: '" "',
-}));
-
-export default function Dashboard(props) {
-  const { window } = props;
-
-  const router = useDemoRouter("/Dashboard");
-
-  // Use useNavigate hook
+export default function Dashboard() {
   const navigate = useNavigate();
 
-  // Handle Logout function
-  function handleLogout(e) {
-    e.preventDefault();
-
-    // Perform logout logic (clear session, etc.)
-    localStorage.removeItem("user");
-
-    // Redirect to login page
+  function handleOp() {
     navigate("/");
   }
-
   return (
-    <AppProvider
-      navigation={NAVIGATION}
-      router={router}
-      theme={demoTheme}
-      window={window}
-    >
-      <DashboardLayout>
-        <PageContainer>
-          <Grid container spacing={1}>
-            <Grid size={5} />
+    <Box sx={{ flexGrow: 1 }}>
+      <CssBaseline />
+      <Toolbar></Toolbar>
+      <AppBar position="static" sx={{ bgcolor: "#5b6993 " }}>
+        <Toolbar>
+          <img
+            src="pict/logosmk.png" // Akses file dari folder public
+            style={{
+              width: 50,
+              height: 50,
+              marginRight: 16,
+              cursor: "pointer",
+            }}
+            onClick={handleOp}
+          />
+          <Typography
+            variant="h6"
+            sx={{
+              flexGrow: 1,
+              fontWeight: "bold",
+              letterSpacing: 2,
+              color: "#20274b",
+              cursor: "pointer",
+            }}
+            onClick={handleOp}
+          >
+            SMK NEGERI 1 KATAPANG
+          </Typography>
+          <Button
+            color="inherit"
+            sx={{
+              color: "#20274b",
+              fontWeight: "bold",
+              "&:hover": {
+                textDecoration: "underline",
+              },
+            }}
+          >
+            Beranda
+          </Button>
+          <Button
+            color="inherit"
+            sx={{
+              color: "#20274b",
+              fontWeight: "bold",
+              "&:hover": {
+                textDecoration: "underline",
+              },
+            }}
+          >
+            Profile
+          </Button>
+          <Button
+            color="inherit"
+            sx={{
+              color: "#20274b",
+              fontWeight: "bold",
+              "&:hover": {
+                textDecoration: "underline",
+              },
+            }}
+          >
+            Program Keahlian
+          </Button>
+          <Button
+            color="inherit"
+            sx={{
+              color: "#20274b",
+              fontWeight: "bold",
+              "&:hover": {
+                textDecoration: "underline",
+              },
+            }}
+          >
+            Media
+          </Button>
+          <Button
+            color="inherit"
+            sx={{
+              color: "#20274b",
+              fontWeight: "bold",
+              "&:hover": {
+                textDecoration: "underline",
+              },
+            }}
+          >
+            PPDB
+          </Button>
+          <Button
+            color="inherit"
+            sx={{
+              color: "#20274b",
+              fontWeight: "bold",
+              "&:hover": {
+                textDecoration: "underline",
+              },
+            }}
+          >
+            Akses
+          </Button>
+        </Toolbar>
+      </AppBar>
 
-            <Grid size={12}>
-              <Skeleton height={14} />
-            </Grid>
+      {/* Konten */}
+      <Box sx={{ p: 3 }}>
+        <Typography variant="h4" gutterBottom>
+          SMK NEGERI 1 KATAPANG
+        </Typography>
 
-            <Grid size={12}>
-              <Skeleton height={14} />
-            </Grid>
-            <Grid size={4}>
-              <Skeleton height={100} />
-            </Grid>
-            <Grid size={8}>
-              <Skeleton height={100} />
-            </Grid>
-
-            <Grid size={12}>
-              <Skeleton height={150} />
-            </Grid>
-            <Grid size={12}>
-              <Skeleton height={14} />
-            </Grid>
-
-            <Grid size={3}>
-              <Skeleton height={100} />
-            </Grid>
-            <Grid size={3}>
-              <Skeleton height={100} />
-            </Grid>
-            <Grid size={3}>
-              <Skeleton height={100} />
-            </Grid>
-            <Grid size={3}>
-              <Skeleton height={100} />
-            </Grid>
+        {/* Statistik */}
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6} md={3}>
+            <Box
+              sx={{
+                bgcolor: "#5b6993",
+                p: 2,
+                textAlign: "center",
+                borderRadius: 2,
+                boxShadow: 1,
+              }}
+            >
+              <Typography variant="h6">Total Siswa</Typography>
+              <Typography variant="h4">1,200</Typography>
+            </Box>
           </Grid>
-        </PageContainer>
-        <Button onClick={handleLogout} color="secondary" variant="contained">
-          Logout
-        </Button>
-      </DashboardLayout>
-    </AppProvider>
+          <Grid item xs={12} sm={6} md={3}>
+            <Box
+              sx={{
+                bgcolor: "#5b6993",
+                p: 2,
+                textAlign: "center",
+                borderRadius: 2,
+                boxShadow: 1,
+              }}
+            >
+              <Typography variant="h6">Total Guru</Typography>
+              <Typography variant="h4">85</Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <Box
+              sx={{
+                bgcolor: "#5b6993",
+                p: 2,
+                textAlign: "center",
+                borderRadius: 2,
+                boxShadow: 1,
+              }}
+            >
+              <Typography variant="h6">Kelas Aktif</Typography>
+              <Typography variant="h4">42</Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <Box
+              sx={{
+                bgcolor: "#5b6993",
+                p: 2,
+                textAlign: "center",
+                borderRadius: 2,
+                boxShadow: 1,
+              }}
+            >
+              <Typography variant="h6">Prestasi</Typography>
+              <Typography variant="h4">130+</Typography>
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+    </Box>
   );
 }
