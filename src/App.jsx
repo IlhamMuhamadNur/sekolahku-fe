@@ -16,6 +16,11 @@ function App() {
         <Route path="/" element={<OpeningPage />} />
         <Route path="/loginform" element={<LoginForm />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/resetpasswordotp" element={<OTPForm />} />
+        <Route path="/NewPassword" element={<NewPassword />} />
+        <Route path="/Register" element={<Register />} />
+        <Route path="/ebook" element={<EBookPage />} />
+        <Route path="/" element={<ERaport />} />
       </Routes>
     </Router>
   );
