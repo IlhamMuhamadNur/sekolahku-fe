@@ -7,6 +7,7 @@ import OpeningPage from "./components/openingpage";
 import NewPassword from "./components/NewPassword";
 import Register from "./components/Register";
 import EBookPage from "./components/ebook";
+import ERaport from "./components/ERaport";
 
 function App() {
   return (
@@ -15,10 +16,6 @@ function App() {
         <Route path="/" element={<OpeningPage />} />
         <Route path="/loginform" element={<LoginForm />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/resetpasswordotp" element={<OTPForm />} />
-        <Route path="/NewPassword" element={<NewPassword />} />
-        <Route path="/Register" element={<Register />} />
-        <Route path="/ebook" element={<EBookPage />} />
       </Routes>
     </Router>
   );
