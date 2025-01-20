@@ -14,6 +14,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function EBookPage() {
   const navigate = useNavigate();
@@ -83,8 +84,25 @@ export default function EBookPage() {
               color: "#20274b",
             }}
           >
-            SMK NEGERI 1 KATAPANG-EBook
+            SMK NEGERI 1 KATAPANG-EBOOK
           </Typography>
+
+          <Link to="/dashboard" style={{ textDecoration: "none" }}>
+            <Button
+              color="inherit"
+              sx={{
+                backgroundColor: "#bac6e3",
+                color: "#20274b",
+                fontWeight: "bold",
+                "&:hover": {
+                  textDecoration: "underline",
+                  backgroundColor: "#8ba1cf",
+                },
+              }}
+            >
+              Beranda
+            </Button>
+          </Link>
         </Toolbar>
       </AppBar>
 
