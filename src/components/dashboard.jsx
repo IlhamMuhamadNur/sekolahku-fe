@@ -19,6 +19,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 import AssessmentOutlinedIcon from "@mui/icons-material/AssessmentOutlined";
 import { useNavigate } from "react-router-dom";
+import CountUp from "react-countup"; // Import CountUp
 
 export default function Dashboard() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -176,9 +177,6 @@ export default function Dashboard() {
                 backgroundColor: "#f4f4f4",
               },
             }}
-            TransitionProps={{
-              onEntering: () => console.log("Menu opened"),
-            }}
           >
             <MenuItem onClick={() => handleRedirect("/loginform")}>
               <ListItemIcon>
@@ -217,8 +215,12 @@ export default function Dashboard() {
                 boxShadow: 1,
               }}
             >
-              <Typography variant="h6">Total Siswa</Typography>
-              <Typography variant="h4">1,200</Typography>
+              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                Total Siswa
+              </Typography>
+              <Typography variant="h4">
+                <CountUp start={0} end={1200} duration={3} separator="." />{" "}
+              </Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
@@ -231,8 +233,12 @@ export default function Dashboard() {
                 boxShadow: 1,
               }}
             >
-              <Typography variant="h6">Total Guru</Typography>
-              <Typography variant="h4">85</Typography>
+              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                Total Guru
+              </Typography>
+              <Typography variant="h4">
+                <CountUp start={0} end={85} duration={3} separator="." />{" "}
+              </Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
@@ -245,8 +251,12 @@ export default function Dashboard() {
                 boxShadow: 1,
               }}
             >
-              <Typography variant="h6">Kelas Aktif</Typography>
-              <Typography variant="h4">42</Typography>
+              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                Kelas Aktif
+              </Typography>
+              <Typography variant="h4">
+                <CountUp start={0} end={42} duration={3} separator="." />{" "}
+              </Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
@@ -259,9 +269,13 @@ export default function Dashboard() {
                 boxShadow: 1,
               }}
             >
-              <Typography variant="h6">Prestasi</Typography>
-              <Typography variant="h4">130+</Typography>
-            </Box>
+              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                Prestasi
+              </Typography>
+              <Typography variant="h4">
+                <CountUp start={0} end={130} duration={3} separator="." />+
+              </Typography>
+            </Box>{" "}
           </Grid>
         </Grid>
       </Box>
