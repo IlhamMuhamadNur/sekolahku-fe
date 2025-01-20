@@ -242,7 +242,12 @@ const Register = () => {
           >
             <Typography variant="body2">Have account?</Typography>
             <Link to="/loginform" style={{ textDecoration: "none" }}>
-              <Typography variant="body2" marginLeft={1} color="primary">
+              <Typography
+                variant="body2"
+                marginLeft={1}
+                color="primary"
+                sx={{ textDecoration: "underline", fontWeight: "bold" }}
+              >
                 Log in
               </Typography>
             </Link>

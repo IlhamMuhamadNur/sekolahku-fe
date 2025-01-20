@@ -126,12 +126,12 @@ const NewPassword = () => {
             marginTop={1}
           >
             <Typography variant="body2">Have account?</Typography>
-            <Link to="/login" style={{ textDecoration: "none" }}>
+            <Link to="/loginform" style={{ textDecoration: "none" }}>
               <Typography
                 variant="body2"
                 marginLeft={1}
                 color="primary"
-                sx={{ textDecoration: "underline" }}
+                sx={{ textDecoration: "underline", fontWeight: "bold" }}
               >
                 Log in
               </Typography>
