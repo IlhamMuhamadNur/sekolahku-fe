@@ -25,7 +25,7 @@ const NewPassword = () => {
         formData
       );
       alert(response.data.message || "Cek email Anda untuk OTP!");
-      navigate("/otp"); // Arahkan ke halaman OTP setelah mengirim permintaan
+      navigate("/resetpasswordotp"); // Arahkan ke halaman OTP setelah mengirim permintaan
     } catch (error) {
       setErrorMessage(
         error.response?.data?.message || "Terjadi kesalahan. Silakan coba lagi."
@@ -52,7 +52,7 @@ const NewPassword = () => {
           height: "100%",
           width: "100%",
           background:
-            "linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(/image/smk.jpg)",
+            "linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(/pict/smk.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           filter: "blur(2px)",
@@ -127,7 +127,12 @@ const NewPassword = () => {
           >
             <Typography variant="body2">Have account?</Typography>
             <Link to="/login" style={{ textDecoration: "none" }}>
-              <Typography variant="body2" marginLeft={1} color="primary">
+              <Typography
+                variant="body2"
+                marginLeft={1}
+                color="primary"
+                sx={{ textDecoration: "underline" }}
+              >
                 Log in
               </Typography>
             </Link>

@@ -82,7 +82,7 @@ const Register = () => {
           height: "100%",
           width: "100%",
           background:
-            "linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(/image/smk.jpg)",
+            "linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(/pict/smk.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           zIndex: -1, // Pastikan layer ini berada di belakang
@@ -241,7 +241,7 @@ const Register = () => {
             marginTop={1}
           >
             <Typography variant="body2">Have account?</Typography>
-            <Link to="/login" style={{ textDecoration: "none" }}>
+            <Link to="/loginform" style={{ textDecoration: "none" }}>
               <Typography variant="body2" marginLeft={1} color="primary">
                 Log in
               </Typography>
