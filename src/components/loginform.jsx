@@ -19,7 +19,7 @@ export default function LoginForm() {
   const navigate = useNavigate();
 
   function handleSignUp() {
-    navigate("/sign-up"); // ke halaman sign-up, dibikin visei
+    navigate("/Register"); // ke halaman sign-up, dibikin visei
   }
   function handleChange(e) {
     const { name, value } = e.target;
@@ -50,7 +50,7 @@ export default function LoginForm() {
       });
   }
   function handleForgetPassword() {
-    navigate("/resetpasswordotp"); //navigate ke halaman imputemail, dibikin visei
+    navigate("/NewPassword"); //navigate ke halaman imputemail, dibikin visei
   }
 
   return (
