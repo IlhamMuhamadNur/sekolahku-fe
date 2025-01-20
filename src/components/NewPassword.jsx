@@ -24,7 +24,7 @@ const NewPassword = () => {
         "https://api.example.com/request-otp", // Ganti URL sesuai dengan API yang digunakan
         formData
       );
-      alert(response.data.message || "Cek email Anda untuk OTP!");
+      alert(response.data.message || "Check your email for OTP!");
       navigate("/otp"); // Arahkan ke halaman OTP setelah mengirim permintaan
     } catch (error) {
       setErrorMessage(
