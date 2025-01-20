@@ -21,7 +21,7 @@ const ResetPassword = () => {
     try {
       // Kirim email ke server untuk verifikasi atau permintaan OTP
       const response = await axios.post(
-        "https://api.example.com/request-otp", // Ganti URL sesuai dengan API yang digunakan
+        "https://api.example.com/request-otp", // URL belum diganti
         formData
       );
       alert(response.data.message || "Cek email Anda untuk OTP!");
