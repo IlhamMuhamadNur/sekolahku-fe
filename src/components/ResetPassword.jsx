@@ -83,9 +83,7 @@ const ResetPassword = () => {
           sx={{
             textDecoration: "underline",
           }}
-        >
-          Reset Password
-        </Typography>
+        ></Typography>
         <form onSubmit={handleSubmit}>
           <TextField
             fullWidth
