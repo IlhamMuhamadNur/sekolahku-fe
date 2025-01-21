@@ -65,7 +65,7 @@ export default function EBookPage() {
       <AppBar position="static" sx={{ bgcolor: "#5b6993" }}>
         <Toolbar>
           <img
-            src="pict/logosmk.png"
+            src="/src/assets/image/logosmk.png"
             alt="Logo SMK"
             style={{
               width: 50,

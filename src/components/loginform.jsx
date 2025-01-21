@@ -59,7 +59,7 @@ export default function LoginForm() {
           height: "60%",
           bottom: "-10%",
           right: "3%",
-          backgroundImage: `url('/pict/anak.png')`,
+          backgroundImage: `url('/src/assets/image/anak.png')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           zIndex: 0,

@@ -29,7 +29,7 @@ export default function OpeningPage() {
       <Box mb={2}>
         {" "}
         <img
-          src="/pict/logosmk.png"
+          src="/src/assets/image/logosmk.png"
           style={{
             width: 120,
             height: "auto",
