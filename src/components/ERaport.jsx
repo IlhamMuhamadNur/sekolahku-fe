@@ -122,7 +122,7 @@ function ERaport({ userRole }) {
         <AppBar position="static" sx={{ bgcolor: "white", boxShadow: 0 }}>
           <Toolbar>
             <img
-              src="pict/logosmk.png"
+              src="/src/assets/image/logosmk.png"
               alt="Logo SMK"
               style={{
                 width: 50,
