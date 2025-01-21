@@ -40,7 +40,7 @@ const AdminDashboard = () => {
       {/* Sidebar */}
       <Box
         sx={{
-          width: 190,
+          width: 230,
           backgroundColor: "#FAFAFA",
           color: "#3D3F3F",
           padding: 2,
@@ -53,7 +53,7 @@ const AdminDashboard = () => {
         <Box sx={{ textAlign: "center", marginBottom: 2 }}>
           {/* Logo Sekolah */}
           <img
-            src="/logosmk.png" // Ganti dengan path logo yang benar
+            src="/pict/logosmk.png" // Ganti dengan path logo yang benar
             alt="Logo Sekolah"
             style={{ width: "100px", height: "auto", marginBottom: "8px" }}
           />
