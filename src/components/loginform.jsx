@@ -1,238 +1,235 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import {
   Box,
   TextField,
   Button,
-  IconButton,
-  InputAdornment,
   Typography,
-  Alert,
+  InputAdornment,
+  IconButton,
+  Link,
 } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { Visibility, VisibilityOff, Star } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 export default function LoginForm() {
-  const [form, setForm] = useState({ username: "", password: "" });
-  const [showPass, setShowPass] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Inisialisasi useNavigate
+  const passwordRef = useRef(null); // Ref untuk password field
 
-  function handleSignUp() {
-    navigate("/sign-up"); // ke halaman sign-up, dibikin visei
-  }
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  }
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      passwordRef.current.focus(); // Pindahkan fokus ke password
+    }
+  };
 
-  function handleLogin(e) {
-    e.preventDefault();
-    const payload = { ...form };
+  const [showPassword, setShowPassword] = React.useState(false);
 
-    //kirim data login ke backend
+  const handlePasswordVisibility = () => {
+    setShowPassword((prev) => !prev); // Toggle untuk menampilkan atau menyembunyikan password
+  };
 
-    axios
-      .post("backend login api url", payload) //ganti pakai url API loginnya, semangat be!
-      .then((response) => {
-        if (response.data.token) {
-          localStorage.setItem("authtoken", response.data.token);
-          navigate("/dashboard");
-        } else {
-          setErrorMessage("Username atau Password salah!");
-        }
-      })
-      .catch((error) => {
-        console.error("Login gagal:", error);
-
-        setErrorMessage("Username atau Password salah!");
-        setTimeout(() => setErrorMessage(""), 1000);
-      });
-  }
-  function handleForgetPassword() {
-    navigate("/resetpasswordotp"); //navigate ke halaman imputemail, dibikin visei
-  }
+  const handleLogin = () => {
+    // Simulasi proses login
+    const isLoginSuccessful = true; // Ganti dengan logika autentikasi Anda
+    if (isLoginSuccessful) {
+      navigate("/dashboard"); // Arahkan ke halaman dashboard
+    } else {
+      alert("Login gagal! Periksa username dan password Anda.");
+    }
+  };
 
   return (
     <Box
       sx={{
         display: "flex",
-        alignItems: "center",
         justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        background: "white",
+        position: "relative",
+        overflow: "hidden",
         margin: 0,
         padding: 0,
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        overflow: "hidden",
       }}
     >
+      {/* Gambar Background */}
       <Box
         sx={{
           position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          backgroundImage: "url(/pict/smk.jpg)",
+          width: "20%",
+          height: "60%",
+          bottom: "-10%",
+          right: "3%",
+          backgroundImage: `url('/pict/anak.png')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundAttachment: "fixed",
+          zIndex: 0,
+          pointerEvents: "none",
         }}
-      />
+      ></Box>
+
+      {/* Form Box Centered */}
       <Box
         sx={{
           position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          backgroundColor: "rgba(255, 255, 255, 0.5)", // Putih dengan transparansi
-        }}
-      />
-      <Box
-        sx={{
-          position: "relative",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "493px",
+          height: "480px",
+          borderRadius: "20px",
           zIndex: 1,
-          // Konten Anda
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
+            backgroundColor: "#fff",
+            padding: "2rem",
+            borderRadius: "8%",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4)",
             width: "100%",
             height: "100%",
-            maxHeight: 435,
-            maxWidth: 450,
-            backgroundColor: "rgba(255, 255, 255, 1)",
-            padding: 3,
-            borderRadius: "8px",
-            boxShadow: "0 2px 20px rgba(0, 1, 1, 0.5)",
           }}
         >
-          <Typography
-            variant="h4"
+          {/* Header */}
+          <Box
             sx={{
-              mb: 3,
-              textDecoration: "underline",
-              fontWeight: "bold",
-              textAlign: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "0.5rem",
+              marginBottom: "1rem",
             }}
           >
-            Login
-          </Typography>
-          <form onSubmit={handleLogin} style={{ width: "100%" }}>
-            <TextField
-              id="username"
-              label="Username"
-              name="username"
-              variant="outlined"
-              fullWidth
-              value={form.username}
-              onChange={handleChange}
-              required
-              autoComplete="username"
+            <Star sx={{ color: "#3D3F3F", mb: 5, mt: 2 }} />
+            <Typography
+              variant="h5"
+              component="h1"
               sx={{
-                mb: 2,
-                "& .MuiInputLabel-asterisk": {
-                  color: "#e62222", //bintang merah
+                mb: 5,
+                mt: 2,
+                fontWeight: 900,
+                textAlign: "center",
+                color: "#3D3F3F",
+                fontFamily: "'Roboto', sans-serif",
+              }}
+            >
+              SEKOLAH SIMAK
+            </Typography>
+          </Box>
+
+          {/* Username */}
+          <Typography
+            variant="body1"
+            sx={{ mt: 3, ml: 7, color: "#273253", fontWeight: "bold" }}
+          >
+            Username
+          </Typography>
+          <Box
+            sx={{ display: "flex", justifyContent: "center", width: "100%" }}
+          >
+            <TextField
+              sx={{
+                width: "360px",
+                height: "44px",
+                borderRadius: "90px ",
+                border: "2px solid #273253",
+                "& .MuiInputBase-root": {
+                  borderRadius: "90px",
+                  fontSize: "15px",
+                  fontFamily: "'Roboto', sans-serif",
+                  mt: "-6px",
+                  mb: "10px",
+                  ml: "15px",
+                },
+                "& .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
                 },
               }}
-            />
-            <TextField
-              label="Password"
-              name="password"
-              variant="outlined"
-              type={showPass ? "text" : "password"}
-              fullWidth
-              value={form.password}
-              onChange={handleChange}
               required
+              onKeyDown={handleKeyDown}
+            />
+          </Box>
+
+          {/* Password */}
+          <Typography
+            variant="body1"
+            sx={{ mt: 3, ml: 7, color: "#273253", fontWeight: "bold" }}
+          >
+            Password
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              width: "100%",
+              alignItems: "center",
+            }}
+          >
+            <TextField
+              sx={{
+                width: "360px",
+                height: "44px",
+                borderRadius: "90px",
+                border: "2px solid #273253",
+                "& .MuiInputBase-root": {
+                  borderRadius: "90px",
+                  fontSize: "15px",
+                  fontFamily: "'Roboto', sans-serif",
+                  mt: "-6px",
+                  mb: "10px",
+                  ml: "15px",
+                },
+                "& .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
+                },
+              }}
+              required
+              inputRef={passwordRef}
+              type={showPassword ? "text" : "password"}
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={() => setShowPass(!showPass)}>
-                      {showPass ? <VisibilityOff /> : <Visibility />}
+                  <InputAdornment position="end" sx={{ mt: 1.5 }}>
+                    <IconButton
+                      onClick={handlePasswordVisibility}
+                      edge="end"
+                      sx={{ marginTop: "-16px" }}
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
                 ),
               }}
-              sx={{
-                mb: 2,
-                "& .MuiInputLabel-asterisk": {
-                  color: "#e62222", // bintang merah
-                },
-              }}
             />
-            {errorMessage && (
-              <Alert
-                severity="error"
-                sx={{
-                  width: "100%",
-                  maxHeight: "18%",
-                  color: "red",
-                  backgroundColor: "transparant",
-                }}
-              >
-                {errorMessage}
-              </Alert>
-            )}
-            <Typography
-              variant="body2"
-              sx={{
-                color: "#2196f3",
-                textDecoration: "underline",
-                cursor: "pointer",
-                mt: 0,
-                mb: 2,
-                textAlign: "right",
-                width: "100%",
-                maxWidth: 400,
-              }}
-              onClick={handleForgetPassword}
-            >
-              Forget Password?
-            </Typography>
-            <Button
-              type="submit"
-              variant="contained"
-              fullWidth
-              sx={{
-                fontWeight: "bold",
-                backgroundColor: "#2196f3",
-                "&:hover": {
-                  backgroundColor: "#1565c0",
-                },
-              }}
-            >
-              Login
-            </Button>
-            <Typography
-              variant="body2"
-              sx={{
-                textAlign: "center",
-                color: "#000000",
-                mt: 2.5,
-              }}
-            >
-              Don't have an account?{" "}
-              <span
-                style={{
-                  color: "#2196f3",
-                  textDecoration: "underline",
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                }}
-                onClick={handleSignUp}
-              >
-                Sign Up
-              </span>
-            </Typography>
-          </form>
+          </Box>
+
+          {/* Login Button */}
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{
+              width: "187.05px",
+              height: "40px",
+              borderRadius: "90px",
+              marginTop: "3rem",
+              textTransform: "none",
+              display: "flex",
+              justifyContent: "center",
+              marginLeft: "auto",
+              marginRight: "auto",
+              backgroundColor: "#273253",
+            }}
+            onClick={handleLogin} // Panggil fungsi handleLogin
+          >
+            Login
+          </Button>
+          <Typography sx={{ textAlign: "center", marginTop: "1rem" }}>
+            <Link href="#" underline="none" sx={{ color: "#273253" }}>
+              Lupa Password?
+            </Link>
+          </Typography>
         </Box>
       </Box>
     </Box>
