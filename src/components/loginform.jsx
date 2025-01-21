@@ -31,7 +31,7 @@ export default function LoginForm() {
     // Simulasi proses login
     const isLoginSuccessful = true; // Ganti dengan logika autentikasi Anda
     if (isLoginSuccessful) {
-      navigate("/dashboard"); // Arahkan ke halaman dashboard
+      navigate("/admindashboard"); // Arahkan ke halaman dashboard
     } else {
       alert("Login gagal! Periksa username dan password Anda.");
     }

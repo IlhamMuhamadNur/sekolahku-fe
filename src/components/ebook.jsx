@@ -87,7 +87,7 @@ export default function EBookPage() {
             SMK NEGERI 1 KATAPANG-EBOOK
           </Typography>
 
-          <Link to="/dashboard" style={{ textDecoration: "none" }}>
+          <Link to="/admindashboard" style={{ textDecoration: "none" }}>
             <Button
               color="inherit"
               sx={{
