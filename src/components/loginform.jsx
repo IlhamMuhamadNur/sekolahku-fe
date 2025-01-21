@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   TextField,
@@ -6,118 +6,233 @@ import {
   Typography,
   InputAdornment,
   IconButton,
-  Link,
+  Alert,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { IconStar } from "@tabler/icons-react"; // Import ikon bintang dari Tabler Icons
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function LoginForm() {
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [form, setForm] = useState({ username: "", password: "" });
+  const [showPass, setShowPass] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
-  const handlePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
-  };
+  function handleSignUp() {
+    navigate("/sign-up"); // ke halaman sign-up, dibikin visei
+  }
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  }
+
+  function handleLogin(e) {
+    e.preventDefault();
+    const payload = { ...form };
+
+    //kirim data login ke backend
+
+    axios
+      .post("backend login api url", payload) //ganti pakai url API loginnya, semangat be!
+      .then((response) => {
+        if (response.data.token) {
+          localStorage.setItem("authtoken", response.data.token);
+          navigate("/dashboard");
+        } else {
+          setErrorMessage("Username atau Password salah!");
+        }
+      })
+      .catch((error) => {
+        console.error("Login gagal:", error);
+
+        setErrorMessage("Username atau Password salah!");
+        setTimeout(() => setErrorMessage(""), 1000);
+      });
+  }
+  function handleForgetPassword() {
+    navigate("/resetpasswordotp"); //navigate ke halaman imputemail, dibikin visei
+  }
 
   return (
     <Box
       sx={{
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        background: "linear-gradient(120deg, #f5f5f5, #e8eaf6)",
-        position: "relative",
+        margin: 0,
+        padding: 0,
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
         overflow: "hidden",
       }}
     >
-      {/* Background Shapes */}
       <Box
         sx={{
           position: "absolute",
-          width: "80%",
-          height: "80%",
-          top: "10%",
-          left: "10%",
-          backgroundImage: `url(/path-to-your-background-shapes.png)`,
-          backgroundRepeat: "no-repeat",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundImage: "url(/pict/smk.jpg)",
           backgroundSize: "cover",
-          zIndex: 0,
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
         }}
-      ></Box>
-
-      {/* Login Form */}
+      />
       <Box
         sx={{
-          backgroundColor: "#fff",
-          padding: "2rem",
-          borderRadius: "16px",
-          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-          zIndex: 1,
+          position: "absolute",
+          top: 0,
+          left: 0,
           width: "100%",
-          maxWidth: 400,
+          height: "100%",
+          backgroundColor: "rgba(255, 255, 255, 0.5)", // Putih dengan transparansi
+        }}
+      />
+      <Box
+        sx={{
+          position: "relative",
+          zIndex: 1,
+          // Konten Anda
         }}
       >
         <Box
           sx={{
             display: "flex",
+            flexDirection: "column",
             justifyContent: "center",
-            alignItems: "center",
-            gap: "0.5rem",
-            marginBottom: "1rem",
+            width: "100%",
+            height: "100%",
+            maxHeight: 435,
+            maxWidth: 450,
+            backgroundColor: "rgba(255, 255, 255, 1)",
+            padding: 3,
+            borderRadius: "8px",
+            boxShadow: "0 2px 20px rgba(0, 1, 1, 0.5)",
           }}
         >
-          <IconStar size={24} strokeWidth={2} color="#1976d2" />{" "}
-          {/* Ikon bintang */}
           <Typography
-            variant="h5"
-            component="h1"
-            sx={{ fontWeight: "bold", textAlign: "center" }}
+            variant="h4"
+            sx={{
+              mb: 3,
+              textDecoration: "underline",
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
           >
-            SEKOLAH SIMAK
+            Login
           </Typography>
+          <form onSubmit={handleLogin} style={{ width: "100%" }}>
+            <TextField
+              id="username"
+              label="Username"
+              name="username"
+              variant="outlined"
+              fullWidth
+              value={form.username}
+              onChange={handleChange}
+              required
+              autoComplete="username"
+              sx={{
+                mb: 2,
+                "& .MuiInputLabel-asterisk": {
+                  color: "#e62222", //bintang merah
+                },
+              }}
+            />
+            <TextField
+              label="Password"
+              name="password"
+              variant="outlined"
+              type={showPass ? "text" : "password"}
+              fullWidth
+              value={form.password}
+              onChange={handleChange}
+              required
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={() => setShowPass(!showPass)}>
+                      {showPass ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              sx={{
+                mb: 2,
+                "& .MuiInputLabel-asterisk": {
+                  color: "#e62222", // bintang merah
+                },
+              }}
+            />
+            {errorMessage && (
+              <Alert
+                severity="error"
+                sx={{
+                  width: "100%",
+                  maxHeight: "18%",
+                  color: "red",
+                  backgroundColor: "transparant",
+                }}
+              >
+                {errorMessage}
+              </Alert>
+            )}
+            <Typography
+              variant="body2"
+              sx={{
+                color: "#2196f3",
+                textDecoration: "underline",
+                cursor: "pointer",
+                mt: 0,
+                mb: 2,
+                textAlign: "right",
+                width: "100%",
+                maxWidth: 400,
+              }}
+              onClick={handleForgetPassword}
+            >
+              Forget Password?
+            </Typography>
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              sx={{
+                fontWeight: "bold",
+                backgroundColor: "#2196f3",
+                "&:hover": {
+                  backgroundColor: "#1565c0",
+                },
+              }}
+            >
+              Login
+            </Button>
+            <Typography
+              variant="body2"
+              sx={{
+                textAlign: "center",
+                color: "#000000",
+                mt: 2.5,
+              }}
+            >
+              Don't have an account?{" "}
+              <span
+                style={{
+                  color: "#2196f3",
+                  textDecoration: "underline",
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                }}
+                onClick={handleSignUp}
+              >
+                Sign Up
+              </span>
+            </Typography>
+          </form>
         </Box>
-
-        <TextField
-          label="Username"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          defaultValue="simakdki"
-        />
-
-        <TextField
-          label="Password"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          type={showPassword ? "text" : "password"}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={handlePasswordVisibility} edge="end">
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-
-        <Button
-          variant="contained"
-          color="primary"
-          fullWidth
-          sx={{ marginTop: "1rem", textTransform: "none" }}
-        >
-          Login
-        </Button>
-
-        <Typography
-          sx={{ textAlign: "center", marginTop: "1rem", fontSize: "0.875rem" }}
-        >
-          <Link href="#" underline="none">
-            Lupa Password?
-          </Link>
-        </Typography>
       </Box>
     </Box>
   );
