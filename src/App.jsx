@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginForm from "./components/login-form";
-import Dashboard from "./components/dashboard";
+import AdminDashboard from "./components/AdminDashboard";
 import ERaport from "./components/ERaport";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<LoginForm />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<AdminDashboard />} />
         <Route path="/" element={<ERaport />} />
       </Routes>
     </Router>
