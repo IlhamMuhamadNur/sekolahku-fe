@@ -12,7 +12,7 @@ import ERaport from "./components/ERaport";
 function App() {
   return (
     <Router>
-      <Routes> 
+      <Routes>
         <Route path="/" element={<OpeningPage />} />
         <Route path="/loginform" element={<LoginForm />} />
         <Route path="/dashboard" element={<Dashboard />} />
