@@ -60,19 +60,9 @@ export default function LoginForm() {
     setShowPassword((prev) => !prev);
   };
 
-<<<<<<< HEAD
-  const handleLogin = () => {
-    // Simulasi proses login
-    const isLoginSuccessful = true; // Ganti dengan logika autentikasi Anda
-    if (isLoginSuccessful) {
-      navigate("/admindashboard"); // Arahkan ke halaman dashboard
-    } else {
-      alert("Login gagal! Periksa username dan password Anda.");
-=======
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       passwordRef.current.focus();
->>>>>>> f6003fb2690121ee9ce0c85447bb7bf6a3f8d075
     }
   };
 

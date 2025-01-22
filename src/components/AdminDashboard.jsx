@@ -57,11 +57,7 @@ const AdminDashboard = () => {
         <Box sx={{ textAlign: "center", marginBottom: 2 }}>
           {/* Logo Sekolah */}
           <img
-<<<<<<< HEAD
             src="/pict/logosmk.png"
-=======
-            src="pict/logosmk.png" // Ganti dengan path logo yang benar
->>>>>>> f6003fb2690121ee9ce0c85447bb7bf6a3f8d075
             alt="Logo Sekolah"
             style={{ width: "100px", height: "auto", marginBottom: "8px" }}
           />
@@ -158,7 +154,6 @@ const AdminDashboard = () => {
         {/* background image */}
         <Box
           sx={{
-<<<<<<< HEAD
             flex: 1,
             position: "absolute",
             left: "285px",
@@ -167,13 +162,6 @@ const AdminDashboard = () => {
             backgroundSize: "cover", // Menyesuaikan gambar agar penuh
             backgroundPosition: "center", // Posisi gambar di tengah
             backgroundRepeat: "no-repeat", // Mencegah pengulangan
-=======
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 3fr)",
-            marginTop: 4,
-            gap: 3,
-            marginLeft: "1%",
->>>>>>> f6003fb2690121ee9ce0c85447bb7bf6a3f8d075
           }}
         >
           {/* Statistik Admin, Guru, dan Siswa */}
