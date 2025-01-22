@@ -80,7 +80,7 @@ export default function OTPForm() {
           left: 0,
           width: "100%",
           height: "100%",
-          backgroundImage: "url(/pict/smk.jpg)",
+          backgroundImage: "url(/src/assets/image/smk.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",

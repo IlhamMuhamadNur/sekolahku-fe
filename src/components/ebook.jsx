@@ -65,7 +65,7 @@ export default function EBookPage() {
       <AppBar position="static" sx={{ bgcolor: "#5b6993" }}>
         <Toolbar>
           <img
-            src="pict/logosmk.png"
+            src="/src/assets/image/logosmk.png"
             alt="Logo SMK"
             style={{
               width: 50,
@@ -87,7 +87,7 @@ export default function EBookPage() {
             SMK NEGERI 1 KATAPANG-EBOOK
           </Typography>
 
-          <Link to="/dashboard" style={{ textDecoration: "none" }}>
+          <Link to="/admindashboard" style={{ textDecoration: "none" }}>
             <Button
               color="inherit"
               sx={{

@@ -31,7 +31,7 @@ const AdminDashboard = () => {
       sx={{
         display: "flex",
         height: "100vh",
-        backgroundImage: "url('/pict/bg.png')", // Path gambar
+        backgroundImage: "url('/src/assets/image/bg.png')", // Path gambar
         backgroundSize: "cover", // Menyesuaikan gambar agar penuh
         backgroundPosition: "center", // Posisi gambar di tengah
         backgroundRepeat: "no-repeat", // Mencegah pengulangan
@@ -53,7 +53,7 @@ const AdminDashboard = () => {
         <Box sx={{ textAlign: "center", marginBottom: 2 }}>
           {/* Logo Sekolah */}
           <img
-            src="/pict/logosmk.png" // Ganti dengan path logo yang benar
+            src="/src/assets/image/logosmk.png" // Ganti dengan path logo yang benar
             alt="Logo Sekolah"
             style={{ width: "100px", height: "auto", marginBottom: "8px" }}
           />

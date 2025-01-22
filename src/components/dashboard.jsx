@@ -82,7 +82,7 @@ export default function Dashboard() {
       <AppBar position="static" sx={{ bgcolor: "#5b6993 " }}>
         <Toolbar>
           <img
-            src="pict/logosmk.png" // Akses file dari folder public
+            src="/src/assets/image/logosmk.png" // Akses file dari folder public
             style={{
               width: 50,
               height: 50,
