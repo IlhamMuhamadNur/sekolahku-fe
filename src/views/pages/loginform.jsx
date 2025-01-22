@@ -9,10 +9,12 @@ import {
   Snackbar,
   Alert,
   Link,
+  Stack,
 } from "@mui/material";
 import { Visibility, VisibilityOff, Star } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { IconStarFilled } from "@tabler/icons-react";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -119,22 +121,23 @@ export default function LoginForm() {
             height: "100%",
           }}
         >
-          <Box
+          <Stack
+            direction="row"
+            spacing={2}
             sx={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              gap: "0.5rem",
-              marginBottom: "1rem",
+              mb: 7.5,
+              mt: 2,
             }}
           >
-            <Star sx={{ color: "#3D3F3F", mb: 5, mt: 2 }} />
+            {/* <Star sx={{ color: "#3D3F3F", mb: 5, mt: 2 }} /> */}
+            <IconStarFilled />
             <Typography
               variant="h5"
               component="h1"
               sx={{
-                mb: 5,
-                mt: 2,
                 fontWeight: 900,
                 textAlign: "center",
                 color: "#3D3F3F",
@@ -143,7 +146,7 @@ export default function LoginForm() {
             >
               SEKOLAH SIMAK
             </Typography>
-          </Box>
+          </Stack>
 
           <Typography
             variant="body1"
