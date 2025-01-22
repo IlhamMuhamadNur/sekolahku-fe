@@ -8,7 +8,7 @@ export default function OpeningPage() {
   //pindah ke halaman login setelah 5 detik
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/dashboard");
+      navigate("/admindashboard");
     }, 5000);
 
     return () => clearTimeout(timer);

@@ -31,10 +31,6 @@ const AdminDashboard = () => {
       sx={{
         display: "flex",
         height: "100vh",
-        backgroundImage: "url('/pict/bg.png')", // Path gambar
-        backgroundSize: "cover", // Menyesuaikan gambar agar penuh
-        backgroundPosition: "center", // Posisi gambar di tengah
-        backgroundRepeat: "no-repeat", // Mencegah pengulangan
       }}
     >
       {/* Sidebar */}
@@ -53,7 +49,7 @@ const AdminDashboard = () => {
         <Box sx={{ textAlign: "center", marginBottom: 2 }}>
           {/* Logo Sekolah */}
           <img
-            src="/pict/logosmk.png" // Ganti dengan path logo yang benar
+            src="/pict/logosmk.png"
             alt="Logo Sekolah"
             style={{ width: "100px", height: "auto", marginBottom: "8px" }}
           />
@@ -114,7 +110,6 @@ const AdminDashboard = () => {
           ))}
         </List>
       </Box>
-
       {/* Main Content */}
       <Box sx={{ flex: 1, padding: 5, overflowY: "auto" }}>
         {/* Search Bar */}
@@ -148,194 +143,209 @@ const AdminDashboard = () => {
             }}
           />
         </Box>
-        {/* Statistik Admin, Guru, dan Siswa */}
-        <Box sx={{ margin: 2, display: "flex", gap: 2 }}>
-          <Card
-            sx={{
-              backgroundColor: "#00C9F2",
-              color: "#26468B",
-              width: 100,
-              height: 80,
-              borderTopLeftRadius: "30px",
-              borderBottomRightRadius: "30px",
-            }}
-          >
-            <CardContent
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                padding: 1,
-              }}
-            >
-              <Typography variant="h6" sx={{ textAlign: "center" }}>
-                Admin
-              </Typography>
-              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                4
-              </Typography>
-            </CardContent>
-          </Card>
-          <Card
-            sx={{
-              backgroundColor: "#FFDC09",
-              color: "#3D3F3F",
-              width: 100,
-              height: 80,
-              borderTopLeftRadius: "30px",
-              borderBottomRightRadius: "30px",
-            }}
-          >
-            <CardContent
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                padding: 1,
-              }}
-            >
-              <Typography variant="h6" sx={{ textAlign: "center" }}>
-                Guru
-              </Typography>
-              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                41
-              </Typography>
-            </CardContent>
-          </Card>
-          <Card
-            sx={{
-              backgroundColor: "#FF6242",
-              color: "white",
-              width: 100,
-              height: 80,
-              borderTopLeftRadius: "30px",
-              borderBottomRightRadius: "30px",
-            }}
-          >
-            <CardContent
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                padding: 1,
-              }}
-            >
-              <Typography variant="h6" sx={{ textAlign: "center" }}>
-                Murid
-              </Typography>
-              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                600
-              </Typography>
-            </CardContent>
-          </Card>
-          <Card
-            sx={{
-              backgroundColor: "#26468B",
-              color: "white",
-              width: 100,
-              height: 80,
-              borderTopLeftRadius: "30px",
-              borderBottomRightRadius: "30px",
-            }}
-          >
-            <CardContent
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                padding: 1.5,
-              }}
-            >
-              <Typography sx={{ textAlign: "center", fontSize: "15px" }}>
-                Orang Tua
-              </Typography>
-              <Typography sx={{ fontWeight: "bold", fontSize: "20px" }}>
-                600
-              </Typography>
-            </CardContent>
-          </Card>
-        </Box>
-        {/* Cards Section */}
+        {/* background image */}
         <Box
           sx={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            marginTop: 4,
-            gap: 2,
+            flex: 1,
+            position: "absolute",
+            left: "245px",
+            right: 0,
+            backgroundImage: "url('/pict/bg.png')", // Path gambar
+            backgroundSize: "cover", // Menyesuaikan gambar agar penuh
+            backgroundPosition: "center", // Posisi gambar di tengah
+            backgroundRepeat: "no-repeat", // Mencegah pengulangan
           }}
         >
-          <Card
+          {/* Statistik Admin, Guru, dan Siswa */}
+          <Box sx={{ margin: 2, display: "flex", gap: 2, margin: 3 }}>
+            <Card
+              sx={{
+                backgroundColor: "#00C9F2",
+                color: "#26468B",
+                width: 100,
+                height: 80,
+                borderTopLeftRadius: "30px",
+                borderBottomRightRadius: "30px",
+              }}
+            >
+              <CardContent
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  padding: 1,
+                }}
+              >
+                <Typography variant="h6" sx={{ textAlign: "center" }}>
+                  Admin
+                </Typography>
+                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                  4
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card
+              sx={{
+                backgroundColor: "#FFDC09",
+                color: "#3D3F3F",
+                width: 100,
+                height: 80,
+                borderTopLeftRadius: "30px",
+                borderBottomRightRadius: "30px",
+              }}
+            >
+              <CardContent
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  padding: 1,
+                }}
+              >
+                <Typography variant="h6" sx={{ textAlign: "center" }}>
+                  Guru
+                </Typography>
+                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                  41
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card
+              sx={{
+                backgroundColor: "#FF6242",
+                color: "white",
+                width: 100,
+                height: 80,
+                borderTopLeftRadius: "30px",
+                borderBottomRightRadius: "30px",
+              }}
+            >
+              <CardContent
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  padding: 1,
+                }}
+              >
+                <Typography variant="h6" sx={{ textAlign: "center" }}>
+                  Murid
+                </Typography>
+                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                  600
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card
+              sx={{
+                backgroundColor: "#26468B",
+                color: "white",
+                width: 100,
+                height: 80,
+                borderTopLeftRadius: "30px",
+                borderBottomRightRadius: "30px",
+              }}
+            >
+              <CardContent
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  padding: 1.5,
+                }}
+              >
+                <Typography sx={{ textAlign: "center", fontSize: "15px" }}>
+                  Orang Tua
+                </Typography>
+                <Typography sx={{ fontWeight: "bold", fontSize: "20px" }}>
+                  600
+                </Typography>
+              </CardContent>
+            </Card>
+          </Box>
+          {/* Cards Section */}
+          <Box
             sx={{
-              backgroundColor: "#26468B",
-              color: "white",
-              borderTopLeftRadius: "30px",
-              borderBottomRightRadius: "30px",
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              margin: 5,
+              marginRight: 20,
+              gap: 3,
             }}
           >
-            <CardContent>
-              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                Efisiensi Kertas Ulangan
-              </Typography>
-              <Typography variant="body2">
-                Dengan menggunakan SiPintar, Sekolah SIMAK telah berhemat:
-              </Typography>
-              <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-                Rp. 24.000
-              </Typography>
-              <Typography sx={{ fontSize: "10px" }}>
-                *Dengan asumsi 1 ulangan membutuhkan 8 lembar kertas fotokopi
-              </Typography>
-            </CardContent>
-          </Card>
-          <Card
-            sx={{
-              backgroundColor: "#FFDC09",
-              color: "#3D3F3F",
-              borderTopLeftRadius: "30px",
-              borderBottomRightRadius: "30px",
-            }}
-          >
-            <CardContent>
-              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                Efisiensi Waktu Periksa Ulangan
-              </Typography>
-              <Typography variant="body2">
-                Dengan menggunakan SiPintar, guru Sekolah SIMAK telah menghemat
-                waktu:
-              </Typography>
-              <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-                1 Jam 15 Menit
-              </Typography>
-              <Typography sx={{ fontSize: "10px" }}>
-                * Dengan asumsi 1 ulangan membutuhkan waktu 5 menit untuk
-                pemeriksaan
-              </Typography>
-            </CardContent>
-          </Card>
-          <Card
-            sx={{
-              backgroundColor: "#FF6242",
-              color: "white",
-              borderTopLeftRadius: "30px",
-              borderBottomRightRadius: "30px",
-            }}
-          >
-            <CardContent>
-              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                Efisiensi Kertas Pengumuman
-              </Typography>
-              <Typography variant="body2">
-                Dengan menggunakan SiPintar, Sekolah SIMAK telah berhemat:
-              </Typography>
-              <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-                Rp. 960.000
-              </Typography>
-              <Typography sx={{ fontSize: "10px" }}>
-                * Dengan asumsi 1 pengumuman membutuhkan 2 lembar kertas
-                fotokopi
-              </Typography>
-            </CardContent>
-          </Card>
+            <Card
+              sx={{
+                backgroundColor: "#26468B",
+                color: "white",
+                borderTopLeftRadius: "30px",
+                borderBottomRightRadius: "30px",
+              }}
+            >
+              <CardContent>
+                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                  Efisiensi Kertas Ulangan
+                </Typography>
+                <Typography variant="body2">
+                  Dengan menggunakan SiPintar, Sekolah SIMAK telah berhemat:
+                </Typography>
+                <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+                  Rp. 24.000
+                </Typography>
+                <Typography sx={{ fontSize: "10px" }}>
+                  *Dengan asumsi 1 ulangan membutuhkan 8 lembar kertas fotokopi
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card
+              sx={{
+                backgroundColor: "#FFDC09",
+                color: "#3D3F3F",
+                borderTopLeftRadius: "30px",
+                borderBottomRightRadius: "30px",
+              }}
+            >
+              <CardContent>
+                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                  Efisiensi Waktu Periksa Ulangan
+                </Typography>
+                <Typography variant="body2">
+                  Dengan menggunakan SiPintar, guru Sekolah SIMAK telah
+                  menghemat waktu:
+                </Typography>
+                <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+                  1 Jam 15 Menit
+                </Typography>
+                <Typography sx={{ fontSize: "10px" }}>
+                  * Dengan asumsi 1 ulangan membutuhkan waktu 5 menit untuk
+                  pemeriksaan
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card
+              sx={{
+                backgroundColor: "#FF6242",
+                color: "white",
+                borderTopLeftRadius: "30px",
+                borderBottomRightRadius: "30px",
+              }}
+            >
+              <CardContent>
+                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                  Efisiensi Kertas Pengumuman
+                </Typography>
+                <Typography variant="body2">
+                  Dengan menggunakan SiPintar, Sekolah SIMAK telah berhemat:
+                </Typography>
+                <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+                  Rp. 960.000
+                </Typography>
+                <Typography sx={{ fontSize: "10px" }}>
+                  * Dengan asumsi 1 pengumuman membutuhkan 2 lembar kertas
+                  fotokopi
+                </Typography>
+              </CardContent>
+            </Card>
+          </Box>
         </Box>
       </Box>
     </Box>
