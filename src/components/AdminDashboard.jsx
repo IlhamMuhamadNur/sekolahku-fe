@@ -166,6 +166,7 @@ const AdminDashboard = () => {
                 height: 80,
                 borderTopLeftRadius: "30px",
                 borderBottomRightRadius: "30px",
+                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
               }}
             >
               <CardContent
@@ -192,6 +193,7 @@ const AdminDashboard = () => {
                 height: 80,
                 borderTopLeftRadius: "30px",
                 borderBottomRightRadius: "30px",
+                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
               }}
             >
               <CardContent
@@ -218,6 +220,7 @@ const AdminDashboard = () => {
                 height: 80,
                 borderTopLeftRadius: "30px",
                 borderBottomRightRadius: "30px",
+                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
               }}
             >
               <CardContent
@@ -244,6 +247,7 @@ const AdminDashboard = () => {
                 height: 80,
                 borderTopLeftRadius: "30px",
                 borderBottomRightRadius: "30px",
+                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
               }}
             >
               <CardContent
@@ -279,6 +283,7 @@ const AdminDashboard = () => {
                 color: "white",
                 borderTopLeftRadius: "30px",
                 borderBottomRightRadius: "30px",
+                boxShadow: "0px 6px 20px rgba(38, 70, 139, 0.8)",
               }}
             >
               <CardContent>
@@ -302,6 +307,7 @@ const AdminDashboard = () => {
                 color: "#3D3F3F",
                 borderTopLeftRadius: "30px",
                 borderBottomRightRadius: "30px",
+                boxShadow: "0px 6px 20px rgba(255, 220, 9, 0.8)",
               }}
             >
               <CardContent>
@@ -327,6 +333,7 @@ const AdminDashboard = () => {
                 color: "white",
                 borderTopLeftRadius: "30px",
                 borderBottomRightRadius: "30px",
+                boxShadow: "0px 6px 20px rgba(255, 98, 66, 1)",
               }}
             >
               <CardContent>
