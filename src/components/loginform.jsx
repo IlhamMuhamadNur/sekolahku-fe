@@ -6,34 +6,63 @@ import {
   Typography,
   InputAdornment,
   IconButton,
+  Snackbar,
+  Alert,
   Link,
 } from "@mui/material";
 import { Visibility, VisibilityOff, Star } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function LoginForm() {
-  const navigate = useNavigate(); // Inisialisasi useNavigate
-  const passwordRef = useRef(null); // Ref untuk password field
+  const navigate = useNavigate();
+  const passwordRef = useRef(null);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+  const [snackbarMessage, setSnackbarMessage] = React.useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = React.useState("success");
 
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      passwordRef.current.focus(); // Pindahkan fokus ke password
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
+  const handleLogin = async () => {
+    const username = document.querySelector("input[type='text']").value;
+    const password = passwordRef.current.value;
+
+    try {
+      const response = await axios.post("https://api.example.com/login", {
+        username,
+        password,
+      });
+
+      if (response.status === 200) {
+        console.log("Login berhasil:", response.data);
+        localStorage.setItem("token", response.data.token);
+        setSnackbarMessage("Login berhasil! Anda akan diarahkan ke dashboard.");
+        setSnackbarSeverity("success");
+        setSnackbarOpen(true);
+        navigate("/dashboard");
+      } else {
+        setSnackbarMessage("Login gagal! Periksa username dan password Anda.");
+        setSnackbarSeverity("error");
+        setSnackbarOpen(true);
+      }
+    } catch (error) {
+      console.error("Terjadi kesalahan:", error);
+      setSnackbarMessage("Terjadi kesalahan saat login. Silakan coba lagi.");
+      setSnackbarSeverity("error");
+      setSnackbarOpen(true);
     }
   };
 
-  const [showPassword, setShowPassword] = React.useState(false);
-
   const handlePasswordVisibility = () => {
-    setShowPassword((prev) => !prev); // Toggle untuk menampilkan atau menyembunyikan password
+    setShowPassword((prev) => !prev);
   };
 
-  const handleLogin = () => {
-    // Simulasi proses login
-    const isLoginSuccessful = true; // Ganti dengan logika autentikasi Anda
-    if (isLoginSuccessful) {
-      navigate("/dashboard"); // Arahkan ke halaman dashboard
-    } else {
-      alert("Login gagal! Periksa username dan password Anda.");
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      passwordRef.current.focus();
     }
   };
 
@@ -51,7 +80,6 @@ export default function LoginForm() {
         padding: 0,
       }}
     >
-      {/* Gambar Background */}
       <Box
         sx={{
           position: "absolute",
@@ -66,8 +94,6 @@ export default function LoginForm() {
           pointerEvents: "none",
         }}
       ></Box>
-
-      {/* Form Box Centered */}
       <Box
         sx={{
           position: "absolute",
@@ -93,7 +119,6 @@ export default function LoginForm() {
             height: "100%",
           }}
         >
-          {/* Header */}
           <Box
             sx={{
               display: "flex",
@@ -120,7 +145,6 @@ export default function LoginForm() {
             </Typography>
           </Box>
 
-          {/* Username */}
           <Typography
             variant="body1"
             sx={{ mt: 3, ml: 7, color: "#273253", fontWeight: "bold" }}
@@ -153,7 +177,6 @@ export default function LoginForm() {
             />
           </Box>
 
-          {/* Password */}
           <Typography
             variant="body1"
             sx={{ mt: 3, ml: 7, color: "#273253", fontWeight: "bold" }}
@@ -187,6 +210,11 @@ export default function LoginForm() {
                 },
               }}
               required
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  passwordRef.current.focus(); // Pindah fokus ke kolom Password
+                }
+              }}
               inputRef={passwordRef}
               type={showPassword ? "text" : "password"}
               InputProps={{
@@ -199,13 +227,29 @@ export default function LoginForm() {
                     >
                       {showPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
+                    <Snackbar
+                      open={snackbarOpen}
+                      autoHideDuration={3000}
+                      onClose={handleSnackbarClose}
+                      anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "center",
+                      }}
+                    >
+                      <Alert
+                        onClose={handleSnackbarClose}
+                        severity={snackbarSeverity}
+                        sx={{ width: "100%" }}
+                      >
+                        {snackbarMessage}
+                      </Alert>
+                    </Snackbar>
                   </InputAdornment>
                 ),
               }}
             />
           </Box>
 
-          {/* Login Button */}
           <Button
             variant="contained"
             color="primary"
@@ -221,7 +265,7 @@ export default function LoginForm() {
               marginRight: "auto",
               backgroundColor: "#273253",
             }}
-            onClick={handleLogin} // Panggil fungsi handleLogin
+            onClick={handleLogin}
           >
             Login
           </Button>
@@ -235,4 +279,3 @@ export default function LoginForm() {
     </Box>
   );
 }
-//

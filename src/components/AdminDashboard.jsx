@@ -349,17 +349,20 @@ const AdminDashboard = () => {
         <Box>
           <Box
             sx={{
-              display: "flex",
               flexWrap: "nowrap",
-              gap: "2%",
               padding: "1%",
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 3fr)",
+              marginTop: 4,
+              gap: 3,
+              marginLeft: "1%",
             }}
           >
             {/* Card Section */}
-            <Box sx={{ flex: 1 }}>
+            <Box sx={{ flex: "none" }}>
               <Typography
                 variant="h6"
-                sx={{ mt: "3%", ml: "1%", color: "#26468B", fontWeight: 500 }}
+                sx={{ ml: "1%", color: "#26468B", fontWeight: 500 }}
               >
                 KPI Tertinggi
               </Typography>
@@ -367,23 +370,38 @@ const AdminDashboard = () => {
                 component={Paper}
                 sx={{
                   boxShadow: "0 4px 12px rgba(0, 0, 0, 0.7)",
-                  borderRadius: "10px",
                   padding: "1%",
+                  borderTopLeftRadius: "30px", // Radius kiri atas
+                  borderBottomRightRadius: "30px", // Radius kanan bawah
+                  borderBottomLeftRadius: "0", // Tidak ada radius di kiri bawah
+                  borderTopRightRadius: "0", // Tidak ada radius di kanan atas
+                  maxWidth: "100%",
+                  width: 400,
                 }}
               >
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell>Nama</TableCell>
-                      <TableCell align="right">Point</TableCell>
-                      <TableCell align="right">Aksi</TableCell>
+                      <TableCell sx={{ borderColor: "#26468B" }}>
+                        Nama
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderColor: "#26468B" }}>
+                        Point
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderColor: "#26468B" }}>
+                        Aksi
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     <TableRow>
-                      <TableCell>John Doe</TableCell>
-                      <TableCell align="right">10</TableCell>
-                      <TableCell align="right">
+                      <TableCell sx={{ borderBottom: "none" }}>
+                        John Doe
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderBottom: "none" }}>
+                        10
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderBottom: "none" }}>
                         <Button
                           variant="contained"
                           size="small"
@@ -408,6 +426,7 @@ const AdminDashboard = () => {
                             borderTopLeftRadius: "10px",
                             borderBottomRightRadius: "10px",
                             backgroundColor: "#26468B",
+                            borderBottom: "none",
                           }}
                         >
                           Lihat
@@ -420,15 +439,14 @@ const AdminDashboard = () => {
               </TableContainer>
             </Box>
 
-            {/* Table Section */}
-            <Box sx={{ flex: 1 }}>
+            <Box sx={{ flex: "none" }}>
               <Typography
                 variant="h6"
                 sx={{
-                  mt: "3%",
-                  ml: "1%",
                   color: "#26468B",
                   fontWeight: 500,
+                  maxWidth: "100%",
+                  width: 400,
                 }}
               >
                 Laporan Update Absensi Murid dan Guru
@@ -437,25 +455,40 @@ const AdminDashboard = () => {
                 component={Paper}
                 sx={{
                   boxShadow: "0 4px 12px rgba(0, 0, 0, 0.7)",
-                  borderRadius: "10px",
                   padding: "1%",
+                  borderTopLeftRadius: "30px", // Radius kiri atas
+                  borderBottomRightRadius: "30px", // Radius kanan bawah
+                  borderBottomLeftRadius: "0", // Tidak ada radius di kiri bawah
+                  borderTopRightRadius: "0", // Tidak ada radius di kanan atas
+                  maxWidth: "100%",
+                  width: 750,
                 }}
               >
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell>Nama</TableCell>
-                      <TableCell align="right" sx={{ borderBottom: "none" }}>
-                        Point
+                      <TableCell sx={{ borderColor: "#26468B" }}>#</TableCell>
+                      <TableCell align="right" sx={{ borderColor: "#26468B" }}>
+                        Nama Wali Kelas
                       </TableCell>
-                      <TableCell align="right">Aksi</TableCell>
+                      <TableCell align="right" sx={{ borderColor: "#26468B" }}>
+                        Kelas
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderColor: "#26468B" }}>
+                        Status
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     <TableRow>
-                      <TableCell>John Doe</TableCell>
-                      <TableCell align="right">10</TableCell>
-                      <TableCell align="right">
+                      <TableCell sx={{ borderBottom: "none" }}>1</TableCell>
+                      <TableCell align="right" sx={{ borderBottom: "none" }}>
+                        Violette D'Amore
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderBottom: "none" }}>
+                        X - A
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderBottom: "none" }}>
                         <Button
                           variant="contained"
                           size="small"
@@ -463,6 +496,7 @@ const AdminDashboard = () => {
                             borderTopLeftRadius: "10px",
                             borderBottomRightRadius: "10px",
                             backgroundColor: "#26468B",
+                            borderBottom: "none",
                           }}
                         >
                           Lihat
@@ -470,9 +504,14 @@ const AdminDashboard = () => {
                       </TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell>Jane Smith</TableCell>
-                      <TableCell align="right">12</TableCell>
-                      <TableCell align="right">
+                      <TableCell sx={{ borderBottom: "none" }}>1</TableCell>
+                      <TableCell align="right" sx={{ borderBottom: "none" }}>
+                        Violette D'Amore
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderBottom: "none" }}>
+                        X - A
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderBottom: "none" }}>
                         <Button
                           variant="contained"
                           size="small"
@@ -480,6 +519,7 @@ const AdminDashboard = () => {
                             borderTopLeftRadius: "10px",
                             borderBottomRightRadius: "10px",
                             backgroundColor: "#26468B",
+                            borderBottom: "none",
                           }}
                         >
                           Lihat
