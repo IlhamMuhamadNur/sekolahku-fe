@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginForm from "./components/loginform";
-import Dashboard from "./components/dashboard";
+import AdminDashboard from "./components/AdminDashboard";
 import OTPForm from "./components/resetpasswordotp";
 import OpeningPage from "./components/openingpage";
 import NewPassword from "./components/NewPassword";
@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<OpeningPage />} />
         <Route path="/loginform" element={<LoginForm />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/admindashboard" element={<AdminDashboard />} />
         <Route path="/resetpasswordotp" element={<OTPForm />} />
         <Route path="/NewPassword" element={<NewPassword />} />
         <Route path="/Register" element={<Register />} />

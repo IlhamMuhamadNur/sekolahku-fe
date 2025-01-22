@@ -8,7 +8,7 @@ export default function OpeningPage() {
   //pindah ke halaman login setelah 5 detik
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/dashboard");
+      navigate("/admindashboard");
     }, 5000);
 
     return () => clearTimeout(timer);
@@ -29,7 +29,7 @@ export default function OpeningPage() {
       <Box mb={2}>
         {" "}
         <img
-          src="/pict/logosmk.png"
+          src="/src/assets/image/logosmk.png"
           style={{
             width: 120,
             height: "auto",
