@@ -29,25 +29,25 @@ export default function EBookPage() {
     {
       id: 1,
       title: "Panduan Dasar Pemrograman",
-      image: "pict/ebook1.jpg",
+      image: "src/assets/image/ebook1.jpg",
       description: "Belajar dasar-dasar pemrograman untuk pemula.",
     },
     {
       id: 2,
       title: "Kiat Sukses UNBK",
-      image: "pict/ebook2.jpg",
+      image: "src/assets/image/ebook2.jpg",
       description: "Tips dan trik menghadapi Ujian Nasional Berbasis Komputer.",
     },
     {
       id: 3,
       title: "Desain Grafis untuk Pemula",
-      image: "pict/ebook3.jpg",
+      image: "src/assets/image/ebook3.jpg",
       description: "Panduan mudah untuk memulai karir di desain grafis.",
     },
     {
       id: 4,
       title: "Teknologi Informasi Modern",
-      image: "pict/ebook4.jpg",
+      image: "src/assets/image/ebook4.jpg",
       description: "Pengetahuan terkini tentang teknologi informasi.",
     },
   ];

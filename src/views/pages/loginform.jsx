@@ -9,9 +9,11 @@ import {
   Snackbar,
   Alert,
   Link,
+  Stack,
 } from "@mui/material";
 import { Visibility, VisibilityOff, Star } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { IconStarFilled } from "@tabler/icons-react";
 import axios from "axios";
 
 export default function LoginForm() {
@@ -31,12 +33,23 @@ export default function LoginForm() {
     const password = passwordRef.current.value;
 
     try {
-      const response = await axios.post("https://api.example.com/login", {
-        username,
-        password,
-      });
+      // const response = await axios.post("https://api.example.com/login", {
+      //   username,
+      //   password,
+      // });
+      const response = await axios.post(
+        "https://47e4-103-171-153-170.ngrok-free.app/api/users/login",
+        { username, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      if (response.status === 200) {
+      console.log("response", response);
+
+      if (response.data.success) {
         console.log("Login berhasil:", response.data);
         localStorage.setItem("token", response.data.token);
         setSnackbarMessage("Login berhasil! Anda akan diarahkan ke dashboard.");
@@ -60,19 +73,9 @@ export default function LoginForm() {
     setShowPassword((prev) => !prev);
   };
 
-<<<<<<< HEAD
-  const handleLogin = () => {
-    // Simulasi proses login
-    const isLoginSuccessful = true; // Ganti dengan logika autentikasi Anda
-    if (isLoginSuccessful) {
-      navigate("/admindashboard"); // Arahkan ke halaman dashboard
-    } else {
-      alert("Login gagal! Periksa username dan password Anda.");
-=======
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       passwordRef.current.focus();
->>>>>>> f6003fb2690121ee9ce0c85447bb7bf6a3f8d075
     }
   };
 
@@ -129,22 +132,23 @@ export default function LoginForm() {
             height: "100%",
           }}
         >
-          <Box
+          <Stack
+            direction="row"
+            spacing={2}
             sx={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              gap: "0.5rem",
-              marginBottom: "1rem",
+              mb: 7.5,
+              mt: 2,
             }}
           >
-            <Star sx={{ color: "#3D3F3F", mb: 5, mt: 2 }} />
+            {/* <Star sx={{ color: "#3D3F3F", mb: 5, mt: 2 }} /> */}
+            <IconStarFilled />
             <Typography
               variant="h5"
               component="h1"
               sx={{
-                mb: 5,
-                mt: 2,
                 fontWeight: 900,
                 textAlign: "center",
                 color: "#3D3F3F",
@@ -153,7 +157,7 @@ export default function LoginForm() {
             >
               SEKOLAH SIMAK
             </Typography>
-          </Box>
+          </Stack>
 
           <Typography
             variant="body1"
