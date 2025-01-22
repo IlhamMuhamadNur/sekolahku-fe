@@ -1,58 +1,44 @@
-import React, { useEffect } from "react";
-import { Typography, Container, Box } from "@mui/material";
+import { useEffect } from "react";
+import { Typography, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 export default function OpeningPage() {
   const navigate = useNavigate();
 
-  //pindah ke halaman login setelah 5 detik
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/loginform");
-    }, 5000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, [navigate]);
 
   return (
-    <Container
-      maxWidth="xs"
-      style={{
+    <Stack
+      direction="column"
+      spacing={2}
+      sx={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         height: "100vh",
-        textAlign: "center",
       }}
     >
-      <Box mb={2}>
-        {" "}
-        <img
-          src="src/assets/image/logosmk.png/logosmk.png"
-          style={{
-            width: 120,
-            height: "auto",
-            marginBottom: -10,
-            alignContent: "center",
-          }}
-        />
-      </Box>
+      <img src="src/assets/image/logosmk.png" style={{ width: 120 }} />
 
       <Typography
         variant="h4"
-        gutterBottom
         sx={{
           textAlign: "center",
           fontSize: 24,
           fontWeight: "bold",
           letterSpacing: 2,
           color: "#1976d2",
-          marginTop: 0,
         }}
       >
         SMK NEGERI 1 KATAPANG
       </Typography>
-    </Container>
+    </Stack>
   );
 }
