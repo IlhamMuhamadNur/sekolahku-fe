@@ -148,7 +148,7 @@ const AdminDashboard = () => {
           sx={{
             flex: 1,
             position: "absolute",
-            left: "245px",
+            left: "285px",
             right: 0,
             backgroundImage: "url('/pict/bg.png')", // Path gambar
             backgroundSize: "cover", // Menyesuaikan gambar agar penuh
