@@ -157,7 +157,7 @@ const AdminDashboard = () => {
           }}
         >
           {/* Statistik Admin, Guru, dan Siswa */}
-          <Box sx={{ margin: 2, display: "flex", gap: 2, margin: 3 }}>
+          <Box sx={{ display: "flex", gap: 2, margin: 4, marginLeft: 6 }}>
             <Card
               sx={{
                 backgroundColor: "#00C9F2",
