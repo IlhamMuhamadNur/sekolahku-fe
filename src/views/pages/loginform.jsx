@@ -13,8 +13,8 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff, Star } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { IconStarFilled } from "@tabler/icons-react";
+import axios from "axios";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -33,12 +33,23 @@ export default function LoginForm() {
     const password = passwordRef.current.value;
 
     try {
-      const response = await axios.post("https://api.example.com/login", {
-        username,
-        password,
-      });
+      // const response = await axios.post("https://api.example.com/login", {
+      //   username,
+      //   password,
+      // });
+      const response = await axios.post(
+        "https://47e4-103-171-153-170.ngrok-free.app/api/users/login",
+        { username, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      if (response.status === 200) {
+      console.log("response", response);
+
+      if (response.data.success) {
         console.log("Login berhasil:", response.data);
         localStorage.setItem("token", response.data.token);
         setSnackbarMessage("Login berhasil! Anda akan diarahkan ke dashboard.");

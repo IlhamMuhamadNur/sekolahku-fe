@@ -52,7 +52,7 @@ const NewPassword = () => {
           height: "100%",
           width: "100%",
           background:
-            "linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(/pict/smk.jpg)",
+            "linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(src/assets/image/smk.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           filter: "blur(2px)",
