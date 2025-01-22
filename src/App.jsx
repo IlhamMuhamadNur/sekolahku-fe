@@ -1,9 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginForm from "./components/loginform";
-import AdminDashboard from "./components/AdminDashboard";
+<<<<<<< HEAD
+=======
 import OTPForm from "./components/resetpasswordotp";
 import OpeningPage from "./components/openingpage";
+>>>>>>> f6003fb2690121ee9ce0c85447bb7bf6a3f8d075
+import AdminDashboard from "./components/AdminDashboard";
 import NewPassword from "./components/NewPassword";
 import Register from "./components/Register";
 import EBookPage from "./components/ebook";
@@ -15,6 +18,10 @@ function App() {
       <Routes>
         <Route path="/" element={<OpeningPage />} />
         <Route path="/loginform" element={<LoginForm />} />
+<<<<<<< HEAD
+=======
+        <Route path="/resetpasswordotp" element={<OTPForm />} />
+>>>>>>> f6003fb2690121ee9ce0c85447bb7bf6a3f8d075
         <Route path="/admindashboard" element={<AdminDashboard />} />
         <Route path="/resetpasswordotp" element={<OTPForm />} />
         <Route path="/NewPassword" element={<NewPassword />} />

@@ -11,6 +11,14 @@ import {
   InputAdornment,
   Card,
   CardContent,
+  Button,
+  TableBody,
+  TableContainer,
+  Paper,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
 } from "@mui/material";
 import {
   Search as SearchIcon,
@@ -49,7 +57,11 @@ const AdminDashboard = () => {
         <Box sx={{ textAlign: "center", marginBottom: 2 }}>
           {/* Logo Sekolah */}
           <img
+<<<<<<< HEAD
             src="/pict/logosmk.png"
+=======
+            src="pict/logosmk.png" // Ganti dengan path logo yang benar
+>>>>>>> f6003fb2690121ee9ce0c85447bb7bf6a3f8d075
             alt="Logo Sekolah"
             style={{ width: "100px", height: "auto", marginBottom: "8px" }}
           />
@@ -146,6 +158,7 @@ const AdminDashboard = () => {
         {/* background image */}
         <Box
           sx={{
+<<<<<<< HEAD
             flex: 1,
             position: "absolute",
             left: "285px",
@@ -154,6 +167,13 @@ const AdminDashboard = () => {
             backgroundSize: "cover", // Menyesuaikan gambar agar penuh
             backgroundPosition: "center", // Posisi gambar di tengah
             backgroundRepeat: "no-repeat", // Mencegah pengulangan
+=======
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 3fr)",
+            marginTop: 4,
+            gap: 3,
+            marginLeft: "1%",
+>>>>>>> f6003fb2690121ee9ce0c85447bb7bf6a3f8d075
           }}
         >
           {/* Statistik Admin, Guru, dan Siswa */}
@@ -352,6 +372,193 @@ const AdminDashboard = () => {
                 </Typography>
               </CardContent>
             </Card>
+          </Box>
+        </Box>
+        <Box>
+          <Box
+            sx={{
+              flexWrap: "nowrap",
+              padding: "1%",
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 3fr)",
+              marginTop: 4,
+              gap: 3,
+              marginLeft: "1%",
+            }}
+          >
+            {/* Card Section */}
+            <Box sx={{ flex: "none" }}>
+              <Typography
+                variant="h6"
+                sx={{ ml: "1%", color: "#26468B", fontWeight: 500 }}
+              >
+                KPI Tertinggi
+              </Typography>
+              <TableContainer
+                component={Paper}
+                sx={{
+                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.7)",
+                  padding: "1%",
+                  borderTopLeftRadius: "30px", // Radius kiri atas
+                  borderBottomRightRadius: "30px", // Radius kanan bawah
+                  borderBottomLeftRadius: "0", // Tidak ada radius di kiri bawah
+                  borderTopRightRadius: "0", // Tidak ada radius di kanan atas
+                  maxWidth: "100%",
+                  width: 400,
+                }}
+              >
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell sx={{ borderColor: "#26468B" }}>
+                        Nama
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderColor: "#26468B" }}>
+                        Point
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderColor: "#26468B" }}>
+                        Aksi
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell sx={{ borderBottom: "none" }}>
+                        John Doe
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderBottom: "none" }}>
+                        10
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderBottom: "none" }}>
+                        <Button
+                          variant="contained"
+                          size="small"
+                          sx={{
+                            borderTopLeftRadius: "10px",
+                            borderBottomRightRadius: "10px",
+                            backgroundColor: "#26468B",
+                          }}
+                        >
+                          Lihat
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Jane Smith</TableCell>
+                      <TableCell align="right">12</TableCell>
+                      <TableCell align="right">
+                        <Button
+                          variant="contained"
+                          size="small"
+                          sx={{
+                            borderTopLeftRadius: "10px",
+                            borderBottomRightRadius: "10px",
+                            backgroundColor: "#26468B",
+                            borderBottom: "none",
+                          }}
+                        >
+                          Lihat
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                    {/* Tambahkan data lain di sini */}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Box>
+
+            <Box sx={{ flex: "none" }}>
+              <Typography
+                variant="h6"
+                sx={{
+                  color: "#26468B",
+                  fontWeight: 500,
+                  maxWidth: "100%",
+                  width: 400,
+                }}
+              >
+                Laporan Update Absensi Murid dan Guru
+              </Typography>
+              <TableContainer
+                component={Paper}
+                sx={{
+                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.7)",
+                  padding: "1%",
+                  borderTopLeftRadius: "30px", // Radius kiri atas
+                  borderBottomRightRadius: "30px", // Radius kanan bawah
+                  borderBottomLeftRadius: "0", // Tidak ada radius di kiri bawah
+                  borderTopRightRadius: "0", // Tidak ada radius di kanan atas
+                  maxWidth: "100%",
+                  width: 750,
+                }}
+              >
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell sx={{ borderColor: "#26468B" }}>#</TableCell>
+                      <TableCell align="right" sx={{ borderColor: "#26468B" }}>
+                        Nama Wali Kelas
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderColor: "#26468B" }}>
+                        Kelas
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderColor: "#26468B" }}>
+                        Status
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell sx={{ borderBottom: "none" }}>1</TableCell>
+                      <TableCell align="right" sx={{ borderBottom: "none" }}>
+                        Violette D'Amore
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderBottom: "none" }}>
+                        X - A
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderBottom: "none" }}>
+                        <Button
+                          variant="contained"
+                          size="small"
+                          sx={{
+                            borderTopLeftRadius: "10px",
+                            borderBottomRightRadius: "10px",
+                            backgroundColor: "#26468B",
+                            borderBottom: "none",
+                          }}
+                        >
+                          Lihat
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell sx={{ borderBottom: "none" }}>1</TableCell>
+                      <TableCell align="right" sx={{ borderBottom: "none" }}>
+                        Violette D'Amore
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderBottom: "none" }}>
+                        X - A
+                      </TableCell>
+                      <TableCell align="right" sx={{ borderBottom: "none" }}>
+                        <Button
+                          variant="contained"
+                          size="small"
+                          sx={{
+                            borderTopLeftRadius: "10px",
+                            borderBottomRightRadius: "10px",
+                            backgroundColor: "#26468B",
+                            borderBottom: "none",
+                          }}
+                        >
+                          Lihat
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                    {/* Tambahkan data lain di sini */}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Box>
           </Box>
         </Box>
       </Box>
