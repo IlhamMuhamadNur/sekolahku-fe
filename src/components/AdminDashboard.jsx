@@ -12,7 +12,13 @@ import {
   Card,
   CardContent,
   Button,
-  Divider,
+  TableBody,
+  TableContainer,
+  Paper,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
 } from "@mui/material";
 import {
   Search as SearchIcon,
@@ -341,102 +347,150 @@ const AdminDashboard = () => {
           </Card>
         </Box>
         <Box>
-          <Typography
-            variant="h6"
-            sx={{ mt: "3%", ml: "1%", color: "#26468B", fontWeight: 500 }}
-          >
-            KPI Tertinggi
-          </Typography>
           <Box
-            sx={{ padding: "1%", display: "flex", flexWrap: "wrap", gap: "1%" }}
+            sx={{
+              display: "flex",
+              flexWrap: "nowrap",
+              gap: "2%",
+              padding: "1%",
+            }}
           >
-            <Card
-              sx={{
-                width: "35%",
-                maxWidth: "100%",
-                height: 200,
-                maxHeight: "100%",
-                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.7)",
-                borderRadius: 2,
-                borderTopLeftRadius: "30px",
-                borderBottomRightRadius: "30px",
-                boxSizing: "border-box", // Pastikan padding dan border dihitung dengan benar
-                position: "relative", // Setel posisi relatif
-              }}
-            >
-              <CardContent>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    borderBottom: "1px solid #26468B",
-                    mb: "4%",
-                    pb: "3%",
-                  }}
-                >
-                  <Typography sx={{ justifyContent: "left" }}>
-                    Nama Guru
-                  </Typography>
-                  <Typography sx={{ justifyContent: "center" }}>
-                    Point
-                  </Typography>
-                  <Typography sx={{ justifyContent: "right" }}>
-                    Lihat
-                  </Typography>
-                  <Divider sx={{ marginBottom: "2%" }} />
-                </Box>
+            {/* Card Section */}
+            <Box sx={{ flex: 1 }}>
+              <Typography
+                variant="h6"
+                sx={{ mt: "3%", ml: "1%", color: "#26468B", fontWeight: 500 }}
+              >
+                KPI Tertinggi
+              </Typography>
+              <TableContainer
+                component={Paper}
+                sx={{
+                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.7)",
+                  borderRadius: "10px",
+                  padding: "1%",
+                }}
+              >
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Nama</TableCell>
+                      <TableCell align="right">Point</TableCell>
+                      <TableCell align="right">Aksi</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>John Doe</TableCell>
+                      <TableCell align="right">10</TableCell>
+                      <TableCell align="right">
+                        <Button
+                          variant="contained"
+                          size="small"
+                          sx={{
+                            borderTopLeftRadius: "10px",
+                            borderBottomRightRadius: "10px",
+                            backgroundColor: "#26468B",
+                          }}
+                        >
+                          Lihat
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Jane Smith</TableCell>
+                      <TableCell align="right">12</TableCell>
+                      <TableCell align="right">
+                        <Button
+                          variant="contained"
+                          size="small"
+                          sx={{
+                            borderTopLeftRadius: "10px",
+                            borderBottomRightRadius: "10px",
+                            backgroundColor: "#26468B",
+                          }}
+                        >
+                          Lihat
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                    {/* Tambahkan data lain di sini */}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Box>
 
-                <Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between", // Menjaga elemen tetap berada di tempatnya
-                      textAlign: "justify",
-                      marginBottom: "1%",
-                    }}
-                  >
-                    <Typography>Samson Lind</Typography>
-                    <Typography>8</Typography>
-                    <Button
-                      variant="contained"
-                      size="small"
-                      sx={{
-                        borderTopLeftRadius: "10px",
-                        borderBottomRightRadius: "10px",
-                        backgroundColor: "#26468B",
-                        justifyContent: "right",
-                      }}
-                    >
-                      Lihat
-                    </Button>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between", // Menjaga elemen tetap berada di tempatnya
-                      alignItems: "center",
-                      marginBottom: "1%",
-                    }}
-                  >
-                    <Typography>Samson Lind</Typography>
-                    <Typography>8</Typography>
-                    <Button
-                      variant="contained"
-                      size="small"
-                      sx={{
-                        borderTopLeftRadius: "10px",
-                        borderBottomRightRadius: "10px",
-                        backgroundColor: "#26468B",
-                      }}
-                    >
-                      Lihat
-                    </Button>
-                  </Box>
-                  {/* Tambahkan data lainnya */}
-                </Box>
-              </CardContent>
-            </Card>
+            {/* Table Section */}
+            <Box sx={{ flex: 1 }}>
+              <Typography
+                variant="h6"
+                sx={{
+                  mt: "3%",
+                  ml: "1%",
+                  color: "#26468B",
+                  fontWeight: 500,
+                }}
+              >
+                Laporan Update Absensi Murid dan Guru
+              </Typography>
+              <TableContainer
+                component={Paper}
+                sx={{
+                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.7)",
+                  borderRadius: "10px",
+                  padding: "1%",
+                }}
+              >
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Nama</TableCell>
+                      <TableCell align="right" sx={{ borderBottom: "none" }}>
+                        Point
+                      </TableCell>
+                      <TableCell align="right">Aksi</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>John Doe</TableCell>
+                      <TableCell align="right">10</TableCell>
+                      <TableCell align="right">
+                        <Button
+                          variant="contained"
+                          size="small"
+                          sx={{
+                            borderTopLeftRadius: "10px",
+                            borderBottomRightRadius: "10px",
+                            backgroundColor: "#26468B",
+                          }}
+                        >
+                          Lihat
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Jane Smith</TableCell>
+                      <TableCell align="right">12</TableCell>
+                      <TableCell align="right">
+                        <Button
+                          variant="contained"
+                          size="small"
+                          sx={{
+                            borderTopLeftRadius: "10px",
+                            borderBottomRightRadius: "10px",
+                            backgroundColor: "#26468B",
+                          }}
+                        >
+                          Lihat
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                    {/* Tambahkan data lain di sini */}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Box>
           </Box>
         </Box>
       </Box>
