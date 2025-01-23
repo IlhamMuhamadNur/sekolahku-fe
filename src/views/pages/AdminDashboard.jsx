@@ -237,7 +237,7 @@ const AdminDashboard = () => {
               sx={{
                 mb: 1,
                 cursor: "pointer",
-                mb: 2,
+
                 "&:hover": { color: "primary.main" },
               }}
               onClick={() => alert("Lihat Profile diklik!")}
