@@ -166,7 +166,9 @@ const AdminDashboard = () => {
           position: "fixed", // Menjaga posisi sidebar tetap
           top: 0, // Menjaga sidebar tetap di atas
           left: 0, // Menjaga sidebar tetap di kiri
-          height: "100vh", // Membuat sidebar memiliki tinggi 100% dari viewport
+          maxHeight: "89%",
+          minHeight: "89%",
+          height: "89%", // Membuat sidebar memiliki tinggi 100% dari viewport
           zIndex: 1000, // Agar sidebar tetap di atas elemen lainnya
         }}
       >
@@ -272,7 +274,7 @@ const AdminDashboard = () => {
           sx={{
             flex: 1,
             position: "absolute",
-            left: 287,
+            left: 280,
             right: 0,
             backgroundImage: "url('src/assets/image/bg.png')", // Path gambar
             backgroundSize: "cover", // Menyesuaikan gambar agar penuh
@@ -499,8 +501,8 @@ const AdminDashboard = () => {
                 minWidth: "35%",
                 maxWidth: "35%",
                 mb: 3,
-                minHeight: "30%",
-                maxHeight: "100%",
+                minHeight: "35%",
+                maxHeight: "35%",
               }}
             >
               <Typography
