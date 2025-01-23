@@ -1,17 +1,16 @@
-import React, { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   Box,
   TextField,
   Button,
   Typography,
-  InputAdornment,
   IconButton,
   Snackbar,
   Alert,
   Link,
   Stack,
 } from "@mui/material";
-import { Visibility, VisibilityOff, Star } from "@mui/icons-material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { IconStarFilled } from "@tabler/icons-react";
 import axios from "axios";
@@ -19,27 +18,27 @@ import axios from "axios";
 export default function LoginForm() {
   const navigate = useNavigate();
   const passwordRef = useRef(null);
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
-  const [snackbarMessage, setSnackbarMessage] = React.useState("");
-  const [snackbarSeverity, setSnackbarSeverity] = React.useState("success");
+  const [payload, setPayload] = useState({
+    username: "",
+    password: "",
+  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
 
-  const handleSnackbarClose = () => {
-    setSnackbarOpen(false);
-  };
+  const handleSnackbarClose = () => setSnackbarOpen(false);
+
+  const handlePasswordVisibility = () => setShowPassword((prev) => !prev);
+
+  const handleChange = (e, key) =>
+    setPayload((prev) => ({ ...prev, [key]: e.target.value }));
 
   const handleLogin = async () => {
-    const username = document.querySelector("input[type='text']").value;
-    const password = passwordRef.current.value;
-
     try {
-      // const response = await axios.post("https://api.example.com/login", {
-      //   username,
-      //   password,
-      // });
       const response = await axios.post(
         "https://47e4-103-171-153-170.ngrok-free.app/api/users/login",
-        { username, password },
+        { username: payload.username, password: payload.password },
         {
           headers: {
             "Content-Type": "application/json",
@@ -47,15 +46,13 @@ export default function LoginForm() {
         }
       );
 
-      console.log("response", response);
-
       if (response.data.success) {
         console.log("Login berhasil:", response.data);
         localStorage.setItem("token", response.data.token);
         setSnackbarMessage("Login berhasil! Anda akan diarahkan ke dashboard.");
         setSnackbarSeverity("success");
         setSnackbarOpen(true);
-        navigate("/dashboard");
+        navigate("/admindashboard");
       } else {
         setSnackbarMessage("Login gagal! Periksa username dan password Anda.");
         setSnackbarSeverity("error");
@@ -69,227 +66,219 @@ export default function LoginForm() {
     }
   };
 
-  const handlePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
-  };
-
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      passwordRef.current.focus();
+  const handleKeyDown = (e, field) => {
+    if (e.key === "Enter") {
+      if (field === "username") {
+        passwordRef.current.focus();
+      } else if (field === "username") {
+        handleLogin();
+      }
     }
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        background: "white",
-        position: "relative",
-        overflow: "hidden",
-        margin: 0,
-        padding: 0,
-      }}
-    >
+    <>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={snackbarOpen}
+        onClose={handleSnackbarClose}
+        key={"top" + "center"}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity={snackbarSeverity}
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+
       <Box
         sx={{
-          position: "absolute",
-          width: "20%",
-          height: "60%",
-          bottom: "-10%",
-          right: "3%",
-          backgroundImage: `url('/src/assets/image/anak.png')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          zIndex: 0,
-          pointerEvents: "none",
-        }}
-      ></Box>
-      <Box
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "493px",
-          height: "480px",
-          borderRadius: "20px",
-          zIndex: 1,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          height: "100vh",
+          background: "white",
+          m: "auto",
         }}
       >
         <Box
           sx={{
-            backgroundColor: "#fff",
-            padding: "2rem",
-            borderRadius: "8%",
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4)",
-            width: "100%",
-            height: "100%",
+            position: "absolute",
+            width: "20%",
+            height: "60%",
+            bottom: "-10%",
+            right: "3%",
+            backgroundImage: `url('/src/assets/image/anak.png')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        />
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "493px",
+            height: "480px",
+            borderRadius: "25px",
+            m: "auto",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          <Stack
-            direction="row"
-            spacing={2}
+          <Box
             sx={{
+              padding: 3,
+              borderRadius: "25px",
+              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4)",
+              width: "100%",
+              height: "100%",
               display: "flex",
+              flexDirection: "column",
               justifyContent: "center",
-              alignItems: "center",
-              mb: 7.5,
-              mt: 2,
             }}
           >
-            {/* <Star sx={{ color: "#3D3F3F", mb: 5, mt: 2 }} /> */}
-            <IconStarFilled />
-            <Typography
-              variant="h5"
-              component="h1"
+            <Stack
+              direction="row"
+              spacing={2}
               sx={{
-                fontWeight: 900,
-                textAlign: "center",
-                color: "#3D3F3F",
-                fontFamily: "'Roboto', sans-serif",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                mb: 7.5,
+                mt: 2,
               }}
             >
-              SEKOLAH SIMAK
+              <IconStarFilled />
+              <Typography
+                variant="h5"
+                sx={{
+                  fontWeight: 900,
+                  textAlign: "center",
+                  color: "#3D3F3F",
+                }}
+              >
+                SEKOLAH SIMAK
+              </Typography>
+            </Stack>
+
+            <Typography
+              variant="body1"
+              sx={{ mt: 3, ml: 7, color: "#273253", fontWeight: "bold" }}
+            >
+              Username
             </Typography>
-          </Stack>
-
-          <Typography
-            variant="body1"
-            sx={{ mt: 3, ml: 7, color: "#273253", fontWeight: "bold" }}
-          >
-            Username
-          </Typography>
-          <Box
-            sx={{ display: "flex", justifyContent: "center", width: "100%" }}
-          >
-            <TextField
+            <Box
               sx={{
-                width: "360px",
-                height: "44px",
-                borderRadius: "90px ",
-                border: "2px solid #273253",
-                "& .MuiInputBase-root": {
-                  borderRadius: "90px",
-                  fontSize: "15px",
-                  fontFamily: "'Roboto', sans-serif",
-                  mt: "-6px",
-                  mb: "10px",
-                  ml: "15px",
-                },
-                "& .MuiOutlinedInput-notchedOutline": {
-                  border: "none",
-                },
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
               }}
-              required
-              onKeyDown={handleKeyDown}
-            />
-          </Box>
-
-          <Typography
-            variant="body1"
-            sx={{ mt: 3, ml: 7, color: "#273253", fontWeight: "bold" }}
-          >
-            Password
-          </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              width: "100%",
-              alignItems: "center",
-            }}
-          >
-            <TextField
+            >
+              <TextField
+                required
+                type="text"
+                value={payload.username}
+                onChange={(e) => handleChange(e, "username")}
+                onKeyDown={(e) => handleKeyDown(e, "username")}
+                sx={{
+                  width: "360px",
+                  height: "44px",
+                  borderRadius: "90px",
+                  border: "2px solid #273253",
+                  "& .MuiInputBase-root": {
+                    mt: "-6px",
+                    mb: "10px",
+                    ml: "15px",
+                  },
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    border: "none",
+                  },
+                }}
+              />
+            </Box>
+            <Typography
+              variant="body1"
+              sx={{ mt: 3, ml: 7, color: "#273253", fontWeight: "bold" }}
+            >
+              Password
+            </Typography>
+            <Box
               sx={{
-                width: "360px",
-                height: "44px",
-                borderRadius: "90px",
-                border: "2px solid #273253",
-                "& .MuiInputBase-root": {
-                  borderRadius: "90px",
-                  fontSize: "15px",
-                  fontFamily: "'Roboto', sans-serif",
-                  mt: "-6px",
-                  mb: "10px",
-                  ml: "15px",
-                },
-                "& .MuiOutlinedInput-notchedOutline": {
-                  border: "none",
-                },
+                display: "flex",
+                justifyContent: "center",
+                width: "100%",
+                alignItems: "center",
               }}
-              required
-              onKeyDown={(event) => {
-                if (event.key === "Enter") {
-                  passwordRef.current.focus(); // Pindah fokus ke kolom Password
-                }
-              }}
-              inputRef={passwordRef}
-              type={showPassword ? "text" : "password"}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end" sx={{ mt: 1.5 }}>
-                    <IconButton
-                      onClick={handlePasswordVisibility}
-                      edge="end"
-                      sx={{ marginTop: "-16px" }}
-                    >
+            >
+              <TextField
+                required
+                inputRef={passwordRef}
+                type={showPassword ? "text" : "password"}
+                value={payload.password}
+                onChange={(e) => handleChange(e, "password")}
+                onKeyDown={(e) => handleKeyDown(e, "password")}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton onClick={handlePasswordVisibility} edge="end">
                       {showPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
-                    <Snackbar
-                      open={snackbarOpen}
-                      autoHideDuration={3000}
-                      onClose={handleSnackbarClose}
-                      anchorOrigin={{
-                        vertical: "bottom",
-                        horizontal: "center",
-                      }}
-                    >
-                      <Alert
-                        onClose={handleSnackbarClose}
-                        severity={snackbarSeverity}
-                        sx={{ width: "100%" }}
-                      >
-                        {snackbarMessage}
-                      </Alert>
-                    </Snackbar>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Box>
+                  ),
+                }}
+                sx={{
+                  width: "360px",
+                  height: "44px",
+                  borderRadius: "90px",
+                  border: "2px solid #273253",
+                  "& .MuiInputBase-root": {
+                    mt: "-6px",
+                    mb: "10px",
+                    ml: "15px",
+                  },
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    border: "none",
+                  },
+                }}
+              />
+            </Box>
 
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{
-              width: "187.05px",
-              height: "40px",
-              borderRadius: "90px",
-              marginTop: "3rem",
-              textTransform: "none",
-              display: "flex",
-              justifyContent: "center",
-              marginLeft: "auto",
-              marginRight: "auto",
-              backgroundColor: "#273253",
-            }}
-            onClick={handleLogin}
-          >
-            Login
-          </Button>
-          <Typography sx={{ textAlign: "center", marginTop: "1rem" }}>
-            <Link href="#" underline="none" sx={{ color: "#273253" }}>
-              Lupa Password?
-            </Link>
-          </Typography>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{
+                width: "187.05px",
+                height: "40px",
+                borderRadius: "90px",
+                display: "flex",
+                justifyContent: "center",
+                textTransform: "none",
+                marginTop: "3rem",
+                marginLeft: "auto",
+                marginRight: "auto",
+                backgroundColor: "#273253",
+              }}
+              onClick={handleLogin}
+            >
+              Login
+            </Button>
+
+            <Typography sx={{ textAlign: "center", marginTop: "1rem" }}>
+              <Link
+                href="/resetpasswordotp"
+                underline="none"
+                sx={{ color: "#273253" }}
+              >
+                Lupa Password?
+              </Link>
+            </Typography>
+          </Box>
         </Box>
       </Box>
-    </Box>
+    </>
   );
 }
