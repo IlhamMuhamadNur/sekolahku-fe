@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import axios from "axios";
 import {
   Box,
   Typography,
@@ -568,14 +568,7 @@ const AdminDashboard = () => {
             </Box>
 
             {/* Tabel 2 */}
-            <Box
-              sx={{
-                minWidth: "64%",
-                maxWidth: "70%",
-                minHeight: "30%",
-                maxHeight: "100%",
-              }}
-            >
+            <Box sx={{ minWidth: "64%", maxWidth: "70%" }}>
               <Typography sx={{ color: "#26468B", fontWeight: 600 }}>
                 LAPORAN UPDATE ABSENSI PERHARI MURID DARI GURU
               </Typography>
