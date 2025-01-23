@@ -37,7 +37,7 @@ export default function LoginForm() {
   const handleLogin = async () => {
     try {
       const response = await axios.post(
-        "https://47e4-103-171-153-170.ngrok-free.app/api/users/login",
+        "https://96b3-103-171-153-170.ngrok-free.app/api/users/login",
         { username: payload.username, password: payload.password },
         {
           headers: {
@@ -70,7 +70,7 @@ export default function LoginForm() {
     if (e.key === "Enter") {
       if (field === "username") {
         passwordRef.current.focus();
-      } else if (field === "username") {
+      } else if (field === "password") {
         handleLogin();
       }
     }
