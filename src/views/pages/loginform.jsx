@@ -70,7 +70,7 @@ export default function LoginForm() {
     if (e.key === "Enter") {
       if (field === "username") {
         passwordRef.current.focus();
-      } else if (field === "username") {
+      } else if (field === "password") {
         handleLogin();
       }
     }
