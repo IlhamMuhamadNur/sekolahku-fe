@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   Box,
   Typography,
@@ -27,6 +28,116 @@ import {
 } from "@mui/icons-material";
 
 const AdminDashboard = () => {
+  const rows0 = [
+    {
+      Nama_Guru: "Drs. Rizki Akmanda",
+      Point: 12,
+      Lihat: (
+        <Button
+          size="small"
+          sx={{
+            backgroundColor: "#26468B",
+            borderTopLeftRadius: "20px",
+            borderBottomRightRadius: "20px",
+            color: "white",
+          }}
+        >
+          Lihat
+        </Button>
+      ),
+    },
+    {
+      Nama_Guru: "Samson Lind",
+      Point: 8,
+      Lihat: (
+        <Button
+          size="small"
+          sx={{
+            backgroundColor: "#26468B",
+            borderTopLeftRadius: "20px",
+            borderBottomRightRadius: "20px",
+            color: "white",
+          }}
+        >
+          Lihat
+        </Button>
+      ),
+    },
+    {
+      Nama_Guru: "Stanton Russel",
+      Point: 8,
+      Lihat: (
+        <Button
+          size="small"
+          sx={{
+            backgroundColor: "#26468B",
+            borderTopLeftRadius: "20px",
+            borderBottomRightRadius: "20px",
+            color: "white",
+          }}
+        >
+          Lihat
+        </Button>
+      ),
+    },
+  ];
+  const rows1 = [
+    {
+      id: 1,
+      NamaWaliKelas: "Violette D'Amore",
+      Kelas1: "X - A",
+      Nu: (
+        <Button
+          size="small"
+          sx={{
+            backgroundColor: "#26468B",
+            borderTopLeftRadius: "20px",
+            borderBottomRightRadius: "20px",
+            color: "white",
+          }}
+        >
+          Not Update
+        </Button>
+      ),
+    },
+    {
+      id: 2,
+      NamaWaliKelas: "Misty Lubowitz",
+      Kelas1: "XI - A",
+      Nu: (
+        <Button
+          size="small"
+          sx={{
+            backgroundColor: "#26468B",
+            borderTopLeftRadius: "20px",
+            borderBottomRightRadius: "20px",
+            color: "white",
+          }}
+        >
+          Not Update
+        </Button>
+      ),
+    },
+    {
+      id: 3,
+      NamaWaliKelas: "Mrs. Joelle Schmidt DDS",
+      Kelas1: "XII - A",
+      Nu: (
+        <Button
+          size="small"
+          sx={{
+            backgroundColor: "#26468B",
+            borderTopLeftRadius: "20px",
+            borderBottomRightRadius: "20px",
+            color: "white",
+          }}
+        >
+          Not Update
+        </Button>
+      ),
+    },
+  ];
+
   const [activePage, setActivePage] = useState("beranda"); // Menyimpan halaman aktif
 
   const menuItems = [
@@ -49,9 +160,14 @@ const AdminDashboard = () => {
           color: "#3D3F3F",
           padding: 2,
           borderRadius: "20px",
-          margin: 2,
+          margin: 3,
           marginRight: 0,
           boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
+          position: "fixed", // Menjaga posisi sidebar tetap
+          top: 0, // Menjaga sidebar tetap di atas
+          left: 0, // Menjaga sidebar tetap di kiri
+          height: "100vh", // Membuat sidebar memiliki tinggi 100% dari viewport
+          zIndex: 1000, // Agar sidebar tetap di atas elemen lainnya
         }}
       >
         <Box sx={{ textAlign: "center", marginBottom: 2 }}>
@@ -121,7 +237,7 @@ const AdminDashboard = () => {
       {/* Main Content */}
       <Box sx={{ flex: 1, padding: 5, overflowY: "auto" }}>
         {/* Search Bar */}
-        <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+        <Box sx={{ display: "flex", alignItems: "center", mb: 3, ml: 33 }}>
           <TextField
             placeholder="Cari apapun di sini"
             variant="outlined"
@@ -156,12 +272,14 @@ const AdminDashboard = () => {
           sx={{
             flex: 1,
             position: "absolute",
-            left: "285px",
+            left: 287,
             right: 0,
             backgroundImage: "url('src/assets/image/bg.png')", // Path gambar
             backgroundSize: "cover", // Menyesuaikan gambar agar penuh
             backgroundPosition: "center", // Posisi gambar di tengah
             backgroundRepeat: "no-repeat", // Mencegah pengulangan
+            height: 550,
+            maxHeight: "100%",
           }}
         >
           {/* Statistik Admin, Guru, dan Siswa */}
@@ -361,188 +479,171 @@ const AdminDashboard = () => {
               </CardContent>
             </Card>
           </Box>
-        </Box>
-        <Box>
           <Box
             sx={{
-              flexWrap: "nowrap",
-              padding: "1%",
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 3fr)",
-              marginTop: 4,
+              marginTop: 5,
+              marginLeft: 6,
+              maxWidth: "100%",
+              maxHeight: "100%",
+              display: "flex",
+              gridTemplateColumns: "repeat(2, 5fr)",
+              margin: 5,
+              marginRight: 20,
               gap: 3,
-              marginLeft: "1%",
             }}
           >
-            {/* Card Section */}
-            <Box sx={{ flex: "none" }}>
+            {/* Tabel 1 */}
+            <Box
+              sx={{
+                flex: 1,
+                minWidth: "35%",
+                maxWidth: "35%",
+                mb: 3,
+                minHeight: "30%",
+                maxHeight: "100%",
+              }}
+            >
               <Typography
-                variant="h6"
-                sx={{ ml: "1%", color: "#26468B", fontWeight: 500 }}
+                sx={{
+                  color: "#26468B",
+                  fontWeight: 600,
+                }}
               >
                 KPI Tertinggi
               </Typography>
               <TableContainer
                 component={Paper}
                 sx={{
-                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.7)",
-                  padding: "1%",
-                  borderTopLeftRadius: "30px", // Radius kiri atas
-                  borderBottomRightRadius: "30px", // Radius kanan bawah
-                  borderBottomLeftRadius: "0", // Tidak ada radius di kiri bawah
-                  borderTopRightRadius: "0", // Tidak ada radius di kanan atas
-                  maxWidth: "100%",
-                  width: 400,
+                  boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
+                  borderTopLeftRadius: "30px",
+                  borderBottomRightRadius: "30px",
                 }}
               >
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell sx={{ borderColor: "#26468B" }}>
-                        Nama
+                      <TableCell
+                        sx={{ textAlign: "left", borderColor: "#26468B" }}
+                      >
+                        Nama Guru
                       </TableCell>
-                      <TableCell align="right" sx={{ borderColor: "#26468B" }}>
+                      <TableCell
+                        sx={{ textAlign: "center", borderColor: "#26468B" }}
+                      >
                         Point
                       </TableCell>
-                      <TableCell align="right" sx={{ borderColor: "#26468B" }}>
-                        Aksi
+                      <TableCell
+                        sx={{
+                          textAlign: "right",
+                          borderColor: "#26468B",
+                        }}
+                      >
+                        Lihat
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    <TableRow>
-                      <TableCell sx={{ borderBottom: "none" }}>
-                        John Doe
-                      </TableCell>
-                      <TableCell align="right" sx={{ borderBottom: "none" }}>
-                        10
-                      </TableCell>
-                      <TableCell align="right" sx={{ borderBottom: "none" }}>
-                        <Button
-                          variant="contained"
-                          size="small"
-                          sx={{
-                            borderTopLeftRadius: "10px",
-                            borderBottomRightRadius: "10px",
-                            backgroundColor: "#26468B",
-                          }}
+                    {rows0.map((row) => (
+                      <TableRow key={row.Nama_Guru}>
+                        <TableCell
+                          sx={{ textAlign: "left", borderBottom: "none" }}
                         >
-                          Lihat
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>Jane Smith</TableCell>
-                      <TableCell align="right">12</TableCell>
-                      <TableCell align="right">
-                        <Button
-                          variant="contained"
-                          size="small"
-                          sx={{
-                            borderTopLeftRadius: "10px",
-                            borderBottomRightRadius: "10px",
-                            backgroundColor: "#26468B",
-                            borderBottom: "none",
-                          }}
+                          {row.Nama_Guru}
+                        </TableCell>
+                        <TableCell
+                          sx={{ textAlign: "center", borderBottom: "none" }}
                         >
-                          Lihat
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                    {/* Tambahkan data lain di sini */}
+                          {row.Point}
+                        </TableCell>
+                        <TableCell
+                          sx={{ textAlign: "right", borderBottom: "none" }}
+                        >
+                          {row.Lihat}
+                        </TableCell>
+                      </TableRow>
+                    ))}
                   </TableBody>
                 </Table>
               </TableContainer>
             </Box>
 
-            <Box sx={{ flex: "none" }}>
-              <Typography
-                variant="h6"
-                sx={{
-                  color: "#26468B",
-                  fontWeight: 500,
-                  maxWidth: "100%",
-                  width: 400,
-                }}
-              >
-                Laporan Update Absensi Murid dan Guru
+            {/* Tabel 2 */}
+            <Box
+              sx={{
+                minWidth: "64%",
+                maxWidth: "70%",
+                minHeight: "30%",
+                maxHeight: "100%",
+              }}
+            >
+              <Typography sx={{ color: "#26468B", fontWeight: 600 }}>
+                LAPORAN UPDATE ABSENSI PERHARI MURID DARI GURU
               </Typography>
               <TableContainer
                 component={Paper}
                 sx={{
-                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.7)",
-                  padding: "1%",
-                  borderTopLeftRadius: "30px", // Radius kiri atas
-                  borderBottomRightRadius: "30px", // Radius kanan bawah
-                  borderBottomLeftRadius: "0", // Tidak ada radius di kiri bawah
-                  borderTopRightRadius: "0", // Tidak ada radius di kanan atas
-                  maxWidth: "100%",
-                  width: 750,
+                  boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
+                  borderTopLeftRadius: "30px",
+                  borderBottomRightRadius: "30px",
                 }}
               >
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell sx={{ borderColor: "#26468B" }}>#</TableCell>
-                      <TableCell align="right" sx={{ borderColor: "#26468B" }}>
+                      <TableCell
+                        sx={{
+                          textAlign: "left",
+                          borderColor: "#26468B",
+                        }}
+                      >
+                        Id
+                      </TableCell>
+
+                      <TableCell
+                        sx={{ textAlign: "left", borderColor: "#26468B" }}
+                      >
                         Nama Wali Kelas
                       </TableCell>
-                      <TableCell align="right" sx={{ borderColor: "#26468B" }}>
+                      <TableCell
+                        sx={{ textAlign: "center", borderColor: "#26468B" }}
+                      >
                         Kelas
                       </TableCell>
-                      <TableCell align="right" sx={{ borderColor: "#26468B" }}>
+                      <TableCell
+                        sx={{ textAlign: "right", borderColor: "#26468B" }}
+                      >
                         Status
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    <TableRow>
-                      <TableCell sx={{ borderBottom: "none" }}>1</TableCell>
-                      <TableCell align="right" sx={{ borderBottom: "none" }}>
-                        Violette D'Amore
-                      </TableCell>
-                      <TableCell align="right" sx={{ borderBottom: "none" }}>
-                        X - A
-                      </TableCell>
-                      <TableCell align="right" sx={{ borderBottom: "none" }}>
-                        <Button
-                          variant="contained"
-                          size="small"
+                    {rows1.map((row) => (
+                      <TableRow key={row.id}>
+                        <TableCell
+                          sx={{ textAlign: "left", borderBottom: "none" }}
+                        >
+                          {row.id}
+                        </TableCell>
+                        <TableCell
+                          sx={{ textAlign: "left", borderBottom: "none" }}
+                        >
+                          {row.NamaWaliKelas}
+                        </TableCell>
+                        <TableCell
+                          sx={{ textAlign: "center", borderBottom: "none" }}
+                        >
+                          {row.Kelas1}
+                        </TableCell>
+                        <TableCell
                           sx={{
-                            borderTopLeftRadius: "10px",
-                            borderBottomRightRadius: "10px",
-                            backgroundColor: "#26468B",
+                            textAlign: "right",
                             borderBottom: "none",
                           }}
                         >
-                          Lihat
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell sx={{ borderBottom: "none" }}>1</TableCell>
-                      <TableCell align="right" sx={{ borderBottom: "none" }}>
-                        Violette D'Amore
-                      </TableCell>
-                      <TableCell align="right" sx={{ borderBottom: "none" }}>
-                        X - A
-                      </TableCell>
-                      <TableCell align="right" sx={{ borderBottom: "none" }}>
-                        <Button
-                          variant="contained"
-                          size="small"
-                          sx={{
-                            borderTopLeftRadius: "10px",
-                            borderBottomRightRadius: "10px",
-                            backgroundColor: "#26468B",
-                            borderBottom: "none",
-                          }}
-                        >
-                          Lihat
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                    {/* Tambahkan data lain di sini */}
+                          {row.Nu}
+                        </TableCell>
+                      </TableRow>
+                    ))}
                   </TableBody>
                 </Table>
               </TableContainer>
