@@ -13,6 +13,7 @@ function App() {
   return (
     <Router>
       <Routes>
+      //
         <Route path="/" element={<OpeningPage />} />
         <Route path="/loginform" element={<LoginForm />} />
         <Route path="/resetpasswordotp" element={<OTPForm />} />
