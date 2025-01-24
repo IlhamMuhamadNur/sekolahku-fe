@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import axios from "axios";
+import * as React from "react";
+import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
+import { kehadiranGuru, kehadiranMurid, valueFormatter } from "./webUsageStats";
+import { useState } from "react";
 import {
   Box,
   Typography,
@@ -29,6 +31,24 @@ import {
   School as SchoolIcon,
 } from "@mui/icons-material";
 
+const size = {
+  width: 330,
+  height: 200,
+};
+
+const data = {
+  data: kehadiranMurid,
+  valueFormatter,
+};
+const size1 = {
+  width: 330,
+  height: 200,
+};
+
+const data1 = {
+  data: kehadiranGuru,
+  valueFormatter,
+};
 const AdminDashboard = () => {
   const rows0 = [
     {
@@ -168,7 +188,7 @@ const AdminDashboard = () => {
           borderRadius: "20px",
           margin: 3,
           marginRight: 0,
-          boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
+          boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
           position: "fixed", // Menjaga posisi sidebar tetap
           top: 0, // Menjaga sidebar tetap di atas
           left: 0, // Menjaga sidebar tetap di kiri
@@ -198,7 +218,7 @@ const AdminDashboard = () => {
             alignItems: "center",
             padding: 1,
             borderRadius: "10px",
-            boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.27)",
+            boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.4)",
             marginBottom: 2,
             cursor: "pointer",
           }}
@@ -227,7 +247,7 @@ const AdminDashboard = () => {
               height: 130,
               bgcolor: "background.paper",
               borderRadius: "15px",
-              boxShadow: "0px 4px 12px rgba(0,0,0,0.3)",
+              boxShadow: "0px 4px 12px rgba(0,0,0,0.2)",
               p: 3,
               outline: "none",
             }}
@@ -349,7 +369,7 @@ const AdminDashboard = () => {
           sx={{
             flex: 1,
             position: "absolute",
-            left: 280,
+            left: 260,
             right: 0,
             backgroundImage: "url('src/assets/image/bg.png')", // Path gambar
             backgroundSize: "cover", // Menyesuaikan gambar agar penuh
@@ -369,7 +389,7 @@ const AdminDashboard = () => {
                 height: 80,
                 borderTopLeftRadius: "30px",
                 borderBottomRightRadius: "30px",
-                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
+                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.4)",
               }}
             >
               <CardContent
@@ -396,7 +416,7 @@ const AdminDashboard = () => {
                 height: 80,
                 borderTopLeftRadius: "30px",
                 borderBottomRightRadius: "30px",
-                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
+                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.4)",
               }}
             >
               <CardContent
@@ -423,7 +443,7 @@ const AdminDashboard = () => {
                 height: 80,
                 borderTopLeftRadius: "30px",
                 borderBottomRightRadius: "30px",
-                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
+                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.4)",
               }}
             >
               <CardContent
@@ -450,7 +470,7 @@ const AdminDashboard = () => {
                 height: 80,
                 borderTopLeftRadius: "30px",
                 borderBottomRightRadius: "30px",
-                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
+                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.4)",
               }}
             >
               <CardContent
@@ -558,7 +578,7 @@ const AdminDashboard = () => {
           </Box>
           <Box
             sx={{
-              marginTop: 5,
+              marginTop: 6,
               marginLeft: 6,
               maxWidth: "100%",
               maxHeight: "100%",
@@ -575,7 +595,7 @@ const AdminDashboard = () => {
                 flex: 1,
                 minWidth: "35%",
                 maxWidth: "35%",
-                mb: 3,
+                mb: "none",
                 minHeight: "35%",
                 maxHeight: "35%",
               }}
@@ -717,6 +737,139 @@ const AdminDashboard = () => {
                   </TableBody>
                 </Table>
               </TableContainer>
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              display: "flex", // Menyusun elemen secara horizontal
+              justifyContent: "space-between", // Memberi jarak antar elemen
+              mb: 10,
+            }}
+          >
+            <Box
+              sx={{
+                flex: 1,
+                minWidth: "33.3%", // Mengatur lebar minimum untuk 2 kolom
+                maxWidth: "33.3%", // Mengatur lebar maksimum untuk 2 kolom
+                minHeight: "35%",
+                maxHeight: "35%",
+                marginLeft: "4%", // Memberi jarak antar kolom
+              }}
+            >
+              <Typography
+                sx={{
+                  color: "#26468B",
+                  fontWeight: 600,
+                }}
+              >
+                Kehadiran Murid
+              </Typography>
+              <Card
+                sx={{
+                  position: "relative",
+                  width: "100%",
+                  padding: "16px",
+                  overflow: "hidden",
+                  boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
+                }}
+              >
+                <Button
+                  sx={{
+                    backgroundColor: "#26468B",
+                    borderTopLeftRadius: "20px",
+                    borderBottomRightRadius: "20px",
+                    color: "white",
+                    position: "absolute",
+                    right: 16,
+                    top: 16,
+                    minWidth: "10vw",
+                    fontSize: "1rem",
+                  }}
+                >
+                  Lihat Detail
+                </Button>
+                <CardContent>
+                  <PieChart
+                    series={[
+                      {
+                        arcLabel: (item) => `${item.value}%`,
+                        arcLabelMinAngle: 35,
+                        arcLabelRadius: "60%",
+                        ...data,
+                      },
+                    ]}
+                    sx={{
+                      [`& .${pieArcLabelClasses.root}`]: {
+                        fontWeight: "bold",
+                      },
+                    }}
+                    {...size}
+                  />
+                </CardContent>
+              </Card>
+            </Box>
+
+            <Box
+              sx={{
+                flex: 1,
+                minWidth: "33.3%", // Mengatur lebar minimum untuk 2 kolom
+                maxWidth: "100%", // Mengatur lebar maksimum untuk 2 kolom
+                minHeight: "35%",
+                maxHeight: "35%",
+                marginLeft: "5%", // Memberi jarak antar kolom
+              }}
+            >
+              <Typography
+                sx={{
+                  color: "#26468B",
+                  fontWeight: 600,
+                }}
+              >
+                Kehadiran Guru
+              </Typography>
+              <Card
+                sx={{
+                  position: "relative",
+                  width: "100%",
+                  padding: "16px",
+                  overflow: "hidden",
+                  boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
+                }}
+              >
+                <Button
+                  sx={{
+                    backgroundColor: "#26468B",
+                    borderTopLeftRadius: "20px",
+                    borderBottomRightRadius: "20px",
+                    color: "white",
+                    position: "absolute",
+                    right: 16,
+                    top: 16,
+                    minWidth: "10vw",
+                    fontSize: "1rem",
+                  }}
+                >
+                  Lihat Detail
+                </Button>
+                <CardContent>
+                  <PieChart
+                    series={[
+                      {
+                        arcLabel: (item) => `${item.value}%`,
+                        arcLabelMinAngle: 35,
+                        arcLabelRadius: "60%",
+                        ...data1,
+                      },
+                    ]}
+                    sx={{
+                      [`& .${pieArcLabelClasses.root}`]: {
+                        fontWeight: "bold",
+                      },
+                    }}
+                    {...size1}
+                  />
+                </CardContent>
+              </Card>
             </Box>
           </Box>
         </Box>
