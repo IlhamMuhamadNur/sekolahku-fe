@@ -14,16 +14,16 @@ function App() {
   return (
     <Router>
       <Routes>
-        //
         <Route path="/" element={<OpeningPage />} />
         <Route path="/login-form" element={<LoginForm />} />
         <Route path="/reset-passwordotp" element={<OTPForm />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/data-admin" element={<DataAdmin />} />
+        <Route path="/reset-passwordotp" element={<OTPForm />} />
         <Route path="/new-password" element={<NewPassword />} />
         <Route path="/register" element={<Register />} />
         <Route path="/e-book" element={<EBookPage />} />
-        <Route path="/e-raport" element={<ERaport />} />
+        <Route path="/e-Raport" element={<ERaport />} />
       </Routes>
     </Router>
   );
