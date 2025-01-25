@@ -749,7 +749,7 @@ const AdminDashboard = () => {
             <Box
               sx={{
                 flex: 1,
-                minWidth: "33.3%", // Mengatur lebar minimum untuk 2 kolom
+                minWidth: "30.3%", // Mengatur lebar minimum untuk 2 kolom
                 maxWidth: "33.3%", // Mengatur lebar maksimum untuk 2 kolom
                 minHeight: "35%",
                 maxHeight: "35%",
@@ -767,7 +767,7 @@ const AdminDashboard = () => {
               <Card
                 sx={{
                   position: "relative",
-                  width: "100%",
+
                   padding: "16px",
                   overflow: "hidden",
                   boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
@@ -781,9 +781,9 @@ const AdminDashboard = () => {
                     color: "white",
                     position: "absolute",
                     right: 16,
-                    top: 16,
-                    minWidth: "10vw",
-                    fontSize: "1rem",
+                    top: 40,
+                    minWidth: "7vw",
+                    fontSize: 13,
                   }}
                 >
                   Lihat Detail
@@ -812,11 +812,9 @@ const AdminDashboard = () => {
             <Box
               sx={{
                 flex: 1,
-                minWidth: "33.3%", // Mengatur lebar minimum untuk 2 kolom
-                maxWidth: "100%", // Mengatur lebar maksimum untuk 2 kolom
                 minHeight: "35%",
                 maxHeight: "35%",
-                marginLeft: "5%", // Memberi jarak antar kolom
+                marginLeft: "1%", // Memberi jarak antar kolom
               }}
             >
               <Typography
@@ -830,10 +828,11 @@ const AdminDashboard = () => {
               <Card
                 sx={{
                   position: "relative",
-                  width: "100%",
                   padding: "16px",
                   overflow: "hidden",
                   boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
+                  minWidth: "48%",
+                  maxWidth: "48%",
                 }}
               >
                 <Button
@@ -843,10 +842,10 @@ const AdminDashboard = () => {
                     borderBottomRightRadius: "20px",
                     color: "white",
                     position: "absolute",
-                    right: 16,
-                    top: 16,
-                    minWidth: "10vw",
-                    fontSize: "1rem",
+                    right: 10,
+                    top: 40,
+                    minWidth: "7vw",
+                    fontSize: 13,
                   }}
                 >
                   Lihat Detail
