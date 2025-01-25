@@ -2,8 +2,10 @@ import * as React from "react";
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
 import { kehadiranGuru, kehadiranMurid, valueFormatter } from "./webUsageStats";
 import { useState } from "react";
+
 import {
   Box,
+  Checkbox,
   Typography,
   List,
   ListItem,
@@ -159,6 +161,35 @@ const AdminDashboard = () => {
       ),
     },
   ];
+
+  const [selectedCandidate, setSelectedCandidate] = useState(null);
+
+  const candidates = [
+    { id: 1, name: "Ahmad" },
+    { id: 2, name: "Budi" },
+    { id: 3, name: "Citra" },
+  ];
+
+  const handleCheckboxChange = (id) => {
+    // Jika kandidat yang dipilih sama dengan yang sedang aktif, batalkan pilihan.
+    if (selectedCandidate === id) {
+      setSelectedCandidate(null);
+    } else {
+      // Pilih kandidat baru dan batalkan pilihan lainnya.
+      setSelectedCandidate(id);
+    }
+  };
+
+  const handleSubmit = () => {
+    if (selectedCandidate === null) {
+      alert("Harap pilih salah satu kandidat!");
+    } else {
+      const selectedName = candidates.find(
+        (candidate) => candidate.id === selectedCandidate
+      )?.name;
+      alert(`Kandidat terpilih: ${selectedName}`);
+    }
+  };
 
   const [activePage, setActivePage] = useState("beranda"); // Menyimpan halaman aktif
   const [isModalOpen, setIsModalOpen] = useState(false); // Menyimpan status modal
@@ -741,19 +772,19 @@ const AdminDashboard = () => {
           </Box>
           <Box
             sx={{
-              display: "flex", // Menyusun elemen secara horizontal
-              justifyContent: "space-between", // Memberi jarak antar elemen
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
               mb: 10,
+              gap: 2, // Memberikan jarak antar elemen jika diperlukan
+              ml: 5,
             }}
           >
+            {/* Kolom Kiri */}
             <Box
               sx={{
                 flex: 1,
-                minWidth: "30.3%", // Mengatur lebar minimum untuk 2 kolom
-                maxWidth: "33.3%", // Mengatur lebar maksimum untuk 2 kolom
-                minHeight: "35%",
-                maxHeight: "35%",
-                marginLeft: "4%", // Memberi jarak antar kolom
+                maxWidth: "33%", // Atur lebar maksimal untuk menjaga proporsi
               }}
             >
               <Typography
@@ -781,7 +812,7 @@ const AdminDashboard = () => {
                     borderBottomRightRadius: "20px",
                     color: "white",
                     position: "absolute",
-                    right: 16,
+                    right: 3,
                     top: 40,
                     minWidth: "7vw",
                     fontSize: 13,
@@ -810,12 +841,11 @@ const AdminDashboard = () => {
               </Card>
             </Box>
 
+            {/* Kolom Tengah */}
             <Box
               sx={{
                 flex: 1,
-                minHeight: "35%",
-                maxHeight: "35%",
-                marginLeft: "1%", // Memberi jarak antar kolom
+                maxWidth: "33%",
               }}
             >
               <Typography
@@ -834,8 +864,6 @@ const AdminDashboard = () => {
                   padding: "16px",
                   overflow: "hidden",
                   boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
-                  minWidth: "48%",
-                  maxWidth: "48%",
                 }}
               >
                 <Button
@@ -846,7 +874,7 @@ const AdminDashboard = () => {
                     color: "white",
                     position: "absolute",
                     right: 10,
-                    top: 40,
+                    top: 48,
                     minWidth: "7vw",
                     fontSize: 13,
                   }}
@@ -872,6 +900,98 @@ const AdminDashboard = () => {
                   />
                 </CardContent>
               </Card>
+            </Box>
+
+            {/* Kolom Kanan */}
+            <Box
+              sx={{
+                flex: 1,
+                maxWidth: "33%",
+              }}
+            >
+              <Typography
+                sx={{
+                  color: "#26468B",
+                  fontWeight: 600,
+                }}
+              >
+                Pemilihan OSIS 2019-2020
+              </Typography>
+              <TableContainer
+                component={Paper}
+                sx={{
+                  maxHeight: "100%",
+                  height: 270,
+                  maxWidth: "100%",
+                  width: 270,
+                  minWidth: 270,
+                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
+                  borderTopLeftRadius: "30px",
+                  borderBottomRightRadius: "30px",
+                  overflow: "hidden",
+                }}
+              >
+                <Table>
+                  <TableHead sx={{ borderBottom: "1px solid #26468B" }}>
+                    <TableRow>
+                      <TableCell
+                        align="left"
+                        sx={{
+                          borderBottom: "1px solid #26468B",
+                        }}
+                      >
+                        11 Juni 2020
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody sx={{ borderBottom: "none" }}>
+                    {candidates.map((candidate) => (
+                      <TableRow key={candidate.name}>
+                        <TableCell
+                          align="left"
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            borderBottom: "none",
+                            mb: -3,
+                          }}
+                        >
+                          <Checkbox
+                            checked={selectedCandidate === candidate.id}
+                            onChange={() => handleCheckboxChange(candidate.id)}
+                            color="primary"
+                          />
+                          {candidate.name}
+                        </TableCell>
+                        <TableCell
+                          align="left"
+                          sx={{ borderBottom: "none" }}
+                        ></TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSubmit}
+                    sx={{
+                      backgroundColor: "#26468B",
+                      borderTopLeftRadius: "20px",
+                      borderBottomRightRadius: "20px",
+                      color: "white",
+                      alignItems: "right",
+                      minWidth: "10px", // Membuat lebar button tetap
+                      fontSize: 14,
+                      textAlign: "center",
+                      marginTop: "10px",
+                      maxWidth: "100%",
+                      left: 190,
+                    }}
+                  >
+                    Kirim
+                  </Button>
+                </Table>
+              </TableContainer>
             </Box>
           </Box>
         </Box>
