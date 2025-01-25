@@ -41,7 +41,7 @@ const data = {
   valueFormatter,
 };
 const size1 = {
-  width: 330,
+  width: 320,
   height: 200,
 };
 
@@ -767,7 +767,8 @@ const AdminDashboard = () => {
               <Card
                 sx={{
                   position: "relative",
-
+                  borderTopLeftRadius: "30px",
+                  borderBottomRightRadius: "30px",
                   padding: "16px",
                   overflow: "hidden",
                   boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
@@ -827,6 +828,8 @@ const AdminDashboard = () => {
               </Typography>
               <Card
                 sx={{
+                  borderTopLeftRadius: "30px",
+                  borderBottomRightRadius: "30px",
                   position: "relative",
                   padding: "16px",
                   overflow: "hidden",
