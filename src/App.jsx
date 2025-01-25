@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginForm from "./views/pages/loginform";
 import OTPForm from "./views/pages/resetpasswordotp";
 import OpeningPage from "./views/pages/openingpage";
-import AdminDashboard from "./views/pages/AdminDashboard";
+import AdminDashboard from "./views/pages/admin-dashboard";
 import DataAdmin from "./views/pages/DataAdmin";
 import NewPassword from "./views/pages/NewPassword";
 import Register from "./views/pages/Register";
