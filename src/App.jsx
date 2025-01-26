@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import OTPForm from "./views/pages/login/resetPassOTP";
+import OTPForm from "./views/pages/authentication/resetPassOTP";
 import OpeningPage from "./views/pages/openingpage";
 import AdminDashboard from "./views/pages/admin-dashboard";
 import DataAdmin from "./views/pages/DataAdmin";
-import NewPassword from "./views/pages/NewPassword";
-import Register from "./views/pages/Register";
+import Register from "./views/pages/authentication/register";
 import EBookPage from "./views/pages/ebook";
 import ERaport from "./views/pages/ERaport";
-import LoginForm from "./views/pages/login";
+import LoginForm from "./views/pages/authentication/loginForm";
+import NewPassword from "./views/pages/authentication/newPassword";
 
 function App() {
   return (
