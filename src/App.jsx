@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import OTPForm from "./views/pages/reset-passwordotp";
+import OTPForm from "./views/pages/login/resetPassOTP";
 import OpeningPage from "./views/pages/openingpage";
 import AdminDashboard from "./views/pages/admin-dashboard";
 import DataAdmin from "./views/pages/DataAdmin";
@@ -16,10 +16,9 @@ function App() {
       <Routes>
         <Route path="/" element={<OpeningPage />} />
         <Route path="/login-form" element={<LoginForm />} />
-        <Route path="/reset-passwordotp" element={<OTPForm />} />
+        <Route path="/reset-password-otp" element={<OTPForm />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/data-admin" element={<DataAdmin />} />
-        <Route path="/reset-passwordotp" element={<OTPForm />} />
         <Route path="/new-password" element={<NewPassword />} />
         <Route path="/register" element={<Register />} />
         <Route path="/e-book" element={<EBookPage />} />
