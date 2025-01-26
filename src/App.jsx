@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginForm from "./views/pages/login-form";
-import OTPForm from "./views/pages/resetpasswordotp";
+import OTPForm from "./views/pages/reset-passwordotp";
 import OpeningPage from "./views/pages/openingpage";
 import AdminDashboard from "./views/pages/admin-dashboard";
 import DataAdmin from "./views/pages/DataAdmin";

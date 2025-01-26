@@ -269,7 +269,7 @@ export default function LoginForm() {
 
             <Typography sx={{ textAlign: "center", marginTop: "1rem" }}>
               <Link
-                href="/resetpasswordotp"
+                href="/reset-passwordotp"
                 underline="none"
                 sx={{ color: "#273253" }}
               >
