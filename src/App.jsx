@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import OTPForm from "./views/pages/authentication/resetPassOTP";
-import OpeningPage from "./views/pages/openingpage";
-import AdminDashboard from "./views/pages/admin-dashboard";
-import DataAdmin from "./views/pages/DataAdmin";
+import OpeningPage from "./views/pages/openingPage";
+import AdminDashboard from "./views/pages/adminDashboard";
+import DataAdmin from "./views/pages/dataAdmin";
 import Register from "./views/pages/authentication/register";
 import EBookPage from "./views/pages/ebook";
-import ERaport from "./views/pages/ERaport";
+import ERaport from "./views/pages/eRaport";
 import LoginForm from "./views/pages/authentication/loginForm";
 import NewPassword from "./views/pages/authentication/newPassword";
 
