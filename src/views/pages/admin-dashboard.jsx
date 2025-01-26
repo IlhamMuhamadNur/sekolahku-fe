@@ -994,6 +994,132 @@ const AdminDashboard = () => {
               </TableContainer>
             </Box>
           </Box>
+          <Box
+            sx={{
+              flex: 1,
+              maxWidth: "50%",
+              ml: "3%",
+              mt: -5,
+            }}
+          >
+            <Typography
+              sx={{
+                color: "#26468B",
+                fontWeight: 600,
+                mb: "-1",
+              }}
+            >
+              Berita Terbaru
+            </Typography>
+            <Card
+              sx={{
+                borderTopLeftRadius: "30px",
+                borderBottomRightRadius: "30px",
+                overflow: "hidden",
+                boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
+                // Margin-bottom tambahan pada Card jika masih dibutuhkan
+                mb: 10,
+              }}
+            >
+              <CardContent>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: 2,
+                    cursor: "pointer",
+                  }}
+                >
+                  {/* Berita Pertama */}
+                  <Box
+                    sx={{
+                      flex: 1,
+                      position: "relative",
+                    }}
+                  >
+                    <Box
+                      component="img"
+                      src="/src/assets/image/d1.png"
+                      alt="Berita 1"
+                      sx={{
+                        width: "100%",
+                        height: "150px",
+                        objectFit: "cover",
+                        borderRadius: "8px",
+                        mt: 3,
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        bottom: 0,
+                        width: "100%",
+                        background: "#26468B",
+                        color: "white",
+                        textAlign: "left",
+                        py: 1,
+                      }}
+                    >
+                      <Typography variant="subtitle2" fontWeight={600}>
+                        Simulasi Simak Online Secara Serentak
+                      </Typography>
+                    </Box>
+                  </Box>
+
+                  {/* Berita Kedua */}
+                  <Box
+                    sx={{
+                      flex: 1,
+                      position: "relative",
+                    }}
+                  >
+                    <Box
+                      component="img"
+                      src="/src/assets/image/d2.jpeg"
+                      alt="Berita 2"
+                      sx={{
+                        width: "100%",
+                        height: "150px",
+                        objectFit: "cover",
+                        borderRadius: "8px",
+                        mt: 3,
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        bottom: 0,
+                        width: "100%",
+                        background: "#26468B",
+                        color: "white",
+                        textAlign: "left",
+                        py: 1,
+                      }}
+                    >
+                      <Typography variant="subtitle2" fontWeight={600}>
+                        Tahap Pembuatan Ulangan Online SIMAK
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Box>
+              </CardContent>
+              <Button
+                size="small"
+                sx={{
+                  backgroundColor: "#26468B",
+                  borderTopLeftRadius: "20px",
+                  borderBottomRightRadius: "20px",
+                  color: "white",
+                  left: "78%",
+                  textAlign: "right",
+                  display: "block",
+                  mt: 2, // Menambahkan margin-top pada Button
+                }}
+              >
+                Lihat Lainnya
+              </Button>
+            </Card>
+          </Box>
         </Box>
       </Box>
     </Box>
