@@ -7,7 +7,7 @@ export default function OpeningPage() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/loginform");
+      navigate("/login-form");
     }, 3000);
 
     return () => clearTimeout(timer);
