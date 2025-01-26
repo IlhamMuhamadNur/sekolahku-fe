@@ -1046,6 +1046,7 @@ const AdminDashboard = () => {
                         height: "150px",
                         objectFit: "cover",
                         borderRadius: "8px",
+                        mt: 3,
                       }}
                     />
                     <Box
@@ -1081,6 +1082,7 @@ const AdminDashboard = () => {
                         height: "150px",
                         objectFit: "cover",
                         borderRadius: "8px",
+                        mt: 3,
                       }}
                     />
                     <Box
