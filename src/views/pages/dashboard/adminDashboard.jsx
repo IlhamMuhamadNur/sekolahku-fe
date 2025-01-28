@@ -1,6 +1,10 @@
 import * as React from "react";
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
-import { kehadiranGuru, kehadiranMurid, valueFormatter } from "./webUsageStats";
+import {
+  kehadiranGuru,
+  kehadiranMurid,
+  valueFormatter,
+} from "../webUsageStats";
 import { useState } from "react";
 
 import {

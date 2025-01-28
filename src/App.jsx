@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import OTPForm from "./views/pages/authentication/resetPassOTP";
 import OpeningPage from "./views/pages/openingPage";
-import AdminDashboard from "./views/pages/adminDashboard";
+import AdminDashboard from "./views/pages/dashboard/adminDashboard";
 import DataAdmin from "./views/pages/dataAdmin";
 import Register from "./views/pages/authentication/register";
 import EBookPage from "./views/pages/ebook";
