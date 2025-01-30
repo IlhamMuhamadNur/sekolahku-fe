@@ -31,6 +31,8 @@ const DataAdmin = () => {
       sx={{
         display: "flex",
         height: "100vh",
+        overflow: "hidden",
+        boxSizing: "border-box",
       }}
     >
       {/* Sidebar */}
@@ -181,8 +183,21 @@ const DataAdmin = () => {
         </List>
       </Box>
       {/* Main Content */}
-      <Box sx={{ flex: 1, padding: 5, overflowY: "auto" }}>
+      <Box
+        sx={{
+          flex: 1,
+        }}
+      >
         {/* background image */}
+        <Divider
+          sx={{
+            backgroundColor: "rgb(138, 155, 192)",
+            margin: "52px 0",
+            width: "100%",
+            height: "0.5px",
+            display: "block",
+          }}
+        />
         <Box
           sx={{
             flex: 1,
@@ -191,10 +206,10 @@ const DataAdmin = () => {
             left: 0,
             right: 0,
             bottom: "calc(-15px)",
-            backgroundImage: "url('src/assets/image/bg.png')", // Path gambar
-            backgroundSize: "cover", // Menyesuaikan gambar agar penuh
-            backgroundPosition: "center", // Posisi gambar di tengah
-            backgroundRepeat: "no-repeat", // Mencegah pengulangan
+            backgroundImage: "url('src/assets/image/bg.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
           }}
         >
           {/* box biodata */}
@@ -202,82 +217,194 @@ const DataAdmin = () => {
             sx={{
               backgroundColor: "#FFF",
               padding: 3,
-              borderRadius: "15px",
-              boxShadow: "0px 4px 12px rgba(0,0,0,0.2)",
+              borderTopLeftRadius: "20px",
+              borderBottomRightRadius: "20px",
+              boxShadow: "0px 4px 12px rgba(0,0,0,0.4)",
               maxWidth: 700,
-              marginLeft: "310px",
+              marginLeft: "330px",
+              marginTop: "30px",
             }}
           >
-            <Typography variant="h5" fontWeight="bold" mb={3}>
+            <Typography
+              variant="h5"
+              fontWeight="bold"
+              mb={3}
+              sx={{ color: "#26468B" }}
+            >
               Bio Data
             </Typography>
-            <Box display="flex" alignItems="center" mb={3}>
-              <Avatar
-                src="/admin-avatar.png"
-                sx={{ width: 100, height: 100, marginRight: 3 }}
-              />
-              <Box>
-                <Button variant="contained" component="label">
+            <Box display="flex" alignItems="flex-start" gap={3} mb={3}>
+              <Box
+                component="form"
+                flex={1}
+                display="grid"
+                gridTemplateColumns="repeat(2, 1fr)"
+                gap={2}
+              >
+                <TextField
+                  label="Nama"
+                  fullWidth
+                  sx={{
+                    gridColumn: "span 2",
+                    "& .MuiOutlinedInput-root": {
+                      fontSize: "0.875rem",
+                      borderRadius: "50px",
+                      padding: "5px 15px",
+                      height: "40px",
+                    },
+                    "& .MuiInputLabel-root": {
+                      fontSize: "0.875rem",
+                      transform: "translate(14px, 10px) scale(1)",
+                    },
+                    "& .MuiInputLabel-shrink": {
+                      transform: "translate(14px, -5px) scale(0.75)",
+                    },
+                  }}
+                />
+                <TextField
+                  label="Username"
+                  fullWidth
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      fontSize: "0.875rem",
+                      borderRadius: "50px",
+                      padding: "5px 15px",
+                      height: "40px",
+                    },
+                    "& .MuiInputLabel-root": {
+                      fontSize: "0.875rem",
+                      transform: "translate(14px, 10px) scale(1)",
+                    },
+                    "& .MuiInputLabel-shrink": {
+                      transform: "translate(14px, -5px) scale(0.75)",
+                    },
+                  }}
+                />
+                <TextField
+                  label="Telepon"
+                  fullWidth
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      fontSize: "0.875rem",
+                      borderRadius: "50px",
+                      padding: "5px 15px",
+                      height: "40px",
+                    },
+                    "& .MuiInputLabel-root": {
+                      fontSize: "0.875rem",
+                      transform: "translate(14px, 10px) scale(1)",
+                    },
+                    "& .MuiInputLabel-shrink": {
+                      transform: "translate(14px, -5px) scale(0.75)",
+                    },
+                  }}
+                />
+                <TextField
+                  label="Tanggal Lahir"
+                  fullWidth
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      fontSize: "0.875rem",
+                      borderRadius: "50px",
+                      padding: "5px 15px",
+                      height: "40px",
+                    },
+                    "& .MuiInputLabel-root": {
+                      fontSize: "0.875rem",
+                      transform: "translate(14px, 10px) scale(1)",
+                    },
+                    "& .MuiInputLabel-shrink": {
+                      transform: "translate(14px, -5px) scale(0.75)",
+                    },
+                  }}
+                />
+                <TextField
+                  label="Alamat"
+                  fullWidth
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      fontSize: "0.875rem",
+                      borderRadius: "50px",
+                      padding: "5px 15px",
+                      height: "40px",
+                    },
+                    "& .MuiInputLabel-root": {
+                      fontSize: "0.875rem",
+                      transform: "translate(14px, 10px) scale(1)",
+                    },
+                    "& .MuiInputLabel-shrink": {
+                      transform: "translate(14px, -5px) scale(0.75)",
+                    },
+                  }}
+                />
+                <TextField
+                  label="Ganti Password"
+                  type="password"
+                  fullWidth
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      fontSize: "0.875rem",
+                      borderRadius: "50px",
+                      padding: "5px 15px",
+                      height: "40px",
+                    },
+                    "& .MuiInputLabel-root": {
+                      fontSize: "0.875rem",
+                      transform: "translate(14px, 10px) scale(1)",
+                    },
+                    "& .MuiInputLabel-shrink": {
+                      transform: "translate(14px, -5px) scale(0.75)",
+                    },
+                  }}
+                />
+              </Box>
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                sx={{ marginX: "40px" }}
+              >
+                <Avatar
+                  src="/admin-avatar.png"
+                  sx={{ width: 100, height: 100, marginBottom: 2 }}
+                />
+                <Button
+                  variant="contained"
+                  component="label"
+                  sx={{
+                    borderTopLeftRadius: "10px",
+                    borderBottomRightRadius: "10px",
+                    borderTopRightRadius: "0px",
+                    borderBottomLeftRadius: "0px",
+                    padding: "5px 10px",
+                    fontSize: "12px",
+                    backgroundColor: "#26468B",
+                  }}
+                >
                   Unggah Foto
                   <input hidden accept="image/*" type="file" />
                 </Button>
               </Box>
             </Box>
+            <Divider sx={{ backgroundColor: "#26468B", margin: "16px 0" }} />
             <Box
-              component="form"
-              display="grid"
-              gridTemplateColumns="repeat(2, 1fr)"
-              gap={2}
+              sx={{ display: "flex", justifyContent: "flex-end", marginTop: 3 }}
             >
-              <TextField
-                label="Nama"
-                fullWidth
-                sx={{ gridColumn: "span 2", borderRadius: "50px" }}
-              />
-              <TextField
-                label="Telepon"
-                fullWidth
-                sx={{ borderRadius: "50px" }}
-              />
-              <TextField
-                label="Username"
-                fullWidth
-                sx={{ borderRadius: "50px" }}
-              />
-              <TextField
-                label="Tanggal Lahir"
-                fullWidth
-                sx={{ borderRadius: "50px" }}
-              />
-              <TextField
-                label="Email"
-                fullWidth
-                sx={{ borderRadius: "50px" }}
-              />
-              <TextField
-                label="Alamat"
-                fullWidth
-                sx={{ borderRadius: "50px" }}
-              />
-              <TextField
-                label="Ganti Password"
-                type="password"
-                fullWidth
+              <Button
+                variant="contained"
+                color="primary"
                 sx={{
-                  width: "49%",
-                  gridColumn: "span 2",
-                  borderRadius: "50px",
+                  borderTopLeftRadius: "10px",
+                  borderBottomRightRadius: "10px",
+                  borderTopRightRadius: "0px",
+                  borderBottomLeftRadius: "0px",
+                  fontSize: "13px",
+                  backgroundColor: "#26468B",
                 }}
-              />
+              >
+                Simpan Perubahan
+              </Button>
             </Box>
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{ marginTop: 3 }}
-              fullWidth
-            >
-              Simpan Perubahan
-            </Button>
           </Box>
         </Box>
       </Box>
