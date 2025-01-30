@@ -54,7 +54,7 @@ export default function OTPForm() {
   };
 
   function handleSignIn() {
-    navigate("loginform"); //navigasi ke login
+    navigate("/login-form");
   }
 
   return (

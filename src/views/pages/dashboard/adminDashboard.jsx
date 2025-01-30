@@ -1,7 +1,15 @@
-import React, { useState } from "react";
-import axios from "axios";
+import * as React from "react";
+import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
+import {
+  kehadiranGuru,
+  kehadiranMurid,
+  valueFormatter,
+} from "../webUsageStats";
+import { useState } from "react";
+
 import {
   Box,
+  Checkbox,
   Typography,
   List,
   ListItem,
@@ -29,6 +37,24 @@ import {
   School as SchoolIcon,
 } from "@mui/icons-material";
 
+const size = {
+  width: 330,
+  height: 200,
+};
+
+const data = {
+  data: kehadiranMurid,
+  valueFormatter,
+};
+const size1 = {
+  width: 320,
+  height: 200,
+};
+
+const data1 = {
+  data: kehadiranGuru,
+  valueFormatter,
+};
 const AdminDashboard = () => {
   const rows0 = [
     {
@@ -140,6 +166,35 @@ const AdminDashboard = () => {
     },
   ];
 
+  const [selectedCandidate, setSelectedCandidate] = useState(null);
+
+  const candidates = [
+    { id: 1, name: "Ahmad" },
+    { id: 2, name: "Budi" },
+    { id: 3, name: "Citra" },
+  ];
+
+  const handleCheckboxChange = (id) => {
+    // Jika kandidat yang dipilih sama dengan yang sedang aktif, batalkan pilihan.
+    if (selectedCandidate === id) {
+      setSelectedCandidate(null);
+    } else {
+      // Pilih kandidat baru dan batalkan pilihan lainnya.
+      setSelectedCandidate(id);
+    }
+  };
+
+  const handleSubmit = () => {
+    if (selectedCandidate === null) {
+      alert("Harap pilih salah satu kandidat!");
+    } else {
+      const selectedName = candidates.find(
+        (candidate) => candidate.id === selectedCandidate
+      )?.name;
+      alert(`Kandidat terpilih: ${selectedName}`);
+    }
+  };
+
   const [activePage, setActivePage] = useState("beranda"); // Menyimpan halaman aktif
   const [isModalOpen, setIsModalOpen] = useState(false); // Menyimpan status modal
 
@@ -168,7 +223,7 @@ const AdminDashboard = () => {
           borderRadius: "20px",
           margin: 3,
           marginRight: 0,
-          boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
+          boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
           position: "fixed", // Menjaga posisi sidebar tetap
           top: 0, // Menjaga sidebar tetap di atas
           left: 0, // Menjaga sidebar tetap di kiri
@@ -198,7 +253,7 @@ const AdminDashboard = () => {
             alignItems: "center",
             padding: 1,
             borderRadius: "10px",
-            boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.27)",
+            boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.4)",
             marginBottom: 2,
             cursor: "pointer",
           }}
@@ -227,7 +282,7 @@ const AdminDashboard = () => {
               height: 130,
               bgcolor: "background.paper",
               borderRadius: "15px",
-              boxShadow: "0px 4px 12px rgba(0,0,0,0.3)",
+              boxShadow: "0px 4px 12px rgba(0,0,0,0.2)",
               p: 3,
               outline: "none",
             }}
@@ -353,7 +408,7 @@ const AdminDashboard = () => {
           sx={{
             flex: 1,
             position: "absolute",
-            left: 280,
+            left: 260,
             right: 0,
             backgroundImage: "url('src/assets/image/bg.png')", // Path gambar
             backgroundSize: "cover", // Menyesuaikan gambar agar penuh
@@ -373,7 +428,7 @@ const AdminDashboard = () => {
                 height: 80,
                 borderTopLeftRadius: "30px",
                 borderBottomRightRadius: "30px",
-                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
+                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.4)",
               }}
             >
               <CardContent
@@ -400,7 +455,7 @@ const AdminDashboard = () => {
                 height: 80,
                 borderTopLeftRadius: "30px",
                 borderBottomRightRadius: "30px",
-                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
+                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.4)",
               }}
             >
               <CardContent
@@ -427,7 +482,7 @@ const AdminDashboard = () => {
                 height: 80,
                 borderTopLeftRadius: "30px",
                 borderBottomRightRadius: "30px",
-                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
+                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.4)",
               }}
             >
               <CardContent
@@ -454,7 +509,7 @@ const AdminDashboard = () => {
                 height: 80,
                 borderTopLeftRadius: "30px",
                 borderBottomRightRadius: "30px",
-                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
+                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.4)",
               }}
             >
               <CardContent
@@ -562,7 +617,7 @@ const AdminDashboard = () => {
           </Box>
           <Box
             sx={{
-              marginTop: 5,
+              marginTop: 6,
               marginLeft: 6,
               maxWidth: "100%",
               maxHeight: "100%",
@@ -579,7 +634,7 @@ const AdminDashboard = () => {
                 flex: 1,
                 minWidth: "35%",
                 maxWidth: "35%",
-                mb: 3,
+                mb: "none",
                 minHeight: "35%",
                 maxHeight: "35%",
               }}
@@ -723,10 +778,359 @@ const AdminDashboard = () => {
               </TableContainer>
             </Box>
           </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+              mb: 10,
+              gap: 2, // Memberikan jarak antar elemen jika diperlukan
+              ml: 5,
+            }}
+          >
+            {/* Kolom Kiri */}
+            <Box
+              sx={{
+                flex: 1,
+                maxWidth: "33%", // Atur lebar maksimal untuk menjaga proporsi
+              }}
+            >
+              <Typography
+                sx={{
+                  color: "#26468B",
+                  fontWeight: 600,
+                }}
+              >
+                Kehadiran Murid
+              </Typography>
+              <Card
+                sx={{
+                  position: "relative",
+                  borderTopLeftRadius: "30px",
+                  borderBottomRightRadius: "30px",
+                  padding: "16px",
+                  overflow: "hidden",
+                  boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
+                }}
+              >
+                <Button
+                  sx={{
+                    backgroundColor: "#26468B",
+                    borderTopLeftRadius: "20px",
+                    borderBottomRightRadius: "20px",
+                    color: "white",
+                    position: "absolute",
+                    right: 3,
+                    top: 40,
+                    minWidth: "7vw",
+                    fontSize: 13,
+                  }}
+                >
+                  Lihat Detail
+                </Button>
+                <CardContent>
+                  <PieChart
+                    series={[
+                      {
+                        arcLabel: (item) => `${item.value}%`,
+                        arcLabelMinAngle: 35,
+                        arcLabelRadius: "60%",
+                        ...data,
+                      },
+                    ]}
+                    sx={{
+                      [`& .${pieArcLabelClasses.root}`]: {
+                        fontWeight: "bold",
+                      },
+                    }}
+                    {...size}
+                  />
+                </CardContent>
+              </Card>
+            </Box>
+
+            {/* Kolom Tengah */}
+            <Box
+              sx={{
+                flex: 1,
+                maxWidth: "33%",
+              }}
+            >
+              <Typography
+                sx={{
+                  color: "#26468B",
+                  fontWeight: 600,
+                }}
+              >
+                Kehadiran Guru
+              </Typography>
+              <Card
+                sx={{
+                  borderTopLeftRadius: "30px",
+                  borderBottomRightRadius: "30px",
+                  position: "relative",
+                  padding: "16px",
+                  overflow: "hidden",
+                  boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
+                }}
+              >
+                <Button
+                  sx={{
+                    backgroundColor: "#26468B",
+                    borderTopLeftRadius: "20px",
+                    borderBottomRightRadius: "20px",
+                    color: "white",
+                    position: "absolute",
+                    right: 10,
+                    top: 48,
+                    minWidth: "7vw",
+                    fontSize: 13,
+                  }}
+                >
+                  Lihat Detail
+                </Button>
+                <CardContent>
+                  <PieChart
+                    series={[
+                      {
+                        arcLabel: (item) => `${item.value}%`,
+                        arcLabelMinAngle: 35,
+                        arcLabelRadius: "60%",
+                        ...data1,
+                      },
+                    ]}
+                    sx={{
+                      [`& .${pieArcLabelClasses.root}`]: {
+                        fontWeight: "bold",
+                      },
+                    }}
+                    {...size1}
+                  />
+                </CardContent>
+              </Card>
+            </Box>
+
+            {/* Kolom Kanan */}
+            <Box
+              sx={{
+                flex: 1,
+                maxWidth: "33%",
+              }}
+            >
+              <Typography
+                sx={{
+                  color: "#26468B",
+                  fontWeight: 600,
+                }}
+              >
+                Pemilihan OSIS 2019-2020
+              </Typography>
+              <TableContainer
+                component={Paper}
+                sx={{
+                  maxHeight: "100%",
+                  height: 270,
+                  maxWidth: "100%",
+                  width: 270,
+                  minWidth: 270,
+                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
+                  borderTopLeftRadius: "30px",
+                  borderBottomRightRadius: "30px",
+                  overflow: "hidden",
+                }}
+              >
+                <Table>
+                  <TableHead sx={{ borderBottom: "1px solid #26468B" }}>
+                    <TableRow>
+                      <TableCell
+                        align="left"
+                        sx={{
+                          borderBottom: "1px solid #26468B",
+                        }}
+                      >
+                        11 Juni 2020
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody sx={{ borderBottom: "none" }}>
+                    {candidates.map((candidate) => (
+                      <TableRow key={candidate.name}>
+                        <TableCell
+                          align="left"
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            borderBottom: "none",
+                            mb: -3,
+                          }}
+                        >
+                          <Checkbox
+                            checked={selectedCandidate === candidate.id}
+                            onChange={() => handleCheckboxChange(candidate.id)}
+                            color="primary"
+                          />
+                          {candidate.name}
+                        </TableCell>
+                        <TableCell
+                          align="left"
+                          sx={{ borderBottom: "none" }}
+                        ></TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSubmit}
+                    sx={{
+                      backgroundColor: "#26468B",
+                      borderTopLeftRadius: "20px",
+                      borderBottomRightRadius: "20px",
+                      color: "white",
+                      alignItems: "right",
+                      minWidth: "10px", // Membuat lebar button tetap
+                      fontSize: 14,
+                      textAlign: "center",
+                      marginTop: "10px",
+                      maxWidth: "100%",
+                      left: 190,
+                    }}
+                  >
+                    Kirim
+                  </Button>
+                </Table>
+              </TableContainer>
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              flex: 1,
+              maxWidth: "50%",
+              ml: "3%",
+              mt: -5,
+            }}
+          >
+            <Typography
+              sx={{
+                color: "#26468B",
+                fontWeight: 600,
+                mb: "-1",
+              }}
+            >
+              Berita Terbaru
+            </Typography>
+            <Card
+              sx={{
+                borderTopLeftRadius: "30px",
+                borderBottomRightRadius: "30px",
+                overflow: "hidden",
+                boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
+                // Margin-bottom tambahan pada Card jika masih dibutuhkan
+                mb: 10,
+              }}
+            >
+              <CardContent>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: 2,
+                    cursor: "pointer",
+                  }}
+                >
+                  {/* Berita Pertama */}
+                  <Box
+                    sx={{
+                      flex: 1,
+                      position: "relative",
+                    }}
+                  >
+                    <Box
+                      component="img"
+                      src="/src/assets/image/d1.png"
+                      alt="Berita 1"
+                      sx={{
+                        width: "100%",
+                        height: "150px",
+                        objectFit: "cover",
+                        borderRadius: "8px",
+                        mt: 3,
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        bottom: 0,
+                        width: "100%",
+                        background: "#26468B",
+                        color: "white",
+                        textAlign: "left",
+                        py: 1,
+                      }}
+                    >
+                      <Typography variant="subtitle2" fontWeight={600}>
+                        Simulasi Simak Online Secara Serentak
+                      </Typography>
+                    </Box>
+                  </Box>
+
+                  {/* Berita Kedua */}
+                  <Box
+                    sx={{
+                      flex: 1,
+                      position: "relative",
+                    }}
+                  >
+                    <Box
+                      component="img"
+                      src="/src/assets/image/d2.jpeg"
+                      alt="Berita 2"
+                      sx={{
+                        width: "100%",
+                        height: "150px",
+                        objectFit: "cover",
+                        borderRadius: "8px",
+                        mt: 3,
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        bottom: 0,
+                        width: "100%",
+                        background: "#26468B",
+                        color: "white",
+                        textAlign: "left",
+                        py: 1,
+                      }}
+                    >
+                      <Typography variant="subtitle2" fontWeight={600}>
+                        Tahap Pembuatan Ulangan Online SIMAK
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Box>
+              </CardContent>
+              <Button
+                size="small"
+                sx={{
+                  backgroundColor: "#26468B",
+                  borderTopLeftRadius: "20px",
+                  borderBottomRightRadius: "20px",
+                  color: "white",
+                  left: "78%",
+                  textAlign: "right",
+                  display: "block",
+                  mt: 2, // Menambahkan margin-top pada Button
+                }}
+              >
+                Lihat Lainnya
+              </Button>
+            </Card>
+          </Box>
         </Box>
       </Box>
     </Box>
   );
 };
-
 export default AdminDashboard;
