@@ -1,6 +1,10 @@
 import * as React from "react";
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
-import { kehadiranGuru, kehadiranMurid, valueFormatter } from "./webUsageStats";
+import {
+  kehadiranGuru,
+  kehadiranMurid,
+  valueFormatter,
+} from "../webUsageStats";
 import { useState } from "react";
 
 import {
@@ -313,7 +317,11 @@ const AdminDashboard = () => {
                 mb: 2,
                 "&:hover": { color: "primary.main" },
               }}
-              onClick={() => alert("Lihat Profile diklik!")}
+              onClick={() => {
+                // Logika logout
+                console.log("profile diklik!");
+                window.location.href = "/data-admin"; // Arahkan ke halaman login
+              }}
             >
               Lihat Profile
             </Typography>

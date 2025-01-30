@@ -126,7 +126,7 @@ const NewPassword = () => {
             marginTop={1}
           >
             <Typography variant="body2">Have account?</Typography>
-            <Link to="/loginform" style={{ textDecoration: "none" }}>
+            <Link to="/login-form" style={{ textDecoration: "none" }}>
               <Typography
                 variant="body2"
                 marginLeft={1}
