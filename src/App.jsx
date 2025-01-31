@@ -1,21 +1,16 @@
-import { useSelector } from "react-redux";
-import {
-  CssBaseline,
-  StyledEngineProvider,
-  ThemeProvider,
-} from "@mui/material";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import OTPForm from "./views/pages/authentication/resetPassOTP";
+import OpeningPage from "./views/pages/openingPage";
+import AdminDashboard from "./views/pages/dashboard/adminDashboard";
+import DataAdmin from "./views/pages/DataAdmin";
+import Register from "./views/pages/authentication/register";
+import EBookPage from "./views/pages/ebook";
+import ERaport from "./views/pages/eRaport";
+import LoginForm from "./views/pages/authentication/loginForm";
+import NewPassword from "./views/pages/authentication/newPassword";
 
-import NavigationScroll from "./layout/NavigationScroll";
-import ThemeRoutes from "./routes";
-
-import Snackbar from "./ui-components/Snackbar";
-import Theme from "./themes";
-
-// ==============================|| APP ||============================== //
-
-const App = () => {
-  const customization = useSelector((state) => state.customization);
-
+function App() {
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={Theme(customization)}>
@@ -29,6 +24,6 @@ const App = () => {
       </ThemeProvider>
     </StyledEngineProvider>
   );
-};
+}
 
 export default App;
