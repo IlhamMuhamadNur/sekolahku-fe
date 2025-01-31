@@ -6,7 +6,6 @@ import {
   valueFormatter,
 } from "../webUsageStats";
 import { useState } from "react";
-
 import {
   Box,
   Checkbox,
