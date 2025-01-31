@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<OpeningPage />} />
         <Route path="/login-form" element={<LoginForm />} />
         <Route path="/reset-password-otp" element={<OTPForm />} />
-        <Route path="/adminDashboard" element={<AdminDashboard />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/data-admin" element={<DataAdmin />} />
         <Route path="/new-password" element={<NewPassword />} />
         <Route path="/register" element={<Register />} />
