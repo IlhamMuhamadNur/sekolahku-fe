@@ -645,16 +645,13 @@ const AdminDashboard = () => {
               </Typography>
               <Card
                 sx={{
-                  position: "relative",
+                  position: "relative", // Pastikan sebagai referensi posisi
                   borderTopLeftRadius: "30px",
                   borderBottomRightRadius: "30px",
                   padding: "5% 1%",
                   overflow: "hidden",
                   boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  height: "100%", // Pastikan card selalu tinggi cukup
+                  height: "100%", // Pastikan tinggi tetap konsisten
                 }}
               >
                 <Button
@@ -664,15 +661,16 @@ const AdminDashboard = () => {
                     borderBottomRightRadius: "20px",
                     color: "white",
                     position: "absolute",
-                    top: "10%",
-                    right: "5%",
+                    top: "10px", // Jaga posisi tetap di atas
+                    right: "10px", // Jaga posisi tetap di kanan
                     minWidth: "7vw",
-                    maxWidth: "120px", // Sesuaikan batas maksimalnya
+                    maxWidth: "120px", // Batasi ukuran agar responsif
                     fontSize: 13,
                   }}
                 >
                   Lihat Detail
                 </Button>
+
                 <CardContent>
                   <PieChart
                     series={[
@@ -686,7 +684,7 @@ const AdminDashboard = () => {
                     sx={{
                       [`& .${pieArcLabelClasses.root}`]: {
                         fontWeight: "bold",
-                      },
+                      }, ////////
                     }}
                     {...size}
                   />
