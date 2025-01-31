@@ -1,28 +1,21 @@
 import * as React from "react";
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
+import Sidebar from "../../../components/sideBar/adminSideBar";
 import {
   kehadiranGuru,
   kehadiranMurid,
   valueFormatter,
 } from "../webUsageStats";
 import { useState } from "react";
-
 import {
   Box,
   Checkbox,
   Typography,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-  Avatar,
   TextField,
   InputAdornment,
   Card,
   CardContent,
   Button,
-  Modal,
-  Divider,
   TableBody,
   TableContainer,
   Paper,
@@ -31,11 +24,7 @@ import {
   TableRow,
   TableCell,
 } from "@mui/material";
-import {
-  Search as SearchIcon,
-  Home as HomeIcon,
-  School as SchoolIcon,
-} from "@mui/icons-material";
+import { Search as SearchIcon } from "@mui/icons-material";
 
 const size = {
   width: 330,
@@ -196,15 +185,6 @@ const AdminDashboard = () => {
   };
 
   const [activePage, setActivePage] = useState("beranda"); // Menyimpan halaman aktif
-  const [isModalOpen, setIsModalOpen] = useState(false); // Menyimpan status modal
-
-  const handleOpenModal = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
-
-  const menuItems = [
-    { text: "Beranda", icon: <HomeIcon />, key: "beranda" },
-    { text: "Siswa", icon: <SchoolIcon />, key: "siswa" },
-  ];
 
   return (
     <Box
@@ -214,162 +194,7 @@ const AdminDashboard = () => {
       }}
     >
       {/* Sidebar */}
-      <Box
-        sx={{
-          width: 230,
-          backgroundColor: "#FAFAFA",
-          color: "#3D3F3F",
-          padding: 2,
-          borderRadius: "20px",
-          margin: 3,
-          marginRight: 0,
-          boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
-          position: "fixed", // Menjaga posisi sidebar tetap
-          top: 0, // Menjaga sidebar tetap di atas
-          left: 0, // Menjaga sidebar tetap di kiri
-          maxHeight: "89%",
-          minHeight: "89%",
-          height: "89%", // Membuat sidebar memiliki tinggi 100% dari viewport
-          zIndex: 1000, // Agar sidebar tetap di atas elemen lainnya
-        }}
-      >
-        <Box sx={{ textAlign: "center", marginBottom: 2 }}>
-          {/* Logo Sekolah */}
-          <img
-            src="src/assets/image/logosmk.png"
-            alt="Logo Sekolah"
-            style={{ width: "100px", height: "auto", marginBottom: "8px" }}
-          />
-          <Typography variant="h6" fontWeight="bold">
-            MOCKUP LOGO
-          </Typography>
-          <Typography variant="caption">Tahun Pelajaran 2020-2021</Typography>
-        </Box>
-
-        {/* Profil Admin dalam Box */}
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            padding: 1,
-            borderRadius: "10px",
-            boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.4)",
-            marginBottom: 2,
-            cursor: "pointer",
-          }}
-          onClick={handleOpenModal}
-        >
-          <Avatar src="/admin-avatar.png" sx={{ marginRight: 2 }} />
-          <Box>
-            <Typography variant="body2">adminsekolah</Typography>
-            <Typography variant="body2" color="gray">
-              ADMIN
-            </Typography>
-          </Box>
-        </Box>
-        <Modal
-          open={isModalOpen}
-          onClose={handleCloseModal}
-          BackdropProps={{ style: { backgroundColor: "transparent" } }}
-        >
-          <Box
-            sx={{
-              position: "absolute",
-              top: "370px",
-              left: "180px",
-              transform: "translate(-50%, -50%)",
-              width: 135,
-              height: 130,
-              bgcolor: "background.paper",
-              borderRadius: "15px",
-              boxShadow: "0px 4px 12px rgba(0,0,0,0.2)",
-              p: 3,
-              outline: "none",
-            }}
-          >
-            <Typography
-              variant="body1"
-              sx={{
-                mb: 1,
-                cursor: "pointer",
-
-                "&:hover": { color: "primary.main" },
-              }}
-              onClick={() => alert("Lihat Profile diklik!")}
-            >
-              Notifikasi
-            </Typography>
-            <Divider
-              sx={{
-                backgroundColor: "black",
-                mb: 2,
-              }}
-            />
-
-            <Typography
-              variant="body2"
-              sx={{
-                cursor: "pointer",
-                mb: 2,
-                "&:hover": { color: "primary.main" },
-              }}
-              onClick={() => {
-                // Logika logout
-                console.log("profile diklik!");
-                window.location.href = "/data-admin"; // Arahkan ke halaman login
-              }}
-            >
-              Lihat Profile
-            </Typography>
-            <Divider sx={{ backgroundColor: "black", mb: 2 }} />
-
-            <Typography
-              variant="body2"
-              sx={{
-                cursor: "pointer",
-                "&:hover": { color: "primary.main" },
-              }}
-              onClick={() => {
-                // Logika logout
-                console.log("Log Out diklik!");
-                window.location.href = "/login-form"; // Arahkan ke halaman login
-              }}
-            >
-              Log Out
-            </Typography>
-          </Box>
-        </Modal>
-        {/* Menu Sidebar */}
-        <List>
-          {menuItems.map((item) => (
-            <ListItem
-              button
-              key={item.key}
-              onClick={() => setActivePage(item.key)}
-              sx={{
-                backgroundColor:
-                  activePage === item.key ? "#FAFAFA" : "transparent",
-                color: activePage === item.key ? "#3D3F3F" : "#3D3F3F",
-                borderRadius: "10px",
-                marginBottom: 1,
-                boxShadow:
-                  activePage === item.key
-                    ? "0px 4px 10px rgba(0,0,0,0.2)"
-                    : "none",
-                transition: "all 0.3s ease-in-out",
-                "&:hover": {
-                  backgroundColor: "#FAFAFA",
-                  color: "#3D3F3F",
-                  boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
-                },
-              }}
-            >
-              <ListItemIcon sx={{ color: "inherit" }}>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItem>
-          ))}
-        </List>
-      </Box>
+      <Sidebar activePage={activePage} setActivePage={setActivePage} />
       {/* Main Content */}
       <Box sx={{ flex: 1, padding: 5, overflowY: "auto" }}>
         {/* Search Bar */}
