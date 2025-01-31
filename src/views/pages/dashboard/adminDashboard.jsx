@@ -629,7 +629,7 @@ const AdminDashboard = () => {
             }}
           >
             {/* Kolom Kiri */}
-            <Box
+            <Box  
               sx={{
                 flex: 1,
                 maxWidth: "33%", // Atur lebar maksimal untuk menjaga proporsi
