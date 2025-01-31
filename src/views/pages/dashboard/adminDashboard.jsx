@@ -629,7 +629,7 @@ const AdminDashboard = () => {
             }}
           >
             {/* Kolom Kiri */}
-            <Box  
+            <Box
               sx={{
                 flex: 1,
                 maxWidth: "33%", // Atur lebar maksimal untuk menjaga proporsi
@@ -648,9 +648,13 @@ const AdminDashboard = () => {
                   position: "relative",
                   borderTopLeftRadius: "30px",
                   borderBottomRightRadius: "30px",
-                  padding: "16px",
+                  padding: "5% 1%",
                   overflow: "hidden",
                   boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  height: "100%", // Pastikan card selalu tinggi cukup
                 }}
               >
                 <Button
@@ -660,9 +664,10 @@ const AdminDashboard = () => {
                     borderBottomRightRadius: "20px",
                     color: "white",
                     position: "absolute",
-                    right: 3,
-                    top: 40,
+                    top: "10%",
+                    right: "5%",
                     minWidth: "7vw",
+                    maxWidth: "120px", // Sesuaikan batas maksimalnya
                     fontSize: 13,
                   }}
                 >
@@ -689,7 +694,7 @@ const AdminDashboard = () => {
               </Card>
             </Box>
 
-            {/* Kolom Tengah */}
+            {/* Kehadiran Guru */}
             <Box
               sx={{
                 flex: 1,
@@ -712,6 +717,10 @@ const AdminDashboard = () => {
                   padding: "16px",
                   overflow: "hidden",
                   boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  height: "100%", // Pastikan card selalu tinggi cukup
                 }}
               >
                 <Button
@@ -721,9 +730,10 @@ const AdminDashboard = () => {
                     borderBottomRightRadius: "20px",
                     color: "white",
                     position: "absolute",
-                    right: 10,
-                    top: 48,
+                    top: "10%",
+                    right: "5%",
                     minWidth: "7vw",
+                    maxWidth: "120px", // Sesuaikan batas maksimalnya
                     fontSize: 13,
                   }}
                 >
