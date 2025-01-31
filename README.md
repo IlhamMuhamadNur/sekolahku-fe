@@ -1,8 +1,9 @@
-# React + Vite
+# Sekolah Ku FE (Rebuild)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application built in React + Vite
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Step to start the development
+1. write ```nvm install``` on your terminal
+2. write ```npm install / yarn install``` on your terminal
+3. Set up the ``.env`` file using ``.env.example`` as an environment content example
+4. write ```npm run dev / yarn start``` on your terminal
