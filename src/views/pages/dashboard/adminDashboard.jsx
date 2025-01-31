@@ -5,6 +5,16 @@ import {
   kehadiranMurid,
   valueFormatter,
 } from "../webUsageStats";
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 import { useState } from "react";
 import {
   Box,
@@ -35,7 +45,14 @@ import {
   Home as HomeIcon,
   School as SchoolIcon,
 } from "@mui/icons-material";
-
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 const size = {
   width: 330,
   height: 200,
@@ -56,59 +73,67 @@ const data1 = {
 };
 const data2 = [{ namaKelas: "Kelas X - A", unit: "", kondisi: "Baik" }];
 const AdminDashboard = () => {
-  const rows0 = [
+  const [openModal, setOpenModal] = useState(false);
+  const [modalData, setModalData] = useState(null);
+
+  const handleOpenModal1 = (data) => {
+    setModalData(data);
+    setOpenModal(true);
+  };
+
+  const handleCloseModal1 = () => setOpenModal(false);
+
+  const rows3 = [
     {
-      Nama_Guru: "Drs. Rizki Akmanda",
-      Point: 12,
+      Nama_Guru: "Guru A",
+      Point: 80,
       Lihat: (
         <Button
-          size="small"
-          sx={{
-            backgroundColor: "#26468B",
-            borderTopLeftRadius: "20px",
-            borderBottomRightRadius: "20px",
-            color: "white",
-          }}
+          onClick={() =>
+            handleOpenModal1({
+              nama: "Guru A",
+              point: 80,
+              additionalData: [10, 20, 30],
+            })
+          }
         >
           Lihat
         </Button>
       ),
     },
     {
-      Nama_Guru: "Samson Lind",
-      Point: 8,
+      Nama_Guru: "Guru B",
+      Point: 75,
       Lihat: (
         <Button
-          size="small"
-          sx={{
-            backgroundColor: "#26468B",
-            borderTopLeftRadius: "20px",
-            borderBottomRightRadius: "20px",
-            color: "white",
-          }}
+          onClick={() =>
+            handleOpenModal1({
+              nama: "Guru B",
+              point: 75,
+              additionalData: [15, 25, 35],
+            })
+          }
         >
           Lihat
         </Button>
       ),
     },
-    {
-      Nama_Guru: "Stanton Russel",
-      Point: 8,
-      Lihat: (
-        <Button
-          size="small"
-          sx={{
-            backgroundColor: "#26468B",
-            borderTopLeftRadius: "20px",
-            borderBottomRightRadius: "20px",
-            color: "white",
-          }}
-        >
-          Lihat
-        </Button>
-      ),
-    },
+    // Add more rows as needed
   ];
+
+  const chartData = {
+    labels: ["Jan", "Feb", "Mar"], // Example labels
+    datasets: [
+      {
+        label: "KPI Points",
+        data: modalData ? modalData.additionalData : [], // Data for the bar chart
+        backgroundColor: "rgba(0, 123, 255, 0.6)",
+        borderColor: "rgba(0, 123, 255, 1)",
+        borderWidth: 1,
+      },
+    ],
+  };
+
   const rows1 = [
     {
       id: 1,
@@ -642,12 +667,7 @@ const AdminDashboard = () => {
                 maxHeight: "35%",
               }}
             >
-              <Typography
-                sx={{
-                  color: "#26468B",
-                  fontWeight: 600,
-                }}
-              >
+              <Typography sx={{ color: "#26468B", fontWeight: 600 }}>
                 KPI Tertinggi
               </Typography>
               <TableContainer
@@ -672,17 +692,14 @@ const AdminDashboard = () => {
                         Point
                       </TableCell>
                       <TableCell
-                        sx={{
-                          textAlign: "right",
-                          borderColor: "#26468B",
-                        }}
+                        sx={{ textAlign: "right", borderColor: "#26468B" }}
                       >
                         Lihat
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {rows0.map((row) => (
+                    {rows3.map((row) => (
                       <TableRow key={row.Nama_Guru}>
                         <TableCell
                           sx={{ textAlign: "left", borderBottom: "none" }}
@@ -706,655 +723,691 @@ const AdminDashboard = () => {
               </TableContainer>
             </Box>
 
-            {/* Tabel 2 */}
-            <Box sx={{ minWidth: "64%", maxWidth: "70%" }}>
-              <Typography sx={{ color: "#26468B", fontWeight: 600 }}>
-                LAPORAN UPDATE ABSENSI PERHARI MURID DARI GURU
-              </Typography>
-              <TableContainer
-                component={Paper}
+            {/* Modal for showing card */}
+            <Modal open={openModal} onClose={handleCloseModal1}>
+              <Box
                 sx={{
-                  boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
-                  borderTopLeftRadius: "30px",
-                  borderBottomRightRadius: "30px",
+                  position: "absolute",
+                  top: "20%",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  width: 400,
+                  bgcolor: "background.paper",
+                  boxShadow: 24,
+                  p: 4,
                 }}
               >
-                <Table>
-                  <TableHead>
-                    <TableRow>
+                {modalData && (
+                  <>
+                    <Typography
+                      variant="h6"
+                      sx={{ color: "#26468B", fontWeight: 600 }}
+                    >
+                      {modalData.nama}
+                    </Typography>
+                    <Typography sx={{ marginBottom: 2 }}>
+                      Point: {modalData.point}
+                    </Typography>
+                    <Bar
+                      data={chartData}
+                      options={{
+                        responsive: true,
+                        plugins: {
+                          title: { display: true, text: "Grafik KPI" },
+                        },
+                      }}
+                    />
+                  </>
+                )}
+              </Box>
+            </Modal>
+          </Box>
+          {/* Tabel 2 */}
+          <Box sx={{ minWidth: "64%", maxWidth: "70%" }}>
+            <Typography sx={{ color: "#26468B", fontWeight: 600 }}>
+              LAPORAN UPDATE ABSENSI PERHARI MURID DARI GURU
+            </Typography>
+            <TableContainer
+              component={Paper}
+              sx={{
+                boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
+                borderTopLeftRadius: "30px",
+                borderBottomRightRadius: "30px",
+              }}
+            >
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell
+                      sx={{
+                        textAlign: "left",
+                        borderColor: "#26468B",
+                      }}
+                    >
+                      Id
+                    </TableCell>
+
+                    <TableCell
+                      sx={{ textAlign: "left", borderColor: "#26468B" }}
+                    >
+                      Nama Wali Kelas
+                    </TableCell>
+                    <TableCell
+                      sx={{ textAlign: "center", borderColor: "#26468B" }}
+                    >
+                      Kelas
+                    </TableCell>
+                    <TableCell
+                      sx={{ textAlign: "right", borderColor: "#26468B" }}
+                    >
+                      Status
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows1.map((row) => (
+                    <TableRow key={row.id}>
+                      <TableCell
+                        sx={{ textAlign: "left", borderBottom: "none" }}
+                      >
+                        {row.id}
+                      </TableCell>
+                      <TableCell
+                        sx={{ textAlign: "left", borderBottom: "none" }}
+                      >
+                        {row.NamaWaliKelas}
+                      </TableCell>
+                      <TableCell
+                        sx={{ textAlign: "center", borderBottom: "none" }}
+                      >
+                        {row.Kelas1}
+                      </TableCell>
                       <TableCell
                         sx={{
-                          textAlign: "left",
-                          borderColor: "#26468B",
+                          textAlign: "right",
+                          borderBottom: "none",
                         }}
                       >
-                        Id
-                      </TableCell>
-
-                      <TableCell
-                        sx={{ textAlign: "left", borderColor: "#26468B" }}
-                      >
-                        Nama Wali Kelas
-                      </TableCell>
-                      <TableCell
-                        sx={{ textAlign: "center", borderColor: "#26468B" }}
-                      >
-                        Kelas
-                      </TableCell>
-                      <TableCell
-                        sx={{ textAlign: "right", borderColor: "#26468B" }}
-                      >
-                        Status
+                        {row.Nu}
                       </TableCell>
                     </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows1.map((row) => (
-                      <TableRow key={row.id}>
-                        <TableCell
-                          sx={{ textAlign: "left", borderBottom: "none" }}
-                        >
-                          {row.id}
-                        </TableCell>
-                        <TableCell
-                          sx={{ textAlign: "left", borderBottom: "none" }}
-                        >
-                          {row.NamaWaliKelas}
-                        </TableCell>
-                        <TableCell
-                          sx={{ textAlign: "center", borderBottom: "none" }}
-                        >
-                          {row.Kelas1}
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            textAlign: "right",
-                            borderBottom: "none",
-                          }}
-                        >
-                          {row.Nu}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Box>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </Box>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            mb: 10,
+            gap: 2, // Memberikan jarak antar elemen jika diperlukan
+            ml: 5,
+          }}
+        >
+          {/* Kolom Kiri */}
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-start",
-              mb: 10,
-              gap: 2, // Memberikan jarak antar elemen jika diperlukan
-              ml: 5,
+              flex: 1,
+              maxWidth: "33%", // Atur lebar maksimal untuk menjaga proporsi
             }}
           >
-            {/* Kolom Kiri */}
-            <Box
+            <Typography
               sx={{
-                flex: 1,
-                maxWidth: "33%", // Atur lebar maksimal untuk menjaga proporsi
+                color: "#26468B",
+                fontWeight: 600,
               }}
             >
-              <Typography
+              Kehadiran Murid
+            </Typography>
+            <Card
+              sx={{
+                position: "relative",
+                borderTopLeftRadius: "30px",
+                borderBottomRightRadius: "30px",
+                padding: "16px",
+                overflow: "hidden",
+                boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
+              }}
+            >
+              <Button
                 sx={{
-                  color: "#26468B",
-                  fontWeight: 600,
+                  backgroundColor: "#26468B",
+                  borderTopLeftRadius: "20px",
+                  borderBottomRightRadius: "20px",
+                  color: "white",
+                  position: "absolute",
+                  right: 3,
+                  top: 40,
+                  minWidth: "7vw",
+                  fontSize: 13,
                 }}
               >
-                Kehadiran Murid
-              </Typography>
-              <Card
-                sx={{
-                  position: "relative",
-                  borderTopLeftRadius: "30px",
-                  borderBottomRightRadius: "30px",
-                  padding: "16px",
-                  overflow: "hidden",
-                  boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
-                }}
-              >
-                <Button
+                Lihat Detail
+              </Button>
+              <CardContent>
+                <PieChart
+                  series={[
+                    {
+                      arcLabel: (item) => `${item.value}%`,
+                      arcLabelMinAngle: 35,
+                      arcLabelRadius: "60%",
+                      ...data,
+                    },
+                  ]}
                   sx={{
-                    backgroundColor: "#26468B",
-                    borderTopLeftRadius: "20px",
-                    borderBottomRightRadius: "20px",
-                    color: "white",
-                    position: "absolute",
-                    right: 3,
-                    top: 40,
-                    minWidth: "7vw",
-                    fontSize: 13,
+                    [`& .${pieArcLabelClasses.root}`]: {
+                      fontWeight: "bold",
+                    },
                   }}
-                >
-                  Lihat Detail
-                </Button>
-                <CardContent>
-                  <PieChart
-                    series={[
-                      {
-                        arcLabel: (item) => `${item.value}%`,
-                        arcLabelMinAngle: 35,
-                        arcLabelRadius: "60%",
-                        ...data,
-                      },
-                    ]}
-                    sx={{
-                      [`& .${pieArcLabelClasses.root}`]: {
-                        fontWeight: "bold",
-                      },
-                    }}
-                    {...size}
-                  />
-                </CardContent>
-              </Card>
-            </Box>
+                  {...size}
+                />
+              </CardContent>
+            </Card>
+          </Box>
 
-            {/* Kolom Tengah */}
-            <Box
+          {/* Kolom Tengah */}
+          <Box
+            sx={{
+              flex: 1,
+              maxWidth: "33%",
+            }}
+          >
+            <Typography
               sx={{
-                flex: 1,
-                maxWidth: "33%",
+                color: "#26468B",
+                fontWeight: 600,
               }}
             >
-              <Typography
+              Kehadiran Guru
+            </Typography>
+            <Card
+              sx={{
+                borderTopLeftRadius: "30px",
+                borderBottomRightRadius: "30px",
+                position: "relative",
+                padding: "16px",
+                overflow: "hidden",
+                boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
+              }}
+            >
+              <Button
                 sx={{
-                  color: "#26468B",
-                  fontWeight: 600,
+                  backgroundColor: "#26468B",
+                  borderTopLeftRadius: "20px",
+                  borderBottomRightRadius: "20px",
+                  color: "white",
+                  position: "absolute",
+                  right: 10,
+                  top: 48,
+                  minWidth: "7vw",
+                  fontSize: 13,
                 }}
               >
-                Kehadiran Guru
-              </Typography>
-              <Card
-                sx={{
-                  borderTopLeftRadius: "30px",
-                  borderBottomRightRadius: "30px",
-                  position: "relative",
-                  padding: "16px",
-                  overflow: "hidden",
-                  boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
-                }}
-              >
-                <Button
+                Lihat Detail
+              </Button>
+              <CardContent>
+                <PieChart
+                  series={[
+                    {
+                      arcLabel: (item) => `${item.value}%`,
+                      arcLabelMinAngle: 35,
+                      arcLabelRadius: "60%",
+                      ...data1,
+                    },
+                  ]}
                   sx={{
-                    backgroundColor: "#26468B",
-                    borderTopLeftRadius: "20px",
-                    borderBottomRightRadius: "20px",
-                    color: "white",
-                    position: "absolute",
-                    right: 10,
-                    top: 48,
-                    minWidth: "7vw",
-                    fontSize: 13,
+                    [`& .${pieArcLabelClasses.root}`]: {
+                      fontWeight: "bold",
+                    },
                   }}
-                >
-                  Lihat Detail
-                </Button>
-                <CardContent>
-                  <PieChart
-                    series={[
-                      {
-                        arcLabel: (item) => `${item.value}%`,
-                        arcLabelMinAngle: 35,
-                        arcLabelRadius: "60%",
-                        ...data1,
-                      },
-                    ]}
-                    sx={{
-                      [`& .${pieArcLabelClasses.root}`]: {
-                        fontWeight: "bold",
-                      },
-                    }}
-                    {...size1}
-                  />
-                </CardContent>
-              </Card>
-            </Box>
+                  {...size1}
+                />
+              </CardContent>
+            </Card>
+          </Box>
 
-            {/* Kolom Kanan */}
-            <Box
+          {/* Kolom Kanan */}
+          <Box
+            sx={{
+              flex: 1,
+              maxWidth: "33%",
+            }}
+          >
+            <Typography
               sx={{
-                flex: 1,
-                maxWidth: "33%",
+                color: "#26468B",
+                fontWeight: 600,
               }}
             >
-              <Typography
-                sx={{
-                  color: "#26468B",
-                  fontWeight: 600,
-                }}
-              >
-                Pemilihan OSIS 2019-2020
-              </Typography>
-              <TableContainer
-                component={Paper}
-                sx={{
-                  maxHeight: "100%",
-                  height: 270,
-                  maxWidth: "100%",
-                  width: 270,
-                  minWidth: 270,
-                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
-                  borderTopLeftRadius: "30px",
-                  borderBottomRightRadius: "30px",
-                  overflow: "hidden",
-                }}
-              >
-                <Table>
-                  <TableHead sx={{ borderBottom: "1px solid #26468B" }}>
-                    <TableRow>
+              Pemilihan OSIS 2019-2020
+            </Typography>
+            <TableContainer
+              component={Paper}
+              sx={{
+                maxHeight: "100%",
+                height: 270,
+                maxWidth: "100%",
+                width: 270,
+                minWidth: 270,
+                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
+                borderTopLeftRadius: "30px",
+                borderBottomRightRadius: "30px",
+                overflow: "hidden",
+              }}
+            >
+              <Table>
+                <TableHead sx={{ borderBottom: "1px solid #26468B" }}>
+                  <TableRow>
+                    <TableCell
+                      align="left"
+                      sx={{
+                        borderBottom: "1px solid #26468B",
+                      }}
+                    >
+                      11 Juni 2020
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody sx={{ borderBottom: "none" }}>
+                  {candidates.map((candidate) => (
+                    <TableRow key={candidate.name}>
                       <TableCell
                         align="left"
                         sx={{
-                          borderBottom: "1px solid #26468B",
+                          display: "flex",
+                          alignItems: "center",
+                          borderBottom: "none",
+                          mb: -3,
                         }}
                       >
-                        11 Juni 2020
+                        <Checkbox
+                          checked={selectedCandidate === candidate.id}
+                          onChange={() => handleCheckboxChange(candidate.id)}
+                          color="primary"
+                        />
+                        {candidate.name}
                       </TableCell>
+                      <TableCell
+                        align="left"
+                        sx={{ borderBottom: "none" }}
+                      ></TableCell>
                     </TableRow>
-                  </TableHead>
-                  <TableBody sx={{ borderBottom: "none" }}>
-                    {candidates.map((candidate) => (
-                      <TableRow key={candidate.name}>
-                        <TableCell
-                          align="left"
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            borderBottom: "none",
-                            mb: -3,
-                          }}
-                        >
-                          <Checkbox
-                            checked={selectedCandidate === candidate.id}
-                            onChange={() => handleCheckboxChange(candidate.id)}
-                            color="primary"
-                          />
-                          {candidate.name}
-                        </TableCell>
-                        <TableCell
-                          align="left"
-                          sx={{ borderBottom: "none" }}
-                        ></TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSubmit}
-                    sx={{
-                      backgroundColor: "#26468B",
-                      borderTopLeftRadius: "20px",
-                      borderBottomRightRadius: "20px",
-                      color: "white",
-                      alignItems: "right",
-                      minWidth: "10px", // Membuat lebar button tetap
-                      fontSize: 14,
-                      textAlign: "center",
-                      marginTop: "10px",
-                      maxWidth: "100%",
-                      left: 190,
-                    }}
-                  >
-                    Kirim
-                  </Button>
-                </Table>
-              </TableContainer>
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              gap: 2,
-              width: "100%",
-              mt: -5,
-            }}
-          >
-            {/* Box Berita Terbaru */}
-            <Box
-              sx={{
-                flex: 1,
-                maxWidth: "50%",
-                height: "100%",
-                overflow: "visible", // pastikan tidak ada overflow tersembunyi
-                ml: 5,
-              }}
-            >
-              <Typography
-                sx={{
-                  color: "#26468B",
-                  fontWeight: 600,
-                  mb: "-1",
-                }}
-              >
-                Berita Terbaru
-              </Typography>
-              <Card
-                sx={{
-                  boxShadow: "0px 4px 10px rgba(0,0,0,0.4)", // pastikan hanya Card yang memiliki box-shadow
-                  borderTopLeftRadius: "30px",
-                  borderBottomRightRadius: "30px",
-                  mb: 3,
-                  minHeight: "100%",
-                  height: 300,
-                  width: "100%", // pastikan lebar 100%
-                  position: "relative", // agar box shadow terlihat di luar elemen
-                }}
-              >
-                <CardContent
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "100%",
-                    boxShadow: "5px 4px 10px rgba(0,0,0,0.4)",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      gap: 2,
-                      height: "100%", // Menambahkan tinggi agar Box menyesuaikan
-                    }}
-                  >
-                    {/* Berita Pertama */}
-                    <Box
-                      sx={{
-                        flex: 1,
-                        position: "relative",
-                      }}
-                    >
-                      <Box
-                        component="img"
-                        src="/src/assets/image/d1.png"
-                        alt="Berita 1"
-                        sx={{
-                          width: "100%",
-                          height: "150px",
-                          objectFit: "cover",
-                          borderRadius: "8px",
-                          mt: 3,
-                          cursor: "pointer",
-                        }}
-                      />
-                      <Box
-                        sx={{
-                          position: "absolute",
-                          bottom: 80,
-                          width: "100%",
-                          background: "#26468B",
-                          color: "white",
-                          textAlign: "left",
-                          py: 2,
-                          cursor: "pointer",
-                        }}
-                      >
-                        <Typography variant="subtitle2" fontWeight={600}>
-                          Simulasi Simak Online Secara Serentak
-                        </Typography>
-                      </Box>
-                    </Box>
-
-                    {/* Berita Kedua */}
-                    <Box
-                      sx={{
-                        flex: 1,
-                        position: "relative",
-                      }}
-                    >
-                      <Box
-                        component="img"
-                        src="/src/assets/image/d2.jpeg"
-                        alt="Berita 2"
-                        sx={{
-                          width: "100%",
-                          height: "150px",
-                          objectFit: "cover",
-                          borderRadius: "8px",
-                          mt: 3,
-                          cursor: "pointer",
-                        }}
-                      />
-                      <Box
-                        sx={{
-                          position: "absolute",
-                          bottom: 80,
-                          width: "100%",
-                          background: "#26468B",
-                          color: "white",
-                          textAlign: "left",
-                          py: 2,
-                          cursor: "pointer",
-                        }}
-                      >
-                        <Typography variant="subtitle2" fontWeight={600}>
-                          Tahap Pembuatan Ulangan Online SIMAK
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </Box>
-                </CardContent>
+                  ))}
+                </TableBody>
                 <Button
-                  size="small"
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSubmit}
                   sx={{
                     backgroundColor: "#26468B",
                     borderTopLeftRadius: "20px",
                     borderBottomRightRadius: "20px",
                     color: "white",
-                    textAlign: "right",
-                    display: "inline-block",
-                    top: -80,
-                    left: "73%",
-                    position: "flex",
-                    padding: "2px 10px",
+                    alignItems: "right",
+                    minWidth: "10px", // Membuat lebar button tetap
+                    fontSize: 14,
+                    textAlign: "center",
+                    marginTop: "10px",
+                    maxWidth: "100%",
+                    left: 190,
                   }}
                 >
-                  Lihat Lainnya
+                  Kirim
                 </Button>
-              </Card>
-            </Box>
-
-            {/* Box Tabel */}
-            <Box
+              </Table>
+            </TableContainer>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            gap: 2,
+            width: "100%",
+            mt: -5,
+          }}
+        >
+          {/* Box Berita Terbaru */}
+          <Box
+            sx={{
+              flex: 1,
+              maxWidth: "50%",
+              height: "100%",
+              overflow: "visible", // pastikan tidak ada overflow tersembunyi
+              ml: 5,
+            }}
+          >
+            <Typography
               sx={{
-                flex: 1,
-                minWidth: "50%",
-                maxWidth: "50%",
-                minHeight: "100%",
-                maxHeight: "100%",
-                mr: 2,
+                color: "#26468B",
+                fontWeight: 600,
+                mb: "-1",
               }}
             >
-              <Typography
+              Berita Terbaru
+            </Typography>
+            <Card
+              sx={{
+                boxShadow: "0px 4px 10px rgba(0,0,0,0.4)", // pastikan hanya Card yang memiliki box-shadow
+                borderTopLeftRadius: "30px",
+                borderBottomRightRadius: "30px",
+                mb: 3,
+                minHeight: "100%",
+                height: 300,
+                width: "100%", // pastikan lebar 100%
+                position: "relative", // agar box shadow terlihat di luar elemen
+              }}
+            >
+              <CardContent
                 sx={{
-                  color: "#26468B",
-                  fontWeight: 600,
-                  mb: "none", // Memberikan margin bawah agar tidak terlalu dekat dengan tombol
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                  boxShadow: "5px 4px 10px rgba(0,0,0,0.4)",
                 }}
               >
-                Sarana Prasarana
-              </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: 2,
+                    height: "100%", // Menambahkan tinggi agar Box menyesuaikan
+                  }}
+                >
+                  {/* Berita Pertama */}
+                  <Box
+                    sx={{
+                      flex: 1,
+                      position: "relative",
+                    }}
+                  >
+                    <Box
+                      component="img"
+                      src="/src/assets/image/d1.png"
+                      alt="Berita 1"
+                      sx={{
+                        width: "100%",
+                        height: "150px",
+                        objectFit: "cover",
+                        borderRadius: "8px",
+                        mt: 3,
+                        cursor: "pointer",
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        bottom: 80,
+                        width: "100%",
+                        background: "#26468B",
+                        color: "white",
+                        textAlign: "left",
+                        py: 2,
+                        cursor: "pointer",
+                      }}
+                    >
+                      <Typography variant="subtitle2" fontWeight={600}>
+                        Simulasi Simak Online Secara Serentak
+                      </Typography>
+                    </Box>
+                  </Box>
 
-              {/* Table */}
-              <TableContainer
-                component={Paper}
+                  {/* Berita Kedua */}
+                  <Box
+                    sx={{
+                      flex: 1,
+                      position: "relative",
+                    }}
+                  >
+                    <Box
+                      component="img"
+                      src="/src/assets/image/d2.jpeg"
+                      alt="Berita 2"
+                      sx={{
+                        width: "100%",
+                        height: "150px",
+                        objectFit: "cover",
+                        borderRadius: "8px",
+                        mt: 3,
+                        cursor: "pointer",
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        bottom: 80,
+                        width: "100%",
+                        background: "#26468B",
+                        color: "white",
+                        textAlign: "left",
+                        py: 2,
+                        cursor: "pointer",
+                      }}
+                    >
+                      <Typography variant="subtitle2" fontWeight={600}>
+                        Tahap Pembuatan Ulangan Online SIMAK
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Box>
+              </CardContent>
+              <Button
+                size="small"
                 sx={{
-                  boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
-                  borderTopLeftRadius: "30px",
-                  borderBottomRightRadius: "30px",
-                  height: 300,
+                  backgroundColor: "#26468B",
+                  borderTopLeftRadius: "20px",
+                  borderBottomRightRadius: "20px",
+                  color: "white",
+                  textAlign: "right",
+                  display: "inline-block",
+                  top: -80,
+                  left: "73%",
+                  position: "flex",
+                  padding: "2px 10px",
                 }}
               >
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell
-                        colSpan={4}
-                        sx={{
-                          padding: "16px",
-                          borderBottom: "1px solid #26468B",
-                        }}
-                      >
-                        <Box
-                          sx={{
-                            display: "flex",
-                            justifyContent: "center",
-                            gap: 2, // jarak antar tombol
-                            mb: -2,
-                          }}
-                        >
-                          {[
-                            "Ruang Kelas",
-                            "Laboratorium",
-                            "Perpustakaan",
-                            "Sanitasi",
-                            "Lainnya",
-                          ].map((label, index) => (
-                            <Button
-                              key={index}
-                              variant="contained"
-                              sx={{
-                                backgroundColor:
-                                  selectedButton === label
-                                    ? "#26468B"
-                                    : "#E4E7EB", // jika tombol dipilih, warna berubah
-                                color:
-                                  selectedButton === label
-                                    ? "white"
-                                    : "#26468B", // warna teks saat dipilih
-                                textTransform: "none",
-                                borderTopLeftRadius: "15px",
-                                fontSize: "12px",
-                                padding: "6px 9px",
-                                minWidth: "80px", // memastikan ukuran tombol tetap
-                                "&:hover": {
-                                  backgroundColor: "#26468B", // warna saat tombol di-hover
-                                  color: "white",
-                                },
-                              }}
-                              onClick={() => handleButtonClick(label)} // set tombol yang dipilih
-                            >
-                              {label}
-                            </Button>
-                          ))}
-                        </Box>
-                      </TableCell>
-                    </TableRow>
+                Lihat Lainnya
+              </Button>
+            </Card>
+          </Box>
 
-                    {/* Row untuk Header Tabel */}
-                    <TableRow>
-                      <TableCell
-                        sx={{
-                          textAlign: "center",
-                          borderColor: "#26468B",
-                          borderRight: "1px solid #26468B",
-                        }}
-                      >
-                        Nama Kelas
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          textAlign: "center",
-                          borderColor: "#26468B",
-                          borderRight: "1px solid #26468B",
-                        }}
-                      >
-                        Unit
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          textAlign: "center",
-                          borderColor: "#26468B",
-                          borderRight: "1px solid #26468B",
-                        }}
-                      >
-                        Kondisi
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          textAlign: "center",
-                          borderColor: "#26468B",
-                        }}
-                      >
-                        Pilihan
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
+          {/* Box Tabel */}
+          <Box
+            sx={{
+              flex: 1,
+              minWidth: "50%",
+              maxWidth: "50%",
+              minHeight: "100%",
+              maxHeight: "100%",
+              mr: 2,
+            }}
+          >
+            <Typography
+              sx={{
+                color: "#26468B",
+                fontWeight: 600,
+                mb: "none", // Memberikan margin bawah agar tidak terlalu dekat dengan tombol
+              }}
+            >
+              Sarana Prasarana
+            </Typography>
 
-                  <TableBody>
-                    {data2.map((row, index) => (
-                      <TableRow key={index}>
-                        <TableCell
-                          sx={{
-                            textAlign: "center",
-                            borderBottom: "none",
-                            borderRight: "1px solid #26468B",
-                            color: "#7F8C8D",
-                          }}
-                        >
-                          {row.namaKelas}
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            textAlign: "left",
-                            borderBottom: "none",
-                            borderRight: "1px solid #26468B",
-                            color: "#7F8C8D",
-                          }}
-                        >
-                          {row.unit}
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            textAlign: "center",
-                            borderBottom: "none",
-                            borderRight: "1px solid #26468B",
-                            color: "#7F8C8D",
-                          }}
-                        >
-                          {row.kondisi}
-                        </TableCell>
-                        <TableCell
-                          sx={{ textAlign: "center", borderBottom: "none" }}
-                        >
+            {/* Table */}
+            <TableContainer
+              component={Paper}
+              sx={{
+                boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
+                borderTopLeftRadius: "30px",
+                borderBottomRightRadius: "30px",
+                height: 300,
+              }}
+            >
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell
+                      colSpan={4}
+                      sx={{
+                        padding: "16px",
+                        borderBottom: "1px solid #26468B",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          gap: 2, // jarak antar tombol
+                          mb: -2,
+                        }}
+                      >
+                        {[
+                          "Ruang Kelas",
+                          "Laboratorium",
+                          "Perpustakaan",
+                          "Sanitasi",
+                          "Lainnya",
+                        ].map((label, index) => (
                           <Button
+                            key={index}
                             variant="contained"
                             sx={{
-                              backgroundColor: "#26468B",
-                              color: "white",
-                              borderTopLeftRadius: "20px",
-                              borderBottomRightRadius: "20px",
+                              backgroundColor:
+                                selectedButton === label
+                                  ? "#26468B"
+                                  : "#E4E7EB", // jika tombol dipilih, warna berubah
+                              color:
+                                selectedButton === label ? "white" : "#26468B", // warna teks saat dipilih
+                              textTransform: "none",
+                              borderTopLeftRadius: "15px",
                               fontSize: "12px",
-                              mr: 1,
-                              padding: "3px 10px",
+                              padding: "6px 9px",
+                              minWidth: "80px", // memastikan ukuran tombol tetap
+                              "&:hover": {
+                                backgroundColor: "#26468B", // warna saat tombol di-hover
+                                color: "white",
+                              },
                             }}
+                            onClick={() => handleButtonClick(label)} // set tombol yang dipilih
                           >
-                            Edit
+                            {label}
                           </Button>
-                          <Button
-                            variant="contained"
-                            sx={{
-                              backgroundColor: "#26468B",
-                              color: "white",
-                              borderTopLeftRadius: "20px",
-                              borderBottomRightRadius: "20px",
-                              fontSize: "12px",
-                              mr: 1,
-                              padding: "3px 10px",
-                            }}
-                          >
-                            Hapus
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Box>
+                        ))}
+                      </Box>
+                    </TableCell>
+                  </TableRow>
+
+                  {/* Row untuk Header Tabel */}
+                  <TableRow>
+                    <TableCell
+                      sx={{
+                        textAlign: "center",
+                        borderColor: "#26468B",
+                        borderRight: "1px solid #26468B",
+                      }}
+                    >
+                      Nama Kelas
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        textAlign: "center",
+                        borderColor: "#26468B",
+                        borderRight: "1px solid #26468B",
+                      }}
+                    >
+                      Unit
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        textAlign: "center",
+                        borderColor: "#26468B",
+                        borderRight: "1px solid #26468B",
+                      }}
+                    >
+                      Kondisi
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        textAlign: "center",
+                        borderColor: "#26468B",
+                      }}
+                    >
+                      Pilihan
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+
+                <TableBody>
+                  {data2.map((row, index) => (
+                    <TableRow key={index}>
+                      <TableCell
+                        sx={{
+                          textAlign: "center",
+                          borderBottom: "none",
+                          borderRight: "1px solid #26468B",
+                          color: "#7F8C8D",
+                        }}
+                      >
+                        {row.namaKelas}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          textAlign: "left",
+                          borderBottom: "none",
+                          borderRight: "1px solid #26468B",
+                          color: "#7F8C8D",
+                        }}
+                      >
+                        {row.unit}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          textAlign: "center",
+                          borderBottom: "none",
+                          borderRight: "1px solid #26468B",
+                          color: "#7F8C8D",
+                        }}
+                      >
+                        {row.kondisi}
+                      </TableCell>
+                      <TableCell
+                        sx={{ textAlign: "center", borderBottom: "none" }}
+                      >
+                        <Button
+                          variant="contained"
+                          sx={{
+                            backgroundColor: "#26468B",
+                            color: "white",
+                            borderTopLeftRadius: "20px",
+                            borderBottomRightRadius: "20px",
+                            fontSize: "12px",
+                            mr: 1,
+                            padding: "3px 10px",
+                          }}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          variant="contained"
+                          sx={{
+                            backgroundColor: "#26468B",
+                            color: "white",
+                            borderTopLeftRadius: "20px",
+                            borderBottomRightRadius: "20px",
+                            fontSize: "12px",
+                            mr: 1,
+                            padding: "3px 10px",
+                          }}
+                        >
+                          Hapus
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </Box>
         </Box>
       </Box>
