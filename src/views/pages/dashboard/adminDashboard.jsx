@@ -628,7 +628,7 @@ const AdminDashboard = () => {
               ml: 5,
             }}
           >
-            {/* Kolom Kiri */}
+            {/* Kehadiran Murid */}
             <Box
               sx={{
                 flex: 1,
@@ -645,7 +645,7 @@ const AdminDashboard = () => {
               </Typography>
               <Card
                 sx={{
-                  position: "relative", // Pastikan sebagai referensi posisi
+                  position: "relative", // Pastikan Card sebagai referensi posisi
                   borderTopLeftRadius: "30px",
                   borderBottomRightRadius: "30px",
                   padding: "5% 1%",
@@ -654,6 +654,7 @@ const AdminDashboard = () => {
                   height: "100%", // Pastikan tinggi tetap konsisten
                 }}
               >
+                {/* Button tetap di kanan atas */}
                 <Button
                   sx={{
                     backgroundColor: "#26468B",
@@ -671,7 +672,14 @@ const AdminDashboard = () => {
                   Lihat Detail
                 </Button>
 
-                <CardContent>
+                {/* Chart ada di kiri */}
+                <CardContent
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-start", // Chart tetap di kiri
+                  }}
+                >
                   <PieChart
                     series={[
                       {
@@ -682,9 +690,10 @@ const AdminDashboard = () => {
                       },
                     ]}
                     sx={{
+                      width: "50%", // Atur ukuran chart agar tidak terlalu besar
                       [`& .${pieArcLabelClasses.root}`]: {
                         fontWeight: "bold",
-                      }, ////////
+                      },
                     }}
                     {...size}
                   />
@@ -712,15 +721,13 @@ const AdminDashboard = () => {
                   borderTopLeftRadius: "30px",
                   borderBottomRightRadius: "30px",
                   position: "relative",
-                  padding: "16px",
+                  padding: "5% 1%",
                   overflow: "hidden",
                   boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  height: "100%", // Pastikan card selalu tinggi cukup
+                  height: "100%", // Pastikan tinggi tetap konsisten
                 }}
               >
+                {/* Button tetap di kanan atas */}
                 <Button
                   sx={{
                     backgroundColor: "#26468B",
@@ -728,16 +735,24 @@ const AdminDashboard = () => {
                     borderBottomRightRadius: "20px",
                     color: "white",
                     position: "absolute",
-                    top: "10%",
-                    right: "5%",
+                    top: "10px", // Jaga agar tetap di atas
+                    right: "10px", // Jaga agar tetap di kanan
                     minWidth: "7vw",
-                    maxWidth: "120px", // Sesuaikan batas maksimalnya
+                    maxWidth: "120px", // Batasi ukuran agar responsif
                     fontSize: 13,
                   }}
                 >
                   Lihat Detail
                 </Button>
-                <CardContent>
+
+                {/* Chart berada di kiri */}
+                <CardContent
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-start", // Chart tetap di kiri
+                  }}
+                >
                   <PieChart
                     series={[
                       {
@@ -748,6 +763,7 @@ const AdminDashboard = () => {
                       },
                     ]}
                     sx={{
+                      width: "50%", // Atur ukuran chart agar tidak terlalu besar
                       [`& .${pieArcLabelClasses.root}`]: {
                         fontWeight: "bold",
                       },
