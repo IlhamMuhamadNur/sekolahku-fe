@@ -6,11 +6,9 @@ import {
   kehadiranMurid,
   valueFormatter,
 } from "../webUsageStats";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
+
 import {
-  LinearProgress,
-  Modal,
   Box,
   Checkbox,
   Typography,
@@ -50,65 +48,66 @@ const data1 = {
 };
 const data2 = [{ namaKelas: "Kelas X - A", unit: "", kondisi: "Baik" }];
 const AdminDashboard = () => {
-  // Data manual untuk tabel
-  const initialRows = [
+  const [openModal, setOpenModal] = useState(false);
+  const [modalData, setModalData] = useState(null);
+
+  const handleOpenModal1 = (data) => {
+    setModalData(data);
+    setOpenModal(true);
+  };
+  const rows0 = [
     {
-      id: 1,
-      nama_guru: "Budi Santoso",
-      point: 95,
-      performa_individu: "Sangat Baik",
-      poin_prestasi: 80,
-      performa_administrasi: 80,
-      penghargaan: "Guru Teladan 2023",
-      absensi: 90,
-      tahun_penghargaan: 2025,
-      keterangan: "Mantap",
-      tingkat: "Nasional",
+      Nama_Guru: "Drs. Rizki Akmanda",
+      Point: 12,
+      Lihat: (
+        <Button
+          size="small"
+          sx={{
+            backgroundColor: "#26468B",
+            borderTopLeftRadius: "20px",
+            borderBottomRightRadius: "20px",
+            color: "white",
+          }}
+        >
+          Lihat
+        </Button>
+      ),
     },
     {
-      id: 2,
-      nama_guru: "Siti Aminah",
-      point: 88,
-      performa_individu: "Baik",
-      poin_prestasi: 82,
-      performa_administrasi: 76,
-      penghargaan: "Penghargaan Administrasi",
-      absensi: 98,
-      tahun_penghargaan: 2024,
-      keterangan: "Mantap",
-      tingkat: "Internasional",
+      Nama_Guru: "Samson Lind",
+      Point: 8,
+      Lihat: (
+        <Button
+          size="small"
+          sx={{
+            backgroundColor: "#26468B",
+            borderTopLeftRadius: "20px",
+            borderBottomRightRadius: "20px",
+            color: "white",
+          }}
+        >
+          Lihat
+        </Button>
+      ),
     },
     {
-      id: 3,
-      nama_guru: "Ahmad Fauzi",
-      point: 80,
-      performa_individu: "80",
-      poin_prestasi: 70,
-      performa_administrasi: 90,
-      penghargaan: "Peningkatan Terbaik 2023",
-      tahun_penghargaan: 2022,
-      keterangan: "Mantap",
-      tingkat: "Nasional",
-      absensi: 70,
+      Nama_Guru: "Stanton Russel",
+      Point: 8,
+      Lihat: (
+        <Button
+          size="small"
+          sx={{
+            backgroundColor: "#26468B",
+            borderTopLeftRadius: "20px",
+            borderBottomRightRadius: "20px",
+            color: "white",
+          }}
+        >
+          Lihat
+        </Button>
+      ),
     },
   ];
-
-  const [rows0, setRows0] = useState(initialRows); // Data tabel
-  const [open0, setOpen0] = useState(false); // State untuk modal
-  const [selectedRow0, setSelectedRow0] = useState(null); // Data baris yang dipilih
-
-  // Fungsi membuka modal
-  const handleOpen0 = (row) => {
-    setSelectedRow0(row);
-    setOpen0(true);
-  };
-
-  // Fungsi menutup modal
-  const handleClose0 = () => {
-    setOpen0(false);
-    setSelectedRow0(null);
-  };
-
   const rows1 = [
     {
       id: 1,
@@ -469,7 +468,7 @@ const AdminDashboard = () => {
               gap: 3,
             }}
           >
-            {/* KPI TERTINGGI */}
+            {/* Tabel 1 */}
             <Box
               sx={{
                 flex: 1,
@@ -496,7 +495,6 @@ const AdminDashboard = () => {
                   borderBottomRightRadius: "30px",
                 }}
               >
-                {" "}
                 <Table>
                   <TableHead>
                     <TableRow>
@@ -511,360 +509,38 @@ const AdminDashboard = () => {
                         Point
                       </TableCell>
                       <TableCell
-                        sx={{ textAlign: "right", borderColor: "#26468B" }}
+                        sx={{
+                          textAlign: "right",
+                          borderColor: "#26468B",
+                        }}
                       >
-                        Aksi
+                        Lihat
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {rows0.map((row) => (
-                      <TableRow key={row.id}>
+                      <TableRow key={row.Nama_Guru}>
                         <TableCell
                           sx={{ textAlign: "left", borderBottom: "none" }}
                         >
-                          {row.nama_guru}
+                          {row.Nama_Guru}
                         </TableCell>
                         <TableCell
                           sx={{ textAlign: "center", borderBottom: "none" }}
                         >
-                          {row.point}
+                          {row.Point}
                         </TableCell>
                         <TableCell
                           sx={{ textAlign: "right", borderBottom: "none" }}
                         >
-                          <Button
-                            size="small"
-                            sx={{
-                              backgroundColor: "#26468B",
-                              borderTopLeftRadius: "20px",
-                              borderBottomRightRadius: "20px",
-                              color: "white",
-                              "&:hover": {
-                                backgroundColor: "#1e376c",
-                              },
-                            }}
-                            onClick={() => handleOpen0(row)}
-                          >
-                            Lihat
-                          </Button>
+                          {row.Lihat}
                         </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
                 </Table>
               </TableContainer>
-
-              {/* Modal untuk detail */}
-              <Modal open={open0} onClose={handleClose0}>
-                <Box
-                  sx={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    maxWidth: "100%",
-                    width: 400,
-                    minwidth: "100%",
-                    bgcolor: "background.paper",
-                    boxShadow: 24,
-                    p: 4,
-                    borderRadius: "10px",
-                  }}
-                >
-                  {selectedRow0 && (
-                    <>
-                      <Typography
-                        variant="h6"
-                        sx={{ mb: 0, color: "#26468B", fontWeight: 600 }}
-                      >
-                        KPI {selectedRow0.nama_guru}
-                      </Typography>
-                      {/* Garis panjang */}
-                      <Box
-                        sx={{
-                          borderBottom: "2px solid #26468B",
-                          maxWidth: "100%",
-                          width: 400,
-                          minwidth: "100%",
-                          mt: 0,
-                          mb: 2,
-                          p: "1px 33px",
-                          ml: -4,
-                        }}
-                      ></Box>
-                      <Typography>PERFORMA INDIVIDU</Typography>
-                      {/* Garis panjang */}
-                      <Box
-                        sx={{
-                          borderBottom: "1px solid #3D3F3F",
-                          mt: 0,
-                          mb: 2,
-                        }}
-                      ></Box>
-
-                      {/* Chart Horizontal */}
-                      <Box
-                        sx={{
-                          flex: 4,
-                          height: 30,
-                          backgroundColor: "#d0dacf", // Warna background chart
-                          position: "relative",
-                          overflow: "hidden",
-                          display: "flex",
-                          alignItems: "center",
-                          mt: -1,
-                        }}
-                      >
-                        {/* Progress Bar */}
-                        <Box
-                          sx={{
-                            width: `${selectedRow0.absensi}%`,
-                            height: "100%",
-                            backgroundColor:
-                              selectedRow0.absensi < 50
-                                ? "#FF5733" // Merah
-                                : selectedRow0.absensi >= 80
-                                  ? "#449f39" // Hijau
-                                  : "#FFB300", // Kuning
-                            position: "absolute",
-                            left: 0,
-                            top: 0,
-                          }}
-                        />
-                        {/* Teks Absensi */}
-                        <Typography
-                          sx={{
-                            position: "absolute",
-                            left: 8, // Jarak dari kiri
-                            color: "#fff", // Warna teks
-                            fontWeight: 400,
-                            fontSize: "14px",
-                          }}
-                        >
-                          Absensi
-                        </Typography>
-                        {/* Nilai Absensi */}
-                        <Typography
-                          sx={{
-                            position: "absolute",
-                            right: 8, // Jarak dari kanan
-                            color: "#fff", // Warna teks
-                            fontWeight: 400,
-                            fontSize: "14px",
-                          }}
-                        >
-                          {selectedRow0.absensi}
-                        </Typography>
-                      </Box>
-                      <Box
-                        sx={{
-                          borderBottom: "2px solid #26468B",
-                          maxWidth: "100%",
-                          width: 400,
-                          minwidth: "100%",
-                          mt: 2,
-                          mb: 3,
-                          p: "1px 33px",
-                          ml: -4,
-                        }}
-                      />
-
-                      <Typography>POIN PRESTASI</Typography>
-                      {/* Garis panjang */}
-                      <Box
-                        sx={{
-                          borderBottom: "1px solid #3D3F3F",
-                          mt: 0,
-                          mb: 2,
-                        }}
-                      ></Box>
-
-                      {/* Chart Horizontal */}
-                      <Box
-                        sx={{
-                          flex: 4,
-                          height: 30,
-                          backgroundColor: "#d0dacf", // Warna background chart
-                          position: "relative",
-                          overflow: "hidden",
-                          display: "flex",
-                          alignItems: "center",
-                          mt: -1,
-                        }}
-                      >
-                        {/* Progress Bar */}
-                        <Box
-                          sx={{
-                            width: `${selectedRow0.poin_prestasi}%`, // Dinamis berdasarkan data
-                            height: "100%",
-                            backgroundColor:
-                              selectedRow0.poin_prestasi < 50
-                                ? "#FF5733" // Merah
-                                : selectedRow0.poin_prestasi >= 80
-                                  ? "#449f39" // Hijau
-                                  : "#FFB300", // Kuning
-                            position: "absolute",
-                            left: 0,
-                            top: 0,
-                          }}
-                        />
-                        {/* Teks TINGKAT NASIONAL */}
-                        <Typography
-                          sx={{
-                            position: "absolute",
-                            left: 8, // Jarak dari kiri
-                            color: "#fff", // Warna teks
-                            fontWeight: 400,
-                            fontSize: "14px",
-                          }}
-                        >
-                          Tingkat Nasional
-                        </Typography>
-                        {/* Nilai TINGKAT NASIONAL */}
-                        <Typography
-                          sx={{
-                            position: "absolute",
-                            right: 8, // Jarak dari kanan
-                            color: "#fff", // Warna teks
-                            fontWeight: 400,
-                            fontSize: "14px",
-                          }}
-                        >
-                          {selectedRow0.poin_prestasi}
-                        </Typography>
-                      </Box>
-                      <Box
-                        sx={{
-                          borderBottom: "2px solid #26468B",
-                          maxWidth: "100%",
-                          width: 400,
-                          minwidth: "100%",
-                          mt: 2,
-                          mb: 3,
-                          p: "1px 33px",
-                          ml: -4,
-                        }}
-                      />
-
-                      <Typography>PERFORMA ADMINISTRASI</Typography>
-                      {/* Garis panjang */}
-                      <Box
-                        sx={{
-                          borderBottom: "1px solid #3D3F3F",
-                          mt: 0,
-                          mb: 2,
-                        }}
-                      ></Box>
-
-                      {/* Chart Horizontal */}
-                      <Box
-                        sx={{
-                          flex: 4,
-                          height: 30,
-                          backgroundColor: "#d0dacf", // Warna background chart
-                          position: "relative",
-                          overflow: "hidden",
-                          display: "flex",
-                          alignItems: "center",
-                          mt: -1,
-                        }}
-                      >
-                        {/* Progress Bar */}
-                        <Box
-                          sx={{
-                            width: `${selectedRow0.performa_administrasi}%`, // Dinamis berdasarkan data
-                            height: "100%",
-                            backgroundColor:
-                              selectedRow0.performa_administrasi < 50
-                                ? "#FF5733" // Merah
-                                : selectedRow0.performa_administrasi >= 80
-                                  ? "#449f39" // Hijau
-                                  : "#FFB300", // Kuning
-                            position: "absolute",
-                            left: 0,
-                            top: 0,
-                          }}
-                        />
-                        {/* Teks TINGKAT NASIONAL */}
-                        <Typography
-                          sx={{
-                            position: "absolute",
-                            left: 8, // Jarak dari kiri
-                            color: "#fff", // Warna teks
-                            fontWeight: 400,
-                            fontSize: "14px",
-                          }}
-                        >
-                          Tingkat Nasional
-                        </Typography>
-                        {/* Nilai TINGKAT NASIONAL */}
-                        <Typography
-                          sx={{
-                            position: "absolute",
-                            right: 8, // Jarak dari kanan
-                            color: "#fff", // Warna teks
-                            fontWeight: 400,
-                            fontSize: "14px",
-                          }}
-                        >
-                          {selectedRow0.performa_administrasi}
-                        </Typography>
-                      </Box>
-                      <Box
-                        sx={{
-                          borderBottom: "2px solid #26468B",
-                          maxWidth: "100%",
-                          width: 400,
-                          minwidth: "100%",
-                          mt: 2,
-                          mb: 3,
-                          p: "1px 33px",
-                          ml: -4,
-                        }}
-                      />
-                      <Typography>PRESTASI PENGHARGAAN</Typography>
-                      {/* Garis panjang */}
-                      <Box
-                        sx={{
-                          borderBottom: "1px solid #3D3F3F",
-                          mt: 0,
-                          mb: 2,
-                        }}
-                      ></Box>
-                      <TableContainer component={Paper}>
-                        <Table
-                          sx={{
-                            minWidth: "80%",
-                            maxWidth: "80%",
-                            width: 200,
-                          }}
-                          aria-label="simple table"
-                        >
-                          <TableHead>
-                            <TableRow sx={{ backgroundColor: "#26468B" }}>
-                              <TableCell>Tahun Penghargaan</TableCell>
-                              <TableCell>Penghargaan</TableCell>
-                              <TableCell>Keterangan</TableCell>
-                              <TableCell>Tingkat</TableCell>
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            {initialRows.map((row) => (
-                              <TableRow key={row.id}>
-                                <TableCell>{row.tahun_penghargaan}</TableCell>
-                                <TableCell>{row.penghargaan}</TableCell>
-                                <TableCell>{row.keterangan}</TableCell>
-                                <TableCell>{row.tingkat}</TableCell>
-                              </TableRow>
-                            ))}
-                          </TableBody>
-                        </Table>
-                      </TableContainer>
-                    </>
-                  )}
-                </Box>
-              </Modal>
             </Box>
 
             {/* Tabel 2 */}
@@ -969,7 +645,7 @@ const AdminDashboard = () => {
               </Typography>
               <Card
                 sx={{
-                  position: "relative", // Pastikan Card sebagai referensi posisi
+                  position: "relative", // Pastikan sebagai referensi posisi
                   borderTopLeftRadius: "30px",
                   borderBottomRightRadius: "30px",
                   padding: "5% 1%",
@@ -978,7 +654,6 @@ const AdminDashboard = () => {
                   height: "100%", // Pastikan tinggi tetap konsisten
                 }}
               >
-                {/* Button tetap di kanan atas */}
                 <Button
                   sx={{
                     backgroundColor: "#26468B",
@@ -996,14 +671,7 @@ const AdminDashboard = () => {
                   Lihat Detail
                 </Button>
 
-                {/* Chart ada di kiri */}
-                <CardContent
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "flex-start", // Chart tetap di kiri
-                  }}
-                >
+                <CardContent>
                   <PieChart
                     series={[
                       {
@@ -1014,10 +682,9 @@ const AdminDashboard = () => {
                       },
                     ]}
                     sx={{
-                      width: "50%", // Atur ukuran chart agar tidak terlalu besar
                       [`& .${pieArcLabelClasses.root}`]: {
                         fontWeight: "bold",
-                      },
+                      }, ////////
                     }}
                     {...size}
                   />
@@ -1045,13 +712,15 @@ const AdminDashboard = () => {
                   borderTopLeftRadius: "30px",
                   borderBottomRightRadius: "30px",
                   position: "relative",
-                  padding: "5% 1%",
+                  padding: "16px",
                   overflow: "hidden",
                   boxShadow: "0px 4px 10px rgba(0,0,0,0.4)",
-                  height: "100%", // Pastikan tinggi tetap konsisten
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  height: "100%", // Pastikan card selalu tinggi cukup
                 }}
               >
-                {/* Button tetap di kanan atas */}
                 <Button
                   sx={{
                     backgroundColor: "#26468B",
@@ -1059,24 +728,16 @@ const AdminDashboard = () => {
                     borderBottomRightRadius: "20px",
                     color: "white",
                     position: "absolute",
-                    top: "10px", // Jaga agar tetap di atas
-                    right: "10px", // Jaga agar tetap di kanan
+                    top: "10%",
+                    right: "5%",
                     minWidth: "7vw",
-                    maxWidth: "120px", // Batasi ukuran agar responsif
+                    maxWidth: "120px", // Sesuaikan batas maksimalnya
                     fontSize: 13,
                   }}
                 >
                   Lihat Detail
                 </Button>
-
-                {/* Chart berada di kiri */}
-                <CardContent
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "flex-start", // Chart tetap di kiri
-                  }}
-                >
+                <CardContent>
                   <PieChart
                     series={[
                       {
@@ -1087,7 +748,6 @@ const AdminDashboard = () => {
                       },
                     ]}
                     sx={{
-                      width: "50%", // Atur ukuran chart agar tidak terlalu besar
                       [`& .${pieArcLabelClasses.root}`]: {
                         fontWeight: "bold",
                       },
