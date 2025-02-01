@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Typography,
-  Avatar,
-  Modal,
-  Divider,
-} from "@mui/material";
+import { Box, Typography, Avatar, Modal, Divider } from "@mui/material";
 
 const ProfileModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // Menyimpan state modal
