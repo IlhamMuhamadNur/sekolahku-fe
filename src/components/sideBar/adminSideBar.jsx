@@ -42,7 +42,7 @@ const Sidebar = ({ activePage, setActivePage }) => {
           style={{ width: "100px", height: "auto", marginBottom: "8px" }}
         />
         <Typography variant="h6" fontWeight="bold">
-          MOCKUP LOGO
+          SMKN 1 KATAPANG
         </Typography>
         <Typography variant="caption">Tahun Pelajaran 2020-2021</Typography>
       </Box>
