@@ -294,7 +294,7 @@ const DetailModal = ({ open, handleClose, selectedRow }) => {
                 sx={{
                   minWidth: "100%",
                   maxWidth: "100%",
-                  width: 200,
+                  width: 100,
                 }}
                 aria-label="simple table"
               >
@@ -302,7 +302,7 @@ const DetailModal = ({ open, handleClose, selectedRow }) => {
                   <TableRow sx={{ backgroundColor: "#26468B" }}>
                     <TableCell
                       sx={{
-                        padding: "5px",
+                        padding: "4px",
                         fontSize: "12px",
                         textAlign: "center",
                         whiteSpace: "nowrap",
@@ -313,7 +313,7 @@ const DetailModal = ({ open, handleClose, selectedRow }) => {
                     </TableCell>
                     <TableCell
                       sx={{
-                        padding: "5px",
+                        padding: "4px",
                         fontSize: "12px",
                         textAlign: "center",
                         color: "white",
@@ -323,7 +323,7 @@ const DetailModal = ({ open, handleClose, selectedRow }) => {
                     </TableCell>
                     <TableCell
                       sx={{
-                        padding: "5px",
+                        padding: "4px",
                         fontSize: "12px",
                         textAlign: "center",
                         color: "white",
@@ -333,7 +333,7 @@ const DetailModal = ({ open, handleClose, selectedRow }) => {
                     </TableCell>
                     <TableCell
                       sx={{
-                        padding: "5px",
+                        padding: "4px",
                         fontSize: "12px",
                         textAlign: "center",
                         color: "white",
@@ -348,8 +348,9 @@ const DetailModal = ({ open, handleClose, selectedRow }) => {
                     <TableRow key={selectedRow.id}>
                       <TableCell
                         sx={{
-                          textAlign: "left",
+                          textAlign: "center",
                           borderBottom: "none",
+                          fontSize: "11px",
                         }}
                       >
                         {selectedRow.nama_guru}
@@ -358,14 +359,17 @@ const DetailModal = ({ open, handleClose, selectedRow }) => {
                         sx={{
                           textAlign: "center",
                           borderBottom: "none",
+
+                          fontSize: "11px",
                         }}
                       >
-                        {selectedRow.point}
+                        {selectedRow.penghargaan}
                       </TableCell>
                       <TableCell
                         sx={{
                           textAlign: "center",
                           borderBottom: "none",
+                          fontSize: "11px",
                         }}
                       >
                         {selectedRow.keterangan}
@@ -374,6 +378,7 @@ const DetailModal = ({ open, handleClose, selectedRow }) => {
                         sx={{
                           textAlign: "center",
                           borderBottom: "none",
+                          fontSize: "11px",
                         }}
                       >
                         {selectedRow.tingkat}
