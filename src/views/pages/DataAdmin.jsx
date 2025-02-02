@@ -8,15 +8,23 @@ import {
   Button,
   Divider,
 } from "@mui/material";
+import { useEffect } from "react";
 
 const DataAdmin = () => {
   const [activePage, setActivePage] = useState("beranda"); // Menyimpan halaman aktif
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto"; // Reset saat unmount
+    };
+  }, []);
 
   return (
     <Box
       sx={{
         display: "flex",
         height: "100vh",
+        width: "100vw", // Pastikan lebar penuh
         overflow: "hidden",
         boxSizing: "border-box",
       }}

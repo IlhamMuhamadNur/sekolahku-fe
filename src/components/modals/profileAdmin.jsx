@@ -57,7 +57,10 @@ const ProfileModal = () => {
               mb: 2,
               "&:hover": { color: "primary.main" },
             }}
-            onClick={() => alert("Lihat Profile diklik!")}
+            onClick={() => {
+              console.log("profile diklik!");
+              window.location.href = "/notifikasi-admin";
+            }}
           >
             Notifikasi
           </Typography>
