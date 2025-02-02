@@ -6,12 +6,11 @@ import {
   kehadiranMurid,
   valueFormatter,
 } from "../webUsageStats";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
+
 import DetailModal from "../../../components/modals/kpiTertinggi";
 
 import {
-  Modal,
   Box,
   Checkbox,
   Typography,
@@ -93,7 +92,7 @@ const AdminDashboard = () => {
     },
   ];
 
-  const [rows0, setRows0] = useState(initialRows); // Data tabel
+  const [rows0] = useState(initialRows); // Data tabel
   const [open0, setOpen0] = useState(false); // State untuk modal
   const [selectedRow0, setSelectedRow0] = useState(null); // Data baris yang dipilih
 
