@@ -8,8 +8,8 @@ import {
 } from "../webUsageStats";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import DetailModal from "../../../components/modals/kpiTertinggi";
 import {
-  LinearProgress,
   Modal,
   Box,
   Checkbox,
@@ -50,7 +50,6 @@ const data1 = {
 };
 const data2 = [{ namaKelas: "Kelas X - A", unit: "", kondisi: "Baik" }];
 const AdminDashboard = () => {
-  // Data manual untuk tabel
   const initialRows = [
     {
       id: 1,
@@ -108,7 +107,6 @@ const AdminDashboard = () => {
     setOpen0(false);
     setSelectedRow0(null);
   };
-
   const rows1 = [
     {
       id: 1,
@@ -555,316 +553,11 @@ const AdminDashboard = () => {
                 </Table>
               </TableContainer>
 
-              {/* Modal untuk detail */}
-              <Modal open={open0} onClose={handleClose0}>
-                <Box
-                  sx={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    maxWidth: "100%",
-                    width: 400,
-                    minwidth: "100%",
-                    bgcolor: "background.paper",
-                    boxShadow: 24,
-                    p: 4,
-                    borderRadius: "10px",
-                  }}
-                >
-                  {selectedRow0 && (
-                    <>
-                      <Typography
-                        variant="h6"
-                        sx={{ mb: 0, color: "#26468B", fontWeight: 600 }}
-                      >
-                        KPI {selectedRow0.nama_guru}
-                      </Typography>
-                      {/* Garis panjang */}
-                      <Box
-                        sx={{
-                          borderBottom: "2px solid #26468B",
-                          maxWidth: "100%",
-                          width: 400,
-                          minwidth: "100%",
-                          mt: 0,
-                          mb: 2,
-                          p: "1px 33px",
-                          ml: -4,
-                        }}
-                      ></Box>
-                      <Typography>PERFORMA INDIVIDU</Typography>
-                      {/* Garis panjang */}
-                      <Box
-                        sx={{
-                          borderBottom: "1px solid #3D3F3F",
-                          mt: 0,
-                          mb: 2,
-                        }}
-                      ></Box>
-
-                      {/* Chart Horizontal */}
-                      <Box
-                        sx={{
-                          flex: 4,
-                          height: 30,
-                          backgroundColor: "#d0dacf", // Warna background chart
-                          position: "relative",
-                          overflow: "hidden",
-                          display: "flex",
-                          alignItems: "center",
-                          mt: -1,
-                        }}
-                      >
-                        {/* Progress Bar */}
-                        <Box
-                          sx={{
-                            width: `${selectedRow0.absensi}%`,
-                            height: "100%",
-                            backgroundColor:
-                              selectedRow0.absensi < 50
-                                ? "#FF5733" // Merah
-                                : selectedRow0.absensi >= 80
-                                  ? "#449f39" // Hijau
-                                  : "#FFB300", // Kuning
-                            position: "absolute",
-                            left: 0,
-                            top: 0,
-                          }}
-                        />
-                        {/* Teks Absensi */}
-                        <Typography
-                          sx={{
-                            position: "absolute",
-                            left: 8, // Jarak dari kiri
-                            color: "#fff", // Warna teks
-                            fontWeight: 400,
-                            fontSize: "14px",
-                          }}
-                        >
-                          Absensi
-                        </Typography>
-                        {/* Nilai Absensi */}
-                        <Typography
-                          sx={{
-                            position: "absolute",
-                            right: 8, // Jarak dari kanan
-                            color: "#fff", // Warna teks
-                            fontWeight: 400,
-                            fontSize: "14px",
-                          }}
-                        >
-                          {selectedRow0.absensi}
-                        </Typography>
-                      </Box>
-                      <Box
-                        sx={{
-                          borderBottom: "2px solid #26468B",
-                          maxWidth: "100%",
-                          width: 400,
-                          minwidth: "100%",
-                          mt: 2,
-                          mb: 3,
-                          p: "1px 33px",
-                          ml: -4,
-                        }}
-                      />
-
-                      <Typography>POIN PRESTASI</Typography>
-                      {/* Garis panjang */}
-                      <Box
-                        sx={{
-                          borderBottom: "1px solid #3D3F3F",
-                          mt: 0,
-                          mb: 2,
-                        }}
-                      ></Box>
-
-                      {/* Chart Horizontal */}
-                      <Box
-                        sx={{
-                          flex: 4,
-                          height: 30,
-                          backgroundColor: "#d0dacf", // Warna background chart
-                          position: "relative",
-                          overflow: "hidden",
-                          display: "flex",
-                          alignItems: "center",
-                          mt: -1,
-                        }}
-                      >
-                        {/* Progress Bar */}
-                        <Box
-                          sx={{
-                            width: `${selectedRow0.poin_prestasi}%`, // Dinamis berdasarkan data
-                            height: "100%",
-                            backgroundColor:
-                              selectedRow0.poin_prestasi < 50
-                                ? "#FF5733" // Merah
-                                : selectedRow0.poin_prestasi >= 80
-                                  ? "#449f39" // Hijau
-                                  : "#FFB300", // Kuning
-                            position: "absolute",
-                            left: 0,
-                            top: 0,
-                          }}
-                        />
-                        {/* Teks TINGKAT NASIONAL */}
-                        <Typography
-                          sx={{
-                            position: "absolute",
-                            left: 8, // Jarak dari kiri
-                            color: "#fff", // Warna teks
-                            fontWeight: 400,
-                            fontSize: "14px",
-                          }}
-                        >
-                          Tingkat Nasional
-                        </Typography>
-                        {/* Nilai TINGKAT NASIONAL */}
-                        <Typography
-                          sx={{
-                            position: "absolute",
-                            right: 8, // Jarak dari kanan
-                            color: "#fff", // Warna teks
-                            fontWeight: 400,
-                            fontSize: "14px",
-                          }}
-                        >
-                          {selectedRow0.poin_prestasi}
-                        </Typography>
-                      </Box>
-                      <Box
-                        sx={{
-                          borderBottom: "2px solid #26468B",
-                          maxWidth: "100%",
-                          width: 400,
-                          minwidth: "100%",
-                          mt: 2,
-                          mb: 3,
-                          p: "1px 33px",
-                          ml: -4,
-                        }}
-                      />
-
-                      <Typography>PERFORMA ADMINISTRASI</Typography>
-                      {/* Garis panjang */}
-                      <Box
-                        sx={{
-                          borderBottom: "1px solid #3D3F3F",
-                          mt: 0,
-                          mb: 2,
-                        }}
-                      ></Box>
-
-                      {/* Chart Horizontal */}
-                      <Box
-                        sx={{
-                          flex: 4,
-                          height: 30,
-                          backgroundColor: "#d0dacf", // Warna background chart
-                          position: "relative",
-                          overflow: "hidden",
-                          display: "flex",
-                          alignItems: "center",
-                          mt: -1,
-                        }}
-                      >
-                        {/* Progress Bar */}
-                        <Box
-                          sx={{
-                            width: `${selectedRow0.performa_administrasi}%`, // Dinamis berdasarkan data
-                            height: "100%",
-                            backgroundColor:
-                              selectedRow0.performa_administrasi < 50
-                                ? "#FF5733" // Merah
-                                : selectedRow0.performa_administrasi >= 80
-                                  ? "#449f39" // Hijau
-                                  : "#FFB300", // Kuning
-                            position: "absolute",
-                            left: 0,
-                            top: 0,
-                          }}
-                        />
-                        {/* Teks TINGKAT NASIONAL */}
-                        <Typography
-                          sx={{
-                            position: "absolute",
-                            left: 8, // Jarak dari kiri
-                            color: "#fff", // Warna teks
-                            fontWeight: 400,
-                            fontSize: "14px",
-                          }}
-                        >
-                          Tingkat Nasional
-                        </Typography>
-                        {/* Nilai TINGKAT NASIONAL */}
-                        <Typography
-                          sx={{
-                            position: "absolute",
-                            right: 8, // Jarak dari kanan
-                            color: "#fff", // Warna teks
-                            fontWeight: 400,
-                            fontSize: "14px",
-                          }}
-                        >
-                          {selectedRow0.performa_administrasi}
-                        </Typography>
-                      </Box>
-                      <Box
-                        sx={{
-                          borderBottom: "2px solid #26468B",
-                          maxWidth: "100%",
-                          width: 400,
-                          minwidth: "100%",
-                          mt: 2,
-                          mb: 3,
-                          p: "1px 33px",
-                          ml: -4,
-                        }}
-                      />
-                      <Typography>PRESTASI PENGHARGAAN</Typography>
-                      {/* Garis panjang */}
-                      <Box
-                        sx={{
-                          borderBottom: "1px solid #3D3F3F",
-                          mt: 0,
-                          mb: 2,
-                        }}
-                      ></Box>
-                      <TableContainer component={Paper}>
-                        <Table
-                          sx={{
-                            minWidth: "80%",
-                            maxWidth: "80%",
-                            width: 200,
-                          }}
-                          aria-label="simple table"
-                        >
-                          <TableHead>
-                            <TableRow sx={{ backgroundColor: "#26468B" }}>
-                              <TableCell>Tahun Penghargaan</TableCell>
-                              <TableCell>Penghargaan</TableCell>
-                              <TableCell>Keterangan</TableCell>
-                              <TableCell>Tingkat</TableCell>
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            {initialRows.map((row) => (
-                              <TableRow key={row.id}>
-                                <TableCell>{row.tahun_penghargaan}</TableCell>
-                                <TableCell>{row.penghargaan}</TableCell>
-                                <TableCell>{row.keterangan}</TableCell>
-                                <TableCell>{row.tingkat}</TableCell>
-                              </TableRow>
-                            ))}
-                          </TableBody>
-                        </Table>
-                      </TableContainer>
-                    </>
-                  )}
-                </Box>
-              </Modal>
+              <DetailModal
+                open={open0}
+                handleClose={handleClose0}
+                selectedRow={selectedRow0}
+              />
             </Box>
 
             {/* Tabel 2 */}
@@ -1462,6 +1155,7 @@ const AdminDashboard = () => {
                         sx={{
                           textAlign: "center",
                           borderColor: "#26468B",
+                          borderRight: "1px solid #26468B",
                         }}
                       >
                         Pilihan
