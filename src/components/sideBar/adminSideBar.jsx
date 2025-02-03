@@ -12,7 +12,12 @@ import { Home as HomeIcon, School as SchoolIcon } from "@mui/icons-material";
 
 const Sidebar = ({ activePage, setActivePage }) => {
   const menuItems = [
-    { text: "Beranda", icon: <HomeIcon />, key: "beranda" },
+    {
+      text: "Beranda",
+      icon: <HomeIcon />,
+      key: "beranda",
+      path: "/admin-dashboard",
+    },
     { text: "Siswa", icon: <SchoolIcon />, key: "siswa" },
   ];
 
@@ -55,7 +60,13 @@ const Sidebar = ({ activePage, setActivePage }) => {
           <ListItem
             button
             key={item.key}
-            onClick={() => setActivePage(item.key)}
+            onClick={() => {
+              if (item.path) {
+                window.location.href = item.path;
+              } else {
+                setActivePage(item.key);
+              }
+            }}
             sx={{
               backgroundColor:
                 activePage === item.key ? "#FAFAFA" : "transparent",
@@ -71,10 +82,13 @@ const Sidebar = ({ activePage, setActivePage }) => {
                 backgroundColor: "#FAFAFA",
                 color: "#3D3F3F",
                 boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
+                cursor: "pointer",
               },
             }}
           >
-            <ListItemIcon sx={{ color: "inherit" }}>{item.icon}</ListItemIcon>
+            <ListItemIcon sx={{ color: "inherit", cursor: "pointer" }}>
+              {item.icon}
+            </ListItemIcon>
             <ListItemText primary={item.text} />
           </ListItem>
         ))}
