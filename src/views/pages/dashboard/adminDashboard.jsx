@@ -8,6 +8,8 @@ import {
 } from "../webUsageStats";
 import { useState } from "react";
 
+import DetailModal from "../../../components/modals/kpiTertinggi";
+
 import {
   Box,
   Checkbox,
@@ -48,66 +50,63 @@ const data1 = {
 };
 const data2 = [{ namaKelas: "Kelas X - A", unit: "", kondisi: "Baik" }];
 const AdminDashboard = () => {
-  const [openModal, setOpenModal] = useState(false);
-  const [modalData, setModalData] = useState(null);
-
-  const handleOpenModal1 = (data) => {
-    setModalData(data);
-    setOpenModal(true);
-  };
-  const rows0 = [
+  const initialRows = [
     {
-      Nama_Guru: "Drs. Rizki Akmanda",
-      Point: 12,
-      Lihat: (
-        <Button
-          size="small"
-          sx={{
-            backgroundColor: "#26468B",
-            borderTopLeftRadius: "20px",
-            borderBottomRightRadius: "20px",
-            color: "white",
-          }}
-        >
-          Lihat
-        </Button>
-      ),
+      id: 1,
+      nama_guru: "Budi Santoso",
+      point: 95,
+      performa_individu: "Sangat Baik",
+      poin_prestasi: 80,
+      performa_administrasi: 80,
+      penghargaan: "Guru Teladan 2023",
+      absensi: 90,
+      tahun_penghargaan: 2025,
+      keterangan: "Mantap",
+      tingkat: "Nasional",
     },
     {
-      Nama_Guru: "Samson Lind",
-      Point: 8,
-      Lihat: (
-        <Button
-          size="small"
-          sx={{
-            backgroundColor: "#26468B",
-            borderTopLeftRadius: "20px",
-            borderBottomRightRadius: "20px",
-            color: "white",
-          }}
-        >
-          Lihat
-        </Button>
-      ),
+      id: 2,
+      nama_guru: "Siti Aminah",
+      point: 88,
+      performa_individu: "Baik",
+      poin_prestasi: 82,
+      performa_administrasi: 76,
+      penghargaan: "Penghargaan Administrasi",
+      absensi: 98,
+      tahun_penghargaan: 2024,
+      keterangan: "Mantap",
+      tingkat: "Internasional",
     },
     {
-      Nama_Guru: "Stanton Russel",
-      Point: 8,
-      Lihat: (
-        <Button
-          size="small"
-          sx={{
-            backgroundColor: "#26468B",
-            borderTopLeftRadius: "20px",
-            borderBottomRightRadius: "20px",
-            color: "white",
-          }}
-        >
-          Lihat
-        </Button>
-      ),
+      id: 3,
+      nama_guru: "Ahmad Fauzi",
+      point: 80,
+      performa_individu: "80",
+      poin_prestasi: 70,
+      performa_administrasi: 90,
+      penghargaan: "Peningkatan Terbaik 2023",
+      tahun_penghargaan: 2022,
+      keterangan: "Mantap",
+      tingkat: "Nasional",
+      absensi: 70,
     },
   ];
+
+  const [rows0] = useState(initialRows); // Data tabel
+  const [open0, setOpen0] = useState(false); // State untuk modal
+  const [selectedRow0, setSelectedRow0] = useState(null); // Data baris yang dipilih
+
+  // Fungsi membuka modal
+  const handleOpen0 = (row) => {
+    setSelectedRow0(row);
+    setOpen0(true);
+  };
+
+  // Fungsi menutup modal
+  const handleClose0 = () => {
+    setOpen0(false);
+    setSelectedRow0(null);
+  };
   const rows1 = [
     {
       id: 1,
@@ -468,7 +467,7 @@ const AdminDashboard = () => {
               gap: 3,
             }}
           >
-            {/* Tabel 1 */}
+            {/* KPI TERTINGGI */}
             <Box
               sx={{
                 flex: 1,
@@ -495,6 +494,7 @@ const AdminDashboard = () => {
                   borderBottomRightRadius: "30px",
                 }}
               >
+                {" "}
                 <Table>
                   <TableHead>
                     <TableRow>
@@ -509,38 +509,55 @@ const AdminDashboard = () => {
                         Point
                       </TableCell>
                       <TableCell
-                        sx={{
-                          textAlign: "right",
-                          borderColor: "#26468B",
-                        }}
+                        sx={{ textAlign: "right", borderColor: "#26468B" }}
                       >
-                        Lihat
+                        Aksi
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {rows0.map((row) => (
-                      <TableRow key={row.Nama_Guru}>
+                      <TableRow key={row.id}>
                         <TableCell
                           sx={{ textAlign: "left", borderBottom: "none" }}
                         >
-                          {row.Nama_Guru}
+                          {row.nama_guru}
                         </TableCell>
                         <TableCell
                           sx={{ textAlign: "center", borderBottom: "none" }}
                         >
-                          {row.Point}
+                          {row.point}
                         </TableCell>
                         <TableCell
                           sx={{ textAlign: "right", borderBottom: "none" }}
                         >
-                          {row.Lihat}
+                          <Button
+                            size="small"
+                            sx={{
+                              backgroundColor: "#26468B",
+                              borderTopLeftRadius: "20px",
+                              borderBottomRightRadius: "20px",
+                              color: "white",
+                              "&:hover": {
+                                backgroundColor: "#1e376c",
+                              },
+                            }}
+                            onClick={() => handleOpen0(row)}
+                          >
+                            Lihat
+                          </Button>
                         </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
                 </Table>
               </TableContainer>
+
+              <DetailModal
+                open={open0}
+                handleClose={handleClose0}
+                selectedRow={selectedRow0}
+              />
             </Box>
 
             {/* Tabel 2 */}
@@ -1138,6 +1155,7 @@ const AdminDashboard = () => {
                         sx={{
                           textAlign: "center",
                           borderColor: "#26468B",
+                          borderRight: "1px solid #26468B",
                         }}
                       >
                         Pilihan

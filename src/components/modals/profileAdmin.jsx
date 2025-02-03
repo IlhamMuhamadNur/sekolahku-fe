@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Typography,
-  Avatar,
-  Modal,
-  Divider,
-} from "@mui/material";
+import { Box, Typography, Avatar, Modal, Divider } from "@mui/material";
 
 const ProfileModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // Menyimpan state modal
@@ -63,7 +57,10 @@ const ProfileModal = () => {
               mb: 2,
               "&:hover": { color: "primary.main" },
             }}
-            onClick={() => alert("Lihat Profile diklik!")}
+            onClick={() => {
+              console.log("profile diklik!");
+              window.location.href = "/notifikasi-admin";
+            }}
           >
             Notifikasi
           </Typography>
