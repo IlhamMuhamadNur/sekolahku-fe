@@ -91,6 +91,7 @@ const DataAdmin = () => {
                 gap={2}
               >
                 <TextField
+                  type="text"
                   label="Nama"
                   fullWidth
                   sx={{
@@ -130,6 +131,7 @@ const DataAdmin = () => {
                   }}
                 />
                 <TextField
+                  type="number"
                   label="Telepon"
                   fullWidth
                   sx={{
@@ -150,6 +152,7 @@ const DataAdmin = () => {
                 />
                 <TextField
                   label="Tanggal Lahir"
+                  type="date"
                   fullWidth
                   sx={{
                     "& .MuiOutlinedInput-root": {
@@ -160,9 +163,11 @@ const DataAdmin = () => {
                     },
                     "& .MuiInputLabel-root": {
                       fontSize: "0.875rem",
+                      display: "none",
                       transform: "translate(14px, 10px) scale(1)",
                     },
                     "& .MuiInputLabel-shrink": {
+                      display: "block",
                       transform: "translate(14px, -5px) scale(0.75)",
                     },
                   }}
